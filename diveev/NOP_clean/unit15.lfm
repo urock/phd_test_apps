@@ -1,0 +1,38 @@
+object Form15: TForm15
+  Left = 452
+  Height = 406
+  Top = 332
+  Width = 571
+  Caption = 'Form15'
+  ClientHeight = 406
+  ClientWidth = 571
+  Color = clLime
+  Font.CharSet = RUSSIAN_CHARSET
+  Font.Height = -16
+  Font.Name = 'Times New Roman'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  OnCreate = FormCreate
+  LCLVersion = '1.2.6.0'
+  object Memo1: TMemo
+    Left = 0
+    Height = 290
+    Top = 16
+    Width = 552
+    ScrollBars = ssAutoVertical
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 440
+    Height = 25
+    Top = 320
+    Width = 107
+    Caption = 'Save to File'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object SaveDialog1: TSaveDialog
+    left = 240
+    top = 336
+  end
+end

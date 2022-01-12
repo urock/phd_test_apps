@@ -1,0 +1,105 @@
+object Form14: TForm14
+  Left = 384
+  Height = 437
+  Top = 388
+  Width = 712
+  Caption = 'Plots'
+  ClientHeight = 437
+  ClientWidth = 712
+  Font.CharSet = RUSSIAN_CHARSET
+  Font.Height = -16
+  Font.Name = 'Times New Roman'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  LCLVersion = '1.2.6.0'
+  object Chart1: TChart
+    Left = 5
+    Height = 359
+    Top = 7
+    Width = 668
+    AxisList = <    
+      item
+        Grid.Style = psClear
+        Marks.LabelFont.CharSet = ANSI_CHARSET
+        Marks.LabelFont.Height = -19
+        Marks.LabelFont.Name = 'Arial Rounded MT Bold'
+        Marks.LabelFont.Pitch = fpVariable
+        Marks.LabelFont.Quality = fqDraft
+        Minors = <>
+        Title.LabelFont.CharSet = ANSI_CHARSET
+        Title.LabelFont.Height = -19
+        Title.LabelFont.Name = 'Algerian'
+        Title.LabelFont.Orientation = 900
+        Title.LabelFont.Pitch = fpVariable
+        Title.LabelFont.Quality = fqDraft
+      end    
+      item
+        Grid.Style = psClear
+        Alignment = calBottom
+        Marks.LabelFont.CharSet = ANSI_CHARSET
+        Marks.LabelFont.Height = -19
+        Marks.LabelFont.Name = 'Arial Rounded MT Bold'
+        Marks.LabelFont.Pitch = fpVariable
+        Marks.LabelFont.Quality = fqDraft
+        Marks.OverlapPolicy = opHideNeighbour
+        Minors = <>
+      end>
+    BackColor = clWhite
+    Foot.Brush.Color = clBtnFace
+    Foot.Font.Color = clBlue
+    Title.Brush.Color = clBtnFace
+    Title.Font.Color = clBlue
+    Title.Text.Strings = (
+      'TAChart'
+    )
+    Color = clWhite
+    ParentColor = False
+    object Chart1LineSeries1: TLineSeries
+      LinePen.Width = 3
+    end
+    object Chart1LineSeries2: TLineSeries
+      LinePen.Width = 3
+    end
+    object Chart1LineSeries3: TLineSeries
+      LinePen.Width = 3
+    end
+    object Chart1LineSeries4: TLineSeries
+      LinePen.Width = 3
+    end
+    object Chart1LineSeries5: TLineSeries
+      LinePen.Width = 3
+    end
+    object Chart1LineSeries6: TLineSeries
+      LinePen.Width = 3
+    end
+    object Chart1LineSeries7: TLineSeries
+      LinePen.Width = 3
+    end
+    object Chart1LineSeries8: TLineSeries
+      LinePen.Width = 3
+    end
+  end
+  object Button1: TButton
+    Left = 40
+    Height = 36
+    Top = 387
+    Width = 110
+    Caption = 'Plots'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 437
+    Height = 40
+    Top = 386
+    Width = 150
+    Caption = 'Save to file'
+    OnClick = Button2Click
+    TabOrder = 2
+  end
+  object SaveDialog1: TSaveDialog
+    InitialDir = '*.*'
+    left = 371
+    top = 384
+  end
+end

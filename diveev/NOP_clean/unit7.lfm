@@ -1,0 +1,147 @@
+object Form7: TForm7
+  Left = 452
+  Height = 356
+  Top = 247
+  Width = 530
+  Caption = 'Parameters of GA for BVGP'
+  ClientHeight = 356
+  ClientWidth = 530
+  Color = 16613616
+  Font.CharSet = RUSSIAN_CHARSET
+  Font.Height = -16
+  Font.Name = 'Times New Roman'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.2.6.0'
+  object Edit1: TEdit
+    Left = 20
+    Height = 27
+    Top = 14
+    Width = 80
+    TabOrder = 0
+  end
+  object Label1: TLabel
+    Left = 120
+    Height = 19
+    Top = 21
+    Width = 138
+    Caption = 'Number of generations'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 120
+    Height = 19
+    Top = 59
+    Width = 216
+    Caption = 'Number of couple in one generation'
+    ParentColor = False
+  end
+  object Edit2: TEdit
+    Left = 20
+    Height = 27
+    Top = 52
+    Width = 80
+    TabOrder = 1
+  end
+  object Edit3: TEdit
+    Left = 20
+    Height = 27
+    Top = 92
+    Width = 80
+    TabOrder = 2
+  end
+  object Label3: TLabel
+    Left = 120
+    Height = 19
+    Top = 97
+    Width = 345
+    Caption = 'Number of generations between exchange of basic BTree'
+    ParentColor = False
+  end
+  object Edit4: TEdit
+    Left = 20
+    Height = 27
+    Top = 128
+    Width = 80
+    TabOrder = 3
+  end
+  object Label4: TLabel
+    Left = 120
+    Height = 19
+    Top = 135
+    Width = 228
+    Caption = 'Number of elitaring of chrpomosomes'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 120
+    Height = 19
+    Top = 173
+    Width = 146
+    Caption = 'Parameter for crossover'
+    ParentColor = False
+  end
+  object Edit5: TEdit
+    Left = 20
+    Height = 27
+    Top = 166
+    Width = 80
+    TabOrder = 4
+  end
+  object Edit6: TEdit
+    Left = 20
+    Height = 27
+    Top = 204
+    Width = 80
+    TabOrder = 5
+  end
+  object Label6: TLabel
+    Left = 120
+    Height = 19
+    Top = 211
+    Width = 136
+    Caption = 'Probability of mutation'
+    ParentColor = False
+  end
+  object Button1: TButton
+    Left = 414
+    Height = 25
+    Top = 302
+    Width = 75
+    Caption = 'Input'
+    OnClick = Button1Click
+    TabOrder = 6
+  end
+  object Edit7: TEdit
+    Left = 21
+    Height = 27
+    Top = 242
+    Width = 80
+    TabOrder = 7
+  end
+  object Label7: TLabel
+    Left = 121
+    Height = 19
+    Top = 249
+    Width = 164
+    Caption = 'Shtraf for phase constraints'
+    ParentColor = False
+  end
+  object Edit8: TEdit
+    Left = 23
+    Height = 27
+    Top = 282
+    Width = 80
+    TabOrder = 8
+  end
+  object Label8: TLabel
+    Left = 123
+    Height = 19
+    Top = 289
+    Width = 171
+    Caption = 'Weight for second functional'
+    ParentColor = False
+  end
+end

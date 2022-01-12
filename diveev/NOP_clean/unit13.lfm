@@ -1,0 +1,40 @@
+object Form13: TForm13
+  Left = 371
+  Height = 375
+  Top = 316
+  Width = 461
+  Caption = 'Undefined paramters'
+  ClientHeight = 375
+  ClientWidth = 461
+  Color = 16250312
+  Font.CharSet = RUSSIAN_CHARSET
+  Font.Height = -16
+  Font.Name = 'Times New Roman'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  OnCreate = FormCreate
+  LCLVersion = '1.2.6.0'
+  object StringGrid1: TStringGrid
+    Left = 33
+    Height = 267
+    Top = 17
+    Width = 384
+    ColCount = 4
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll]
+    TabOrder = 0
+    TitleFont.CharSet = RUSSIAN_CHARSET
+    TitleFont.Height = -16
+    TitleFont.Name = 'Times New Roman'
+    TitleFont.Pitch = fpVariable
+    TitleFont.Quality = fqDraft
+  end
+  object Button1: TButton
+    Left = 341
+    Height = 25
+    Top = 300
+    Width = 75
+    Caption = 'Input'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+end
