@@ -4,13 +4,12 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="23">
+    <Units Count="29">
       <Unit0>
         <Filename Value="NOP1.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="67" Y="14"/>
+        <TopLine Value="12"/>
+        <CursorPos Y="23"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -21,8 +20,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <TopLine Value="329"/>
-        <CursorPos X="60" Y="362"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="407"/>
+        <CursorPos Y="435"/>
         <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -34,8 +34,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
-        <TopLine Value="38"/>
-        <CursorPos X="59" Y="49"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="39"/>
+        <CursorPos X="5" Y="60"/>
         <UsageCount Value="202"/>
       </Unit2>
       <Unit3>
@@ -61,7 +62,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit3"/>
-        <TopLine Value="37"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="40"/>
         <CursorPos X="38" Y="73"/>
         <UsageCount Value="258"/>
       </Unit5>
@@ -94,8 +96,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit6"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <CursorPos X="14" Y="37"/>
+        <TopLine Value="4"/>
+        <CursorPos X="29" Y="19"/>
         <UsageCount Value="209"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -140,10 +144,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit10"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="12"/>
         <UsageCount Value="202"/>
-        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="unit11.pas"/>
@@ -174,10 +177,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit13"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="49" Y="13"/>
         <UsageCount Value="207"/>
-        <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="unit14.pas"/>
@@ -194,11 +196,10 @@
         <Filename Value="unitadaptobject.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UnitAdaptObject"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="77"/>
-        <CursorPos X="27" Y="93"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="111"/>
+        <CursorPos X="17" Y="131"/>
         <UsageCount Value="204"/>
-        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="unit15.pas"/>
@@ -208,162 +209,194 @@
         <UnitName Value="Unit15"/>
         <TopLine Value="24"/>
         <CursorPos X="27" Y="44"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="205"/>
       </Unit18>
       <Unit19>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
         <TopLine Value="8915"/>
         <CursorPos X="33" Y="8929"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="26"/>
       </Unit19>
       <Unit20>
         <Filename Value="C:\lazarus\components\lazutils\laz2_xmlread.pas"/>
         <UnitName Value="laz2_XMLRead"/>
         <TopLine Value="1498"/>
         <CursorPos X="21" Y="1511"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="24"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\BVGP_Duff1\unitbvgpobject.pas"/>
         <UnitName Value="UnitBVGPobject"/>
         <TopLine Value="301"/>
         <CursorPos X="58" Y="1021"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="12"/>
       </Unit21>
       <Unit22>
-        <Filename Value="C:\lazarus\components\tachart\tachartutils.pas"/>
-        <UnitName Value="TAChartUtils"/>
-        <TopLine Value="227"/>
-        <CursorPos X="26" Y="513"/>
-        <UsageCount Value="1"/>
+        <Filename Value="unit2.lfm"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="16" Y="105"/>
+        <UsageCount Value="8"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="..\..\..\..\..\..\usr\lib\lazarus\2.0.6\lcl\grids.pas"/>
+        <UnitName Value="Grids"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="3017"/>
+        <CursorPos Y="3034"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="..\..\..\..\..\..\usr\lib\lazarus\2.0.6\lcl\include\menuitem.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="69"/>
+        <CursorPos Y="87"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="..\..\..\..\..\..\usr\lib\lazarus\2.0.6\lcl\lclmessageglue.pas"/>
+        <UnitName Value="LCLMessageGlue"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="103"/>
+        <CursorPos Y="123"/>
+        <UsageCount Value="10"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="..\..\..\..\..\..\usr\lib\lazarus\2.0.6\lcl\interfaces\gtk2\gtk2proc.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3765"/>
+        <CursorPos Y="3783"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="..\..\..\..\..\..\usr\lib\lazarus\2.0.6\lcl\interfaces\gtk2\gtk2wsmenus.pp"/>
+        <UnitName Value="Gtk2WSMenus"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="125"/>
+        <CursorPos Y="142"/>
+        <UsageCount Value="10"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="..\..\..\..\..\..\usr\lib\lazarus\2.0.6\lcl\include\application.inc"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="2209"/>
+        <CursorPos X="54" Y="2251"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit28>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="17" HistoryIndex="16">
       <Position1>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="155" Column="23" TopLine="139"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="209" TopLine="181"/>
       </Position1>
       <Position2>
         <Filename Value="unit1.pas"/>
-        <Caret Line="514" Column="12" TopLine="501"/>
+        <Caret Line="213" TopLine="186"/>
       </Position2>
       <Position3>
         <Filename Value="unit1.pas"/>
-        <Caret Line="517" Column="66" TopLine="494"/>
+        <Caret Line="423" TopLine="406"/>
       </Position3>
       <Position4>
         <Filename Value="unit1.pas"/>
-        <Caret Line="522" Column="55" TopLine="52"/>
+        <Caret Line="424" TopLine="406"/>
       </Position4>
       <Position5>
         <Filename Value="unit1.pas"/>
-        <Caret Line="500" Column="19" TopLine="486"/>
+        <Caret Line="425" TopLine="406"/>
       </Position5>
       <Position6>
         <Filename Value="unit1.pas"/>
-        <Caret Line="503" Column="6" TopLine="486"/>
+        <Caret Line="426" TopLine="406"/>
       </Position6>
       <Position7>
         <Filename Value="unit1.pas"/>
-        <Caret Line="534" Column="22" TopLine="511"/>
+        <Caret Line="427" TopLine="406"/>
       </Position7>
       <Position8>
         <Filename Value="unit1.pas"/>
-        <Caret Line="523" TopLine="500"/>
+        <Caret Line="428" TopLine="406"/>
       </Position8>
       <Position9>
         <Filename Value="unit1.pas"/>
-        <Caret Line="508" Column="27" TopLine="489"/>
+        <Caret Line="429" TopLine="406"/>
       </Position9>
       <Position10>
         <Filename Value="unit1.pas"/>
-        <Caret Line="143" Column="20" TopLine="83"/>
+        <Caret Line="428" TopLine="406"/>
       </Position10>
       <Position11>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="49" Column="24" TopLine="35"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="429" TopLine="406"/>
       </Position11>
       <Position12>
         <Filename Value="unit1.pas"/>
-        <Caret Line="106" Column="76" TopLine="94"/>
+        <Caret Line="428" TopLine="406"/>
       </Position12>
       <Position13>
         <Filename Value="unit1.pas"/>
-        <Caret Line="508" Column="16" TopLine="488"/>
+        <Caret Line="429" TopLine="406"/>
       </Position13>
       <Position14>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="53" Column="64" TopLine="44"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="428" TopLine="406"/>
       </Position14>
       <Position15>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="56" Column="71" TopLine="47"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="430" TopLine="406"/>
       </Position15>
       <Position16>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="66" Column="33" TopLine="46"/>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="431" TopLine="406"/>
       </Position16>
       <Position17>
         <Filename Value="unit1.pas"/>
-        <Caret Line="484" Column="93" TopLine="479"/>
+        <Caret Line="435" TopLine="407"/>
       </Position17>
-      <Position18>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="493" Column="19" TopLine="479"/>
-      </Position18>
-      <Position19>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="125" Column="34" TopLine="114"/>
-      </Position19>
-      <Position20>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="184" Column="31" TopLine="178"/>
-      </Position20>
-      <Position21>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="1385" Column="23" TopLine="1369"/>
-      </Position21>
-      <Position22>
-        <Filename Value="NOP1.pas"/>
-        <Caret Line="21" Column="16"/>
-      </Position22>
-      <Position23>
-        <Filename Value="NOP1.pas"/>
-        <Caret Line="17" Column="24"/>
-      </Position23>
-      <Position24>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="508" Column="60" TopLine="501"/>
-      </Position24>
-      <Position25>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="367" Column="14" TopLine="350"/>
-      </Position25>
-      <Position26>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="365" Column="8" TopLine="350"/>
-      </Position26>
-      <Position27>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="368" Column="3" TopLine="350"/>
-      </Position27>
-      <Position28>
-        <Filename Value="unitadaptobject.pas"/>
-        <Caret Line="93" Column="27" TopLine="77"/>
-      </Position28>
-      <Position29>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="359" Column="66" TopLine="350"/>
-      </Position29>
-      <Position30>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="369" Column="21" TopLine="350"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode="default"/>
     </RunParams>
   </ProjectSession>
+  <Debugging>
+    <BreakPoints Count="4">
+      <Item1>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="NOP1.pas"/>
+        <Line Value="23"/>
+      </Item1>
+      <Item2>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="unit1.pas"/>
+        <Line Value="186"/>
+      </Item2>
+      <Item3>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="unit1.pas"/>
+        <Line Value="423"/>
+      </Item3>
+      <Item4>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="unit1.pas"/>
+        <Line Value="435"/>
+      </Item4>
+    </BreakPoints>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="StringGrid2"/>
+      </Item1>
+    </Watches>
+  </Debugging>
 </CONFIG>
