@@ -305,7 +305,7 @@ begin
    end;
 
 
-   //******* STEP 1 *******//
+   //******* STEP 1 MenuItem5Click *******//
    // set parameters from first window () {button: Create object for NOP}
    ASNEE:=TUser.Create(hh1, pp1, rr1, nfu1, lchr1, p1, c1, d1, epo1,
                        kel1, alfa1, pmut1, L1, Mout1, kp1,
@@ -316,9 +316,9 @@ begin
     ASNEE.NOP.SetO1s(o1s1);
     ASNEE.NOP.SetO2s(o2s1);
     ASNEE.SetShtraf(Shtraf1);
-    ASNEE.ksearch:=ksearch1;            
+    ASNEE.ksearch:=ksearch1;
 
-   //******* STEP 2 *******//
+   //******* STEP 2 MenuItem8Click *******//
    // set another parameters {button: Undefinaed parameters}
    ASNEE.Setqymin(qymin1);
    ASNEE.Setqymax(qymax1);
@@ -327,7 +327,7 @@ begin
       ASNEE.ix[i]:=trunc((qymax1[i]-qymin1[i])/stepsqy1[i]);
    ASNEE.Setixmax(ASNEE.ix); 
 
-   //******* STEP 3 *******//
+   //******* STEP 3 MenuItem9Click *******//
    // set another parameters {button: parameters for NOP} 
    ASNEE.Setq(q1);
    ASNEE.NOP.SetRnum(rnum1);
@@ -335,7 +335,7 @@ begin
    ASNEE.NOP.SetDnum(dnum1);
    ASNEE.NOP.SetPsi(Psi1);    
 
-   //******* STEP 4 *******//
+   //******* STEP 4 MenuItem10Click *******//
    // set another parameters {button: parameters of GA for NOP}
    ASNEE.RR:=RR1;
    ASNEE.kel:=kel1;
@@ -345,14 +345,14 @@ begin
    ASNEE.SetPP(PP1);
    ASNEE.SetShtraf(Shtraf1); 
 
-   //******* STEP 5 *******//
+   //******* STEP 5 MenuItem11Click *******//
    // set another parameters {button: parameters for model}
    ASNEE.Setdt(dt1);
    ASNEE.Settf(tf1);
    ASNEE.Setx0(x01);
    ASNEE.Setuogr(umin1,umax1); 
 
-   //******* STEP 6 *******//
+   //******* STEP 6 MenuItem6Click *******//
 
    
    ASNEE.NOP.SetPsi(Psi1);
