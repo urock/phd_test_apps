@@ -397,7 +397,7 @@ begin
 
 //******* STEP 7 *******//
 
-   readkey;
+   // readkey;
 end.
 
 
