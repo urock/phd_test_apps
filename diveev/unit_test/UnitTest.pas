@@ -21,8 +21,6 @@ O2sc:array [0..1] of integer=(1,2);
 Pnumc:array [0..2] of integer=(0,1,2);
 Rnumc:array [0..2] of integer=(3,4,5);
 Dnumc:array [0..1] of integer=(22,23);
-qc:array [0..2]of real=(1,1,1);
-// qc:array [0..2]of real=(12.86841, 3.82666, 6.94312); // parameters from file q_461.txt
 x0c:array [0..2] of real=(0,0,0);
 xfc:array[0..2] of real=(0,0,0);
 uminc:array[0..1] of double=(-10,-10);
@@ -33,7 +31,8 @@ stepsqyc:array[0..2]of real=(1.25,2.5,5*pi/12);
 epsterm=0.1;
 infinity=1e10;
 
-  PsiBasc:array [0..23,0..23] of integer=
+{ qc:array [0..2]of real=(1,1,1);
+   PsiBasc:array [0..23,0..23] of integer=
   ((0,0,0,0,  0,0,1,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,0),
    (0,0,0,0,  0,0,0,1,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,0),
    (0,0,0,0,  0,0,0,0,  1,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,0),
@@ -62,9 +61,12 @@ infinity=1e10;
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   1,1,0,0),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,1,1,0),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,1,1),
-   (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1));
+   (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1)); }
 // parameters from file 24_NOP_461
-{ PsiBasc:array [0..23,0..23] of integer=
+
+
+qc:array [0..2]of real=(12.86841, 3.82666, 6.94312); // parameters from file q_461.txt
+PsiBasc:array [0..23,0..23] of integer=
   ((0,0,0,0,  0,0,1,10,	0,0,12,1,  0,0,0,0,  0,0,0,0,   0,0,0,10),
    (0,0,0,0,  0,0,0,1,  0,0,0,0,   0,0,0,0,  0,0,0,12,  0,0,0,0),
    (0,0,0,0,  0,0,0,0,  1,0,0,0,   0,0,2,9,  0,0,0,0,   10,0,0,0),
@@ -93,7 +95,7 @@ infinity=1e10;
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   1,1,0,13),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,1,1,17),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,1,4),
-   (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1)); }
+   (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1));
 
   nGraphc=8; // num of graphs
 
@@ -133,7 +135,7 @@ qyGraph:TArrArrReal;
 umin1:TArrReal;
 umax1:TarrReal;
 q1:TArrReal;
-qy1:TArrReal;
+// qy1:TArrReal;
 xm:TArrArrReal;
 ym:TArrArrReal;
 um:TArrArrReal;
@@ -153,7 +155,7 @@ kolpoint:integer;
 f0,f1:real;
 
 // test
-StringGrid1:array [1..3,1..nGraphc] of real;
+StringGrid1:array [0..3,0..nGraphc+1] of real;
 // 
 
 // TUser param:
@@ -230,36 +232,6 @@ Begin
   t:=0;
 End;
 
-//*********************************************************
-
-Procedure TUser.RP(t1: real; x1: TArrReal; var f1: TArrReal);
-var
-  i:integer;
-Begin
-  NOP.Vs[0]:=(xf1[0]-x1[0]);    //*cos(alf)+(xf1[1]-x1[1])*sin(alf);
-  NOP.Vs[1]:=(xf1[1]-x1[1]);    //*cos(alf)-(xf1[0]-x1[0])*sin(alf);
-  NOP.Vs[2]:=(xf1[2]-x1[2]);
-  NOP.RPControl;
-  if Normdist(x1,xf1)<epsterm then
-  begin
-    u[0]:=0;
-    u[1]:=0;
-  end
-  else
-  begin
-    u[0]:=NOP.z[NOP.Dnum[0]];   //*cos(alf)-NOP.z[NOP.Dnum[1]]*sin(alf);
-    u[1]:=NOP.z[NOP.Dnum[1]];   //*cos(alf)+NOP.z[NOP.Dnum[0]]*sin(alf);
-  end;
-  OgrUpr;
-  f1[0]:=0.5*(u[0]+u[1])*cos(x1[2]);
-  f1[1]:=0.5*(u[0]+u[1])*sin(x1[2]);
-  f1[2]:=0.5*(u[0]-u[1]);
-  for i := 0 to n-1 do
-    if abs(f1[i])>infinity then
-      f1[i]:=Ro_10(f1[i])*infinity;
-End;
-
-//*********************************************************
 
 Procedure TUser.Viewer;
 Begin
@@ -269,6 +241,44 @@ Begin
 End;
 
 //*********************************************************
+
+//*********************************************************
+Procedure TUser.RP(t1: real; x1: TArrReal; var f1: TArrReal);
+var
+  i:integer;
+  alf:real;
+Begin
+  {if (x1[0]>0) and (x1[1]>0) then alf:=0
+    else
+      if (x1[0]<0)and(x1[1]>0) then alf:=pi/2
+      else
+        if (x1[0]>0)and(x1[1]<0) then alf:=-pi/2
+        else  alf:=pi; }
+  alf:=0;
+  NOP.Vs[0]:=(xf1[0]-x1[0]);//*cos(alf)+(xf1[1]-x1[1])*sin(alf);
+  NOP.Vs[1]:=(xf1[1]-x1[1]);//*cos(alf)-(xf1[0]-x1[0])*sin(alf);
+  NOP.Vs[2]:=(xf1[2]-x1[2]);
+  NOP.RPControl;
+  if Normdist(x1,xf1)<epsterm then
+  begin
+    u[0]:=0;
+    u[1]:=0;
+  end
+  else
+  begin
+    u[0]:=NOP.z[NOP.Dnum[0]];//*cos(alf)-NOP.z[NOP.Dnum[1]]*sin(alf);
+    u[1]:=NOP.z[NOP.Dnum[1]];//*cos(alf)+NOP.z[NOP.Dnum[0]]*sin(alf);
+  end;
+  OgrUpr;
+  f1[0]:=0.5*(u[0]+u[1])*cos(x1[2]);
+  f1[1]:=0.5*(u[0]+u[1])*sin(x1[2]);
+  f1[2]:=0.5*(u[0]-u[1]);
+  for i := 0 to n-1 do
+    if abs(f1[i])>infinity then
+      f1[i]:=Ro_10(f1[i])*infinity;
+End;
+//*********************************************************
+
 
 // MAIN //
 begin
@@ -296,7 +306,7 @@ begin
    Setlength(umin1,m1);
    Setlength(umax1,m1);
    Setlength(q1,p1);
-   Setlength(qy1,ny1);
+   // Setlength(qy1,ny1);
    Setlength(ym,ll1);
    Setlength(um,m1);
    Setlength(xf1,n1);
@@ -339,39 +349,8 @@ begin
     qymin1[i]:=qyminc[i];
     qymax1[i]:=qymaxc[i];
     stepsqy1[i]:=stepsqyc[i];
-    qy1[i]:=qymin1[i];
+    // qy1[i]:=qymin1[ i];
    end;
-
-   // bullshit, but works, will refactor this
-  StringGrid1[1,1]:=qymin1[0];
-  StringGrid1[2,1]:=qymin1[1];
-  StringGrid1[3,1]:=qymin1[2];
-  StringGrid1[1,2]:=qymin1[0];
-  StringGrid1[2,2]:=qymin1[1];
-  StringGrid1[3,2]:=qymax1[2];
-  StringGrid1[1,3]:=qymin1[0];
-  StringGrid1[2,3]:=qymax1[1];
-  StringGrid1[3,3]:=qymin1[2];
-  StringGrid1[1,4]:=qymin1[0];
-  StringGrid1[2,4]:=qymax1[1];
-  StringGrid1[3,4]:=qymax1[2];
-  StringGrid1[1,5]:=qymax1[0];
-  StringGrid1[2,5]:=qymin1[1];
-  StringGrid1[3,5]:=qymin1[2];
-  StringGrid1[1,6]:=qymax1[0];
-  StringGrid1[2,6]:=qymin1[1];
-  StringGrid1[3,6]:=qymax1[2];
-  StringGrid1[1,7]:=qymax1[0];
-  StringGrid1[2,7]:=qymax1[1];
-  StringGrid1[3,7]:=qymin1[2];
-  StringGrid1[1,8]:=qymax1[0];
-  StringGrid1[2,8]:=qymax1[1];
-  StringGrid1[3,8]:=qymax1[2];
-
-
-  for i:=0 to nGraphc-1 do
-    for j:=0 to ny1-1 do
-      qyGraph[j,i]:= StringGrid1[j+1,i+1];
 
    //******* STEP 1 MenuItem5Click *******//
    // set parameters from first window () {button: Create object for NOP}
@@ -423,17 +402,54 @@ begin
    //******* STEP 6 MenuItem6Click *******//
 
    
+   // bullshit, but works, will refactor  this 
+   for i:=0 to  ny1-1 do
+      StringGrid1[i+1,0]:=i;
+
+   for i:=0 to  nGraphc-1 do
+      StringGrid1[0,i+1]:=i;
+
+   StringGrid1[1,1]:=qymin1[0];
+   StringGrid1[2,1]:=qymin1[1];
+   StringGrid1[3,1]:=qymin1[2];
+   StringGrid1[1,2]:=qymin1[0];
+   StringGrid1[2,2]:=qymin1[1];
+   StringGrid1[3,2]:=qymax1[2];
+   StringGrid1[1,3]:=qymin1[0];
+   StringGrid1[2,3]:=qymax1[1];
+   StringGrid1[3,3]:=qymin1[2];
+   StringGrid1[1,4]:=qymin1[0];
+   StringGrid1[2,4]:=qymax1[1];
+   StringGrid1[3,4]:=qymax1[2];
+   StringGrid1[1,5]:=qymax1[0];
+   StringGrid1[2,5]:=qymin1[1];
+   StringGrid1[3,5]:=qymin1[2];
+   StringGrid1[1,6]:=qymax1[0];
+   StringGrid1[2,6]:=qymin1[1];
+   StringGrid1[3,6]:=qymax1[2];
+   StringGrid1[1,7]:=qymax1[0];
+   StringGrid1[2,7]:=qymax1[1];
+   StringGrid1[3,7]:=qymin1[2];
+   StringGrid1[1,8]:=qymax1[0];
+   StringGrid1[2,8]:=qymax1[1];
+   StringGrid1[3,8]:=qymax1[2];
+
+
+  for i:=0 to nGraphc-1 do
+    for j:=0 to ny1-1 do
+      qyGraph[j,i]:= StringGrid1[j+1,i+1]; 
+
    ASNEE.NOP.SetPsi(Psi1);
    sumt:=0;
    sumdelt:=0;
    for iGraph := 0 to nGraphc-1 do
    begin
       for i:= 0 to ny1-1 do
-         ASNEE.qy[i]:=qyGraph[i,iGraph];
+         ASNEE.qy[i]:=qyGraph[i,iGraph]; //   it's OK
       ASNEE.Initial;
       tp:=0;
       kolpoint_mult[iGraph]:=0;
-      ASNEE.NOP.SetCs(q1);
+      ASNEE.NOP.SetCs(q1);     // it's OK    (12,86841, 3,82666, 6,94312) == qc
       f0:=0;
       repeat
          if abs(ASNEE.t-tp)<ASNEE.dt/2 then
@@ -452,8 +468,8 @@ begin
       sumt:=sumt+ASNEE.t;
       sumdelt:=sumdelt+Normdist(ASNEE.x,xf1);
    end;
-   f0:=sumdelt;
-   f1:=sumt;
+   f0:=sumdelt; // sumdelt = 0,870068437487367
+   f1:=sumt; // sumt = 6,3
 
    // kolpoint_mult = (8, 6, 15, 9, 6, 8, 8, 6) - with 461 data
    // Len=8: { 15,  15,  15,  15,  15,  15,  15,  15} - with default values
