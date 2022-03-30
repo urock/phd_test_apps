@@ -135,7 +135,7 @@ qyGraph:TArrArrReal;
 umin1:TArrReal;
 umax1:TarrReal;
 q1:TArrReal;
-// qy1:TArrReal;
+qy1:TArrReal;
 xm:TArrArrReal;
 ym:TArrArrReal;
 um:TArrArrReal;
@@ -169,7 +169,7 @@ tp,sumdelt,sumt,dxx,xx,yy:real;
 
 // TODO EXTRACT "TUser" CLASS TO SEPARTE FILE
 
-//*********************************************************
+//*************************************************************
 function Normdist(x1: TArrReal; xf1: TArrReal): real;  
 var
   sum, aa:real;
@@ -184,28 +184,37 @@ Begin
   end;
   result:=sum;
 End;
-
 //*************************************************************
-
-
-//*********************************************************
+Function Power2(l:integer):real;
+var
+  i:integer;
+  d,delt:real;
+Begin
+  d:=1;
+  if l<0 then delt:=0.5
+  else delt:=2;
+  for i:=1 to trunc(l) do
+    d:=d*delt;
+  Result:=d;
+End;
+//*************************************************************
 Constructor TUser.Create(hh1, pp1, rr1, nfu1, lchr1, p1, c1, d1, Epo1,
   kel1: integer; alfa1, pmut1: real; Lay1, Mout1, kp1, kr1, kw1, kv1, n1, m1,
   ll1, ny1: integer);
 Begin
-  Inherited Create(hh1, pp1, rr1, nfu1, lchr1, p1, c1, d1, epo1,
-                   kel1, alfa1, pmut1, Lay1,Mout1, kp1, kr1, kw1,
-                   kv1,n1,m1,ll1,ny1);
+  Inherited Create(hh1, pp1, rr1, nfu1, lchr1, p1, c1, d1, Epo1,
+                   kel1, alfa1, pmut1, Lay1, Mout1, kp1, kr1, kw1,
+                   kv1, n1, m1, ll1,ny1);
 End;
 //*********************************************************
-
 Procedure TUser.Func(var Fu: TArrReal);
 var
-  promah:real;
+  sumpen,dr,promah:real;
   i:integer;
 Begin
   Initial;
   goalrun:=goalrun+1;
+  sumpen:=0;
   for i:=0 to NOP.kR-1 do
     NOP.Cs[i]:=q[i];
   repeat
@@ -219,9 +228,7 @@ Begin
   fu[0]:=t+Shtraf1*promah;
   fu[1]:=promah;
 End;
-
 //*********************************************************
-
 Procedure TUser.Initial;
 Begin
   x[0]:=x0[0]+qy[0];
@@ -231,29 +238,12 @@ Begin
   u[1]:=0;
   t:=0;
 End;
-
-
-Procedure TUser.Viewer;
-Begin
-  y[0]:=x[0];
-  y[1]:=x[1];
-  y[2]:=x[2];
-End;
-
-//*********************************************************
-
 //*********************************************************
 Procedure TUser.RP(t1: real; x1: TArrReal; var f1: TArrReal);
 var
   i:integer;
   alf:real;
 Begin
-  {if (x1[0]>0) and (x1[1]>0) then alf:=0
-    else
-      if (x1[0]<0)and(x1[1]>0) then alf:=pi/2
-      else
-        if (x1[0]>0)and(x1[1]<0) then alf:=-pi/2
-        else  alf:=pi; }
   alf:=0;
   NOP.Vs[0]:=(xf1[0]-x1[0]);//*cos(alf)+(xf1[1]-x1[1])*sin(alf);
   NOP.Vs[1]:=(xf1[1]-x1[1]);//*cos(alf)-(xf1[0]-x1[0])*sin(alf);
@@ -278,6 +268,13 @@ Begin
       f1[i]:=Ro_10(f1[i])*infinity;
 End;
 //*********************************************************
+Procedure TUser.Viewer;
+Begin
+  y[0]:=x[0];
+  y[1]:=x[1];
+  y[2]:=x[2];
+End;
+//*********************************************************
 
 
 // MAIN //
@@ -294,7 +291,7 @@ begin
    // 6. (MenuItem6Click)
 
    //******* STEP 0 *******//
-   randomize;
+   // randomize;
 
    Setlength(O1s1,kW1);
    Setlength(O2s1,kV1);
@@ -306,80 +303,77 @@ begin
    Setlength(umin1,m1);
    Setlength(umax1,m1);
    Setlength(q1,p1);
-   // Setlength(qy1,ny1);
    Setlength(ym,ll1);
    Setlength(um,m1);
    Setlength(xf1,n1);
    SetLength(xf2,ndu1);
-
-   for i:=0 to L1-1 do
-    for j:=0 to L1-1 do
-      Psi1[i,j]:=PsiBasc[i,j];
-   for i:=0 to nGraphc-1 do
-   begin
-    SetLength(xmm[i],ll1);
-   end;
    Setlength(qymax1,ny1);
    Setlength(qymin1,ny1);
    Setlength(stepsqy1,ny1);
    SetLength(qyGraph,ny1,nGraphc);
+   Setlength(qy1,ny1);
+
+   for i:=0 to L1-1 do
+    for j:=0 to L1-1 do
+      Psi1[i,j]:=PsiBasc[i,j];
+
+   for i:=0 to nGraphc-1 do
+      SetLength(xmm[i],ll1);
    for i:=0 to kW1-1 do
-    O1s1[i]:=O1sc[i];
+      O1s1[i]:=O1sc[i];
    for i:=0 to kV1-1 do
-    O2s1[i]:=O2sc[i];
+      O2s1[i]:=O2sc[i];
    for i:=0 to kP1-1 do
-    Pnum1[i]:=Pnumc[i];
+      Pnum1[i]:=Pnumc[i];
    for i:=0 to kR1-1 do
-    Rnum1[i]:=Rnumc[i];
+      Rnum1[i]:=Rnumc[i];
    for i:=0 to Mout1-1 do
-    Dnum1[i]:=Dnumc[i];
+      Dnum1[i]:=Dnumc[i];
    for i:=0 to p1-1 do
-    q1[i]:=qc[i];
+      q1[i]:=qc[i];
    for i:=0 to n1-1 do
-    x01[i]:=x0c[i];
-   for i:=0 to n1-1 do
-    xf1[i]:=xfc[i];
+   begin
+      x01[i]:=x0c[i];
+      xf1[i]:=xfc[i];
+   end;
    for i:=0 to m1-1 do
-    umin1[i]:=uminc[i];
-   for i:=0 to m1-1 do
-    umax1[i]:=umaxc[i];
-   
+   begin
+      umin1[i]:=uminc[i];
+      umax1[i]:=umaxc[i];
+   end;
    for i:= 0 to ny1-1 do
    begin
-    qymin1[i]:=qyminc[i];
-    qymax1[i]:=qymaxc[i];
-    stepsqy1[i]:=stepsqyc[i];
-    // qy1[i]:=qymin1[ i];
+      qymin1[i]:=qyminc[i];
+      qymax1[i]:=qymaxc[i];
+      stepsqy1[i]:=stepsqyc[i];
+      qy1[i]:=qymin1[i];
    end;
 
    //******* STEP 1 MenuItem5Click *******//
    // set parameters from first window () {button: Create object for NOP}
-   ASNEE:=TUser.Create(hh1, pp1, rr1, nfu1, lchr1, p1, c1, d1, epo1,
+    ASNEE:=TUser.Create(hh1, pp1, rr1, nfu1, lchr1, p1, c1, d1, epo1,
                        kel1, alfa1, pmut1, L1, Mout1, kp1,
-                       kr1, kw1, kv1,n1,m1,ll1,ny1);
-    ASNEE.Setqymax(qymax1);
-    ASNEE.Setqymin(qymin1);
-    ASNEE.Setstepsqy(stepsqy1);
-    ASNEE.NOP.SetO1s(o1s1);
-    ASNEE.NOP.SetO2s(o2s1);
-    ASNEE.SetShtraf(Shtraf1);
-    ASNEE.ksearch:=ksearch1;
+                       kr1, kw1, kv1, n1, m1, ll1, ny1);
+    ASNEE.Setqymax(qymax1);      // 2.5, 2.5, 1.31
+    ASNEE.Setqymin(qymin1);      // -2.5, -2.5, -1.31
+    ASNEE.Setstepsqy(stepsqy1);  // 1.25 2.5 1.31
+    ASNEE.NOP.SetO1s(o1s1);      // (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 23)
+    ASNEE.NOP.SetO2s(o2s1);      // (1, 2)
+    ASNEE.SetShtraf(Shtraf1);    // 2
+    ASNEE.ksearch:=ksearch1;     // 8
 
    //******* STEP 2 MenuItem8Click *******//
    // set another parameters {button: Undefinaed parameters}
-   ASNEE.Setqymin(qymin1);
-   ASNEE.Setqymax(qymax1);
-   ASNEE.Setstepsqy(stepsqy1);
    for i:=0 to ny1-1 do
       ASNEE.ix[i]:=trunc((qymax1[i]-qymin1[i])/stepsqy1[i]);
-   ASNEE.Setixmax(ASNEE.ix); 
+   ASNEE.Setixmax(ASNEE.ix);     // (4 2 2)
 
    //******* STEP 3 MenuItem9Click *******//
    // set another parameters {button: parameters for NOP} 
-   ASNEE.Setq(q1);
-   ASNEE.NOP.SetRnum(rnum1);
-   ASNEE.NOP.SetPnum(pnum1);
-   ASNEE.NOP.SetDnum(dnum1);
+   ASNEE.Setq(q1); // (12,86841, 3,82666, 6,94312)
+   ASNEE.NOP.SetRnum(rnum1);     // (3, 4, 5)
+   ASNEE.NOP.SetPnum(pnum1);     // (0, 1, 2)
+   ASNEE.NOP.SetDnum(dnum1);     // (22, 23)
    ASNEE.NOP.SetPsi(Psi1);    
 
    //******* STEP 4 MenuItem10Click *******//
@@ -394,20 +388,23 @@ begin
 
    //******* STEP 5 MenuItem11Click *******//
    // set another parameters {button: parameters for model}
-   ASNEE.Setdt(dt1);
-   ASNEE.Settf(tf1);
-   ASNEE.Setx0(x01);
-   ASNEE.Setuogr(umin1,umax1); 
+   ASNEE.Setdt(dt1); // 0.01
+   ASNEE.Settf(tf1); // 1.5
+   ASNEE.Setx0(x01); // (0 0 0)
+   ASNEE.Setuogr(umin1,umax1);  // (-10,-10) (10,10)
 
    //******* STEP 6 MenuItem6Click *******//
 
    
    // bullshit, but works, will refactor  this 
-   for i:=0 to  ny1-1 do
-      StringGrid1[i+1,0]:=i;
+{    for i:=0 to  ny1-1 do
+   begin
+      qy1[i]:=qymin1[i];
+      // StringGrid1[i+1,0]:=i;
+   end; }
 
-   for i:=0 to  nGraphc-1 do
-      StringGrid1[0,i+1]:=i;
+{    for i:=0 to  nGraphc-1 do
+      StringGrid1[0,i+1]:=i; }
 
    StringGrid1[1,1]:=qymin1[0];
    StringGrid1[2,1]:=qymin1[1];
@@ -434,11 +431,10 @@ begin
    StringGrid1[2,8]:=qymax1[1];
    StringGrid1[3,8]:=qymax1[2];
 
-
   for i:=0 to nGraphc-1 do
     for j:=0 to ny1-1 do
       qyGraph[j,i]:= StringGrid1[j+1,i+1]; 
-
+  // qyGraph - ok
    ASNEE.NOP.SetPsi(Psi1);
    sumt:=0;
    sumdelt:=0;
@@ -449,7 +445,7 @@ begin
       ASNEE.Initial;
       tp:=0;
       kolpoint_mult[iGraph]:=0;
-      ASNEE.NOP.SetCs(q1);     // it's OK    (12,86841, 3,82666, 6,94312) == qc
+      ASNEE.NOP.SetCs(q1);     // it's OK (12,86841, 3,82666, 6,94312) == qc
       f0:=0;
       repeat
          if abs(ASNEE.t-tp)<ASNEE.dt/2 then
@@ -459,6 +455,8 @@ begin
             for i:=0 to n1-1 do
             begin
                Setlength(xmm[iGraph,i],kolpoint_mult[iGraph]);
+               // unit test ASNEE.x = (0,00896497069884294, -0,0244317368711905, 0,0903986549528864)
+               // Diveev ASNEE.x = (0,0156847190752594, -0,0228745203577209, 0,092137971388368);
                xmm[iGraph,i,kolpoint_mult[iGraph]-1]:=ASNEE.x[i];
             end;
             tp:=tp+dtp;
@@ -468,10 +466,10 @@ begin
       sumt:=sumt+ASNEE.t;
       sumdelt:=sumdelt+Normdist(ASNEE.x,xf1);
    end;
-   f0:=sumdelt; // sumdelt = 0,870068437487367
-   f1:=sumt; // sumt = 6,3
+   f0:=sumdelt; // Diveev sumdelt = 0,870068437487367
+   f1:=sumt; // Diveev sumt = 6,3
 
-   // kolpoint_mult = (8, 6, 15, 9, 6, 8, 8, 6) - with 461 data
+   // Diveev kolpoint_mult = (8, 6, 15, 9, 6, 8, 8, 6) - with 461 data
    // Len=8: { 15,  15,  15,  15,  15,  15,  15,  15} - with default values
    for i:=0 to Length(kolpoint_mult)-1 do
       writeln(kolpoint_mult[i]);
