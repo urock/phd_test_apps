@@ -21,9 +21,12 @@ uminc:array    [0..1] of double=(-10,-10);
 umaxc:array    [0..1] of double=(10,10);
 x0c:array      [0..2] of real=(0,0,0);
 xfc:array      [0..2] of real=(0,0,0);
-qyminc:array   [0..2] of real=(-2.5,-2.5,-5*pi/12);
+qyminc:array   [0..2] of real=(-2.5,-2.5,-1.31);
+qymaxc:array   [0..2] of real=(2.5,2.5,1.31);
+stepsqyc:array [0..2] of real=(1.25,2.5,1.31);
+{ qyminc:array   [0..2] of real=(-2.5,-2.5,-5*pi/12);
 qymaxc:array   [0..2] of real=(2.5,2.5,5*pi/12);
-stepsqyc:array [0..2] of real=(1.25,2.5,5*pi/12);
+stepsqyc:array [0..2] of real=(1.25,2.5,5*pi/12); }
 
 {  qc:array [0..2]of real=(1,1,1);
    PsiBasc:array [0..23,0..23] of integer=

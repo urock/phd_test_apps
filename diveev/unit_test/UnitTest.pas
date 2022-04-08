@@ -95,7 +95,7 @@ begin
 
    //******* STEP 3 MenuItem9Click *******//
    // set another parameters {button: parameters for NOP} 
-   ASNEE.Setq(q1); // (12,86841, 3,82666, 6,94312)
+   ASNEE.Setq(q1);               // (12,86841, 3,82666, 6,94312)
    ASNEE.NOP.SetRnum(rnum1);     // (3, 4, 5)
    ASNEE.NOP.SetPnum(pnum1);     // (0, 1, 2)
    ASNEE.NOP.SetDnum(dnum1);     // (22, 23)
@@ -113,10 +113,10 @@ begin
 
    //******* STEP 5 MenuItem11Click *******//
    // set another parameters {button: parameters for model}
-   ASNEE.Setdt(dt1); // 0.01
-   ASNEE.Settf(tf1); // 1.5
-   ASNEE.Setx0(x01); // (0 0 0)
-   ASNEE.Setuogr(umin1,umax1);  // (-10,-10) (10,10)
+   ASNEE.Setdt(dt1);             // 0.01
+   ASNEE.Settf(tf1);             // 1.5
+   ASNEE.Setx0(x01);             // (0 0 0)
+   ASNEE.Setuogr(umin1,umax1);   // (-10,-10) (10,10)
 
    //******* STEP 6 MenuItem6Click *******//
 
