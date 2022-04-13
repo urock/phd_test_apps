@@ -6,10 +6,9 @@
     <Units Count="8">
       <Unit0>
         <Filename Value="UnitTest.pas"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="160"/>
-        <CursorPos X="63" Y="185"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="85"/>
+        <CursorPos X="28" Y="102"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -25,13 +24,13 @@
         <EditorIndex Value="2"/>
         <TopLine Value="142"/>
         <CursorPos X="27" Y="164"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="TUserClass.pas"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -43,14 +42,16 @@
       <Unit5>
         <Filename Value="TModelClass.pas"/>
         <EditorIndex Value="3"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="TGANOPClass.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <CursorPos X="100" Y="704"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="671"/>
+        <CursorPos X="47" Y="696"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -60,7 +61,7 @@
         <UsageCount Value="10"/>
       </Unit7>
     </Units>
-    <JumpHistory Count="12" HistoryIndex="11">
+    <JumpHistory Count="13" HistoryIndex="12">
       <Position1>
         <Filename Value="UnitTest.pas"/>
       </Position1>
@@ -105,6 +106,10 @@
         <Filename Value="UnitTest.pas"/>
         <Caret Line="183"/>
       </Position12>
+      <Position13>
+        <Filename Value="UnitTest.pas"/>
+        <Caret Line="151" Column="18" TopLine="128"/>
+      </Position13>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -118,7 +123,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="UnitTest.pas"/>
-        <Line Value="393"/>
+        <Line Value="392"/>
       </Item1>
     </BreakPoints>
   </Debugging>

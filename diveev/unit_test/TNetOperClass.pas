@@ -308,6 +308,7 @@ End;
 //*************************************************************
 Procedure TNetOper.PsitoPas;
  // It tranforms from Psi to Pascal
+ // формирование выражения вложенных функций 
 var
   i,j:integer;
   zz:string;

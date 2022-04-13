@@ -149,7 +149,6 @@ begin
     for j:=0 to ny1-1 do
       qyGraph[j,i]:= StringGrid1[j+1,i+1]; 
   // qyGraph - ok
-   ASNEE.NOP.SetPsi(Psi1);
    sumt:=0;
    sumdelt:=0;
    for iGraph := 0 to nGraphc-1 do

@@ -78,8 +78,9 @@ var
   alf:real;
 Begin
   alf:=0;
-  NOP.Vs[0]:=(xf1[0]-x1[0]);//*cos(alf)+(xf1[1]-x1[1])*sin(alf);
-  NOP.Vs[1]:=(xf1[1]-x1[1]);//*cos(alf)-(xf1[0]-x1[0])*sin(alf);
+  // diff of robot state and goal   
+  NOP.Vs[0]:=(xf1[0]-x1[0]);
+  NOP.Vs[1]:=(xf1[1]-x1[1]);
   NOP.Vs[2]:=(xf1[2]-x1[2]);
   NOP.RPControl;
   if Normdist(x1,xf1)<epsterm then
@@ -89,13 +90,16 @@ Begin
   end
   else
   begin
-    u[0]:=NOP.z[NOP.Dnum[0]];//*cos(alf)-NOP.z[NOP.Dnum[1]]*sin(alf);
-    u[1]:=NOP.z[NOP.Dnum[1]];//*cos(alf)+NOP.z[NOP.Dnum[0]]*sin(alf);
+    // control vector
+    u[0]:=NOP.z[NOP.Dnum[0]]; 
+    u[1]:=NOP.z[NOP.Dnum[1]];
   end;
-  OgrUpr;
+  OgrUpr; // TModel.OgrUpr            
   f1[0]:=0.5*(u[0]+u[1])*cos(x1[2]);
   f1[1]:=0.5*(u[0]+u[1])*sin(x1[2]);
   f1[2]:=0.5*(u[0]-u[1]);
+
+  // ??? 
   for i := 0 to n-1 do
     if abs(f1[i])>infinity then
       f1[i]:=Ro_10(f1[i])*infinity;
