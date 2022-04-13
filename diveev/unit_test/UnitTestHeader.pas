@@ -4,7 +4,7 @@ UNIT UnitTestHeader;
                            INTERFACE
 //*************************************************************
 uses Classes, SysUtils, FileUtil, ComCtrls,
-UnitAdaptObject, Interfaces, TUserClass;
+Interfaces, TUserClass;
 
 const
 nGraphc=8; // num of graphs

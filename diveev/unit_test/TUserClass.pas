@@ -3,9 +3,18 @@ UNIT TUserClass;
 //*************************************************************
                            INTERFACE
 //*************************************************************
-uses UnitAdaptObject, Calc3;
+uses TModelClass, Calc3;
 
 type
+  TArrInt=array of integer;
+  TArrArrInt=array of TArrInt;
+  TArr4Int=array [0..3]of integer;
+  TArrArr4Int=array of TArr4Int;
+  TArrArrArr4int=array of TArrArr4Int;
+  TArrReal=array of real;
+  TArrArrReal=array of TArrReal;
+  TArrString=array of string;
+  TProc=Procedure;
   { TUser }
   TUser=class(TModel)
     Constructor Create(hh1,pp1,rr1,nfu1,lchr1,p1,c1,d1,
