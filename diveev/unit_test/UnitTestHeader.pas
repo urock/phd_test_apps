@@ -160,6 +160,9 @@ goalrun:integer=0;
 j,i,k,kol,iGraph:integer;
 tp,sumdelt,sumt,dxx,xx,yy:real;
 
+sumdelt_golden: real=0.870068;
+sumt_golden: real = 6.3;
+
 function Normdist(x1: TArrReal; xf1: TArrReal): real;
 Function Power2(l:integer):real;
 //*************************************************************

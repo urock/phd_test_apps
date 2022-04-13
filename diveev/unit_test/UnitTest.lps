@@ -3,12 +3,12 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="11"/>
-    <Units Count="2">
+    <Units Count="8">
       <Unit0>
         <Filename Value="UnitTest.pas"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="347"/>
-        <CursorPos Y="388"/>
+        <TopLine Value="160"/>
+        <CursorPos X="63" Y="185"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -20,8 +20,47 @@
         <CursorPos X="38" Y="112"/>
         <UsageCount Value="10"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="UnitTestHeader.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="142"/>
+        <CursorPos X="27" Y="164"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="TUserClass.pas"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="calc3.pas"/>
+        <UnitName Value="Calc3"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="TModelClass.pas"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="TGANOPClass.pas"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="100" Y="704"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="TNetOperClass.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="11" Y="20"/>
+        <UsageCount Value="10"/>
+      </Unit7>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="12" HistoryIndex="11">
       <Position1>
         <Filename Value="UnitTest.pas"/>
       </Position1>
@@ -29,6 +68,43 @@
         <Filename Value="UnitTest.pas"/>
         <Caret Line="2" Column="100"/>
       </Position2>
+      <Position3>
+        <Filename Value="UnitTest.pas"/>
+        <Caret Line="181" Column="83"/>
+      </Position3>
+      <Position4>
+        <Filename Value="TUserClass.pas"/>
+        <Caret Line="10" Column="18"/>
+      </Position4>
+      <Position5>
+        <Filename Value="UnitTest.pas"/>
+        <Caret Line="181" Column="83"/>
+      </Position5>
+      <Position6>
+        <Filename Value="TUserClass.pas"/>
+      </Position6>
+      <Position7>
+        <Filename Value="TModelClass.pas"/>
+      </Position7>
+      <Position8>
+        <Filename Value="TUserClass.pas"/>
+      </Position8>
+      <Position9>
+        <Filename Value="UnitTest.pas"/>
+        <Caret Line="186" Column="48" TopLine="170"/>
+      </Position9>
+      <Position10>
+        <Filename Value="UnitTest.pas"/>
+        <Caret Line="183" Column="4" TopLine="166"/>
+      </Position10>
+      <Position11>
+        <Filename Value="UnitTest.pas"/>
+        <Caret Line="184" Column="46" TopLine="166"/>
+      </Position11>
+      <Position12>
+        <Filename Value="UnitTest.pas"/>
+        <Caret Line="183"/>
+      </Position12>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -42,7 +118,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="UnitTest.pas"/>
-        <Line Value="388"/>
+        <Line Value="393"/>
       </Item1>
     </BreakPoints>
   </Debugging>

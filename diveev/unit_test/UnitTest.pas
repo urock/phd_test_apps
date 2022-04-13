@@ -180,15 +180,24 @@ begin
       sumt:=sumt+ASNEE.t;
       sumdelt:=sumdelt+Normdist(ASNEE.x,xf1);
    end;
+
+   writeln(sumdelt);
+   writeln(sumt);
+
+   if (abs(sumdelt_golden - sumdelt) < 0.001) and (abs(sumt_golden - sumt) < 0.001) then
+     writeln('Test OK')
+   else
+     writeln('Error');
+
    f0:=sumdelt; // Diveev sumdelt = 0,870068437487367
    f1:=sumt; // Diveev sumt = 6,3
 
    // Diveev kolpoint_mult = (8, 6, 15, 9, 6, 8, 8, 6) - with 461 data
    // Len=8: { 15,  15,  15,  15,  15,  15,  15,  15} - with default values
-   for i:=0 to Length(kolpoint_mult)-1 do
-      writeln(kolpoint_mult[i]);
+   //for i:=0 to Length(kolpoint_mult)-1 do
+   //   writeln(kolpoint_mult[i]);
 
-   readkey;
+   //readkey;
 end.
 
 
