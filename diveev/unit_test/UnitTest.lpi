@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <PathDelim Value="\"/>
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
+        <UseDefaultCompilerOptions Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <MainUnit Value="0"/>
       <Title Value="UnitTest"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
     </General>
-    <BuildModes Count="1">
-      <Item1 Name="default" Default="True"/>
+    <BuildModes>
+      <Item Name="Default" Default="True"/>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -24,19 +24,24 @@
     </PublishOptions>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="3">
-      <Item1>
-        <PackageName Value="LCL"/>
-      </Item1>
-      <Item2>
-        <PackageName Value="LCLBase"/>
-      </Item2>
-      <Item3>
+    <RequiredPackages>
+      <Item>
         <PackageName Value="LazUtils"/>
-      </Item3>
+      </Item>
+      <Item>
+        <PackageName Value="LCLBase"/>
+      </Item>
+      <Item>
+        <PackageName Value="LCL"/>
+      </Item>
     </RequiredPackages>
+    <Units>
+      <Unit>
+        <Filename Value="UnitTest.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+    </Units>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
@@ -45,7 +50,6 @@
       <Filename Value="UnitTest"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir)"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
