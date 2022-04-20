@@ -164,6 +164,7 @@ sumdelt_golden: real=0.870068;
 sumt_golden: real = 6.3;
 
 function Normdist(x1: TArrReal; xf1: TArrReal): real;
+procedure SetParameters();
 //*************************************************************
                         IMPLEMENTATION
 //*************************************************************
@@ -182,6 +183,91 @@ Begin
   result:=sum;
 End;
 //*************************************************************
+
+procedure SetParameters();
+begin
+  Setlength(O1s1,kW1);
+  Setlength(O2s1,kV1);
+  Setlength(Pnum1,kP1);
+  Setlength(Rnum1,kR1);
+  Setlength(Dnum1,Mout1);
+  SetLength(Psi1,L1,L1);
+  Setlength(x01,n1);
+  Setlength(umin1,m1);
+  Setlength(umax1,m1);
+  Setlength(q1,p1);
+  Setlength(ym,ll1);
+  Setlength(um,m1);
+  Setlength(xf1,n1);
+  SetLength(xf2,ndu1);
+  Setlength(qymax1,ny1);
+  Setlength(qymin1,ny1);
+  Setlength(stepsqy1,ny1);
+  SetLength(qyGraph,ny1,nGraphc);
+  Setlength(qy1,ny1);
+
+  for i:=0 to L1-1 do
+  for j:=0 to L1-1 do
+  Psi1[i,j]:=PsiBasc[i,j];
+
+  for i:=0 to nGraphc-1 do
+  SetLength(xmm[i],ll1);
+  for i:=0 to kW1-1 do
+  O1s1[i]:=O1sc[i];
+  for i:=0 to kV1-1 do
+  O2s1[i]:=O2sc[i];
+  for i:=0 to kP1-1 do
+  Pnum1[i]:=Pnumc[i];
+  for i:=0 to kR1-1 do
+  Rnum1[i]:=Rnumc[i];
+  for i:=0 to Mout1-1 do
+  Dnum1[i]:=Dnumc[i];
+  for i:=0 to p1-1 do
+  q1[i]:=qc[i];
+  for i:=0 to n1-1 do
+  begin
+  x01[i]:=x0c[i];
+  xf1[i]:=xfc[i];
+  end;
+  for i:=0 to m1-1 do
+  begin
+  umin1[i]:=uminc[i];
+  umax1[i]:=umaxc[i];
+  end;
+  for i:= 0 to ny1-1 do
+  begin
+  qymin1[i]:=qyminc[i];
+  qymax1[i]:=qymaxc[i];
+  stepsqy1[i]:=stepsqyc[i];
+  qy1[i]:=qymin1[i];
+  end;
+
+  StringGrid1[1,1]:=qymin1[0];
+  StringGrid1[2,1]:=qymin1[1];
+  StringGrid1[3,1]:=qymin1[2];
+  StringGrid1[1,2]:=qymin1[0];
+  StringGrid1[2,2]:=qymin1[1];
+  StringGrid1[3,2]:=qymax1[2];
+  StringGrid1[1,3]:=qymin1[0];
+  StringGrid1[2,3]:=qymax1[1];
+  StringGrid1[3,3]:=qymin1[2];
+  StringGrid1[1,4]:=qymin1[0];
+  StringGrid1[2,4]:=qymax1[1];
+  StringGrid1[3,4]:=qymax1[2];
+  StringGrid1[1,5]:=qymax1[0];
+  StringGrid1[2,5]:=qymin1[1];
+  StringGrid1[3,5]:=qymin1[2];
+  StringGrid1[1,6]:=qymax1[0];
+  StringGrid1[2,6]:=qymin1[1];
+  StringGrid1[3,6]:=qymax1[2];
+  StringGrid1[1,7]:=qymax1[0];
+  StringGrid1[2,7]:=qymax1[1];
+  StringGrid1[3,7]:=qymin1[2];
+  StringGrid1[1,8]:=qymax1[0];
+  StringGrid1[2,8]:=qymax1[1];
+  StringGrid1[3,8]:=qymax1[2];
+
+end;
 
 begin
 end.
