@@ -8,9 +8,10 @@
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
+        <UseDefaultCompilerOptions Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="UnitTest"/>
+      <Title Value="TNetOperTest"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
     </General>
@@ -37,7 +38,7 @@
     </RequiredPackages>
     <Units>
       <Unit>
-        <Filename Value="UnitTest.pas"/>
+        <Filename Value="TNetOperTest.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
@@ -46,7 +47,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="UnitTest"/>
+      <Filename Value="TNetOperTest"/>
     </Target>
     <SearchPaths>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
