@@ -164,7 +164,6 @@ sumdelt_golden: real=0.870068;
 sumt_golden: real = 6.3;
 
 function Normdist(x1: TArrReal; xf1: TArrReal): real;
-Function Power2(l:integer):real;
 //*************************************************************
                         IMPLEMENTATION
 //*************************************************************
@@ -183,19 +182,6 @@ Begin
   result:=sum;
 End;
 //*************************************************************
-Function Power2(l:integer):real;
-var
-  i:integer;
-  d,delt:real;
-Begin
-  d:=1;
-  if l<0 then delt:=0.5
-  else delt:=2;
-  for i:=1 to trunc(l) do
-    d:=d*delt;
-  Result:=d;
-End;
-
 
 begin
 end.

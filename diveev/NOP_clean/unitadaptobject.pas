@@ -1304,12 +1304,12 @@ Procedure TModel.Euler2;
 var
   i:integer;
 Begin
-  RP(t,x,fa);
+  RP(t,x,fa);  // (0 0 10)
   for i:=0 to n-1 do
     xs[i]:=x[i]+dt*fa[i];
-  RP(t+dt,xs,fb);
+  RP(t+dt,xs,fb);  // (0 0 10)
   for i:=0 to n-1 do
-    x[i]:=x[i]+dt*(fa[i]+fb[i])/2;
+    x[i]:=x[i]+dt*(fa[i]+fb[i])/2;  //(-2.5 -2.5 -1.21)
   t:=t+dt;
 End;
 //*************************************************************
