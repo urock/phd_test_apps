@@ -1,4 +1,4 @@
-program TNetOperTest;
+program UnitTest;
 
 uses crt, TUserClass, UnitTestHeader;
 
@@ -99,7 +99,7 @@ begin
   else
     writeln('Error');
 
-  readkey;
+  // readkey;
 end.
 
 
