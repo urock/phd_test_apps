@@ -1,0 +1,106 @@
+object Form2: TForm2
+  Left = 349
+  Height = 539
+  Top = 252
+  Width = 650
+  Caption = 'Values of the NOP matrix and parameters'
+  ClientHeight = 539
+  ClientWidth = 650
+  Color = clYellow
+  DesignTimePPI = 144
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.0.10.0'
+  object StringGrid1: TStringGrid
+    Left = 19
+    Height = 398
+    Top = 58
+    Width = 451
+    DefaultColWidth = 36
+    FixedCols = 0
+    FixedRows = 0
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Button3: TButton
+    Left = 317
+    Height = 41
+    Top = 470
+    Width = 154
+    Caption = 'Accept changes'
+    OnClick = Button3Click
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Label2: TLabel
+    Left = 19
+    Height = 25
+    Top = 19
+    Width = 91
+    Caption = 'NOP matrix'
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 509
+    Height = 25
+    Top = 18
+    Width = 87
+    Caption = 'Parameters'
+    ParentColor = False
+    ParentFont = False
+  end
+  object StringGrid2: TStringGrid
+    Left = 509
+    Height = 396
+    Top = 60
+    Width = 110
+    ColCount = 2
+    DefaultColWidth = 36
+    FixedCols = 0
+    FixedRows = 0
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll]
+    ParentFont = False
+    RowCount = 2
+    TabOrder = 2
+  end
+  object Button4: TButton
+    Left = 509
+    Height = 43
+    Top = 468
+    Width = 110
+    Caption = 'NEXT >>'
+    OnClick = Button4Click
+    ParentFont = False
+    TabOrder = 3
+  end
+  object Button2: TButton
+    Left = 19
+    Height = 41
+    Top = 470
+    Width = 134
+    Caption = 'Load from file'
+    OnClick = Button2Click
+    ParentFont = False
+    TabOrder = 4
+  end
+  object Button1: TButton
+    Left = 173
+    Height = 40
+    Top = 472
+    Width = 122
+    Caption = 'Save to file'
+    OnClick = Button1Click
+    ParentFont = False
+    TabOrder = 5
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 432
+    Top = 10
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 353
+    Top = 10
+  end
+end

@@ -1,0 +1,95 @@
+object Form1: TForm1
+  Left = 800
+  Height = 360
+  Top = 318
+  Width = 518
+  Caption = 'Network Operator (NOP) Matrix'
+  ClientHeight = 360
+  ClientWidth = 518
+  Color = 16744703
+  DesignTimePPI = 144
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.0.10.0'
+  object Edit2: TEdit
+    Left = 17
+    Height = 33
+    Top = 29
+    Width = 137
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Label2: TLabel
+    Left = 173
+    Height = 25
+    Top = 38
+    Width = 304
+    Caption = 'Dimension of NOP square matrix: L x L'
+    ParentColor = False
+    ParentFont = False
+  end
+  object Edit3: TEdit
+    Left = 17
+    Height = 33
+    Top = 126
+    Width = 137
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Label3: TLabel
+    Left = 176
+    Height = 25
+    Top = 173
+    Width = 181
+    Caption = 'Number of parameters'
+    ParentColor = False
+    ParentFont = False
+  end
+  object BitBtn1: TBitBtn
+    Left = 346
+    Height = 41
+    Top = 298
+    Width = 150
+    Default = True
+    DefaultCaption = True
+    Kind = bkOK
+    ModalResult = 1
+    OnClick = BitBtn1Click
+    ParentFont = False
+    TabOrder = 2
+  end
+  object Edit4: TEdit
+    Left = 17
+    Height = 33
+    Top = 77
+    Width = 137
+    ParentFont = False
+    TabOrder = 3
+  end
+  object Label4: TLabel
+    Left = 173
+    Height = 25
+    Top = 86
+    Width = 154
+    Caption = 'Number of outputs'
+    ParentColor = False
+    ParentFont = False
+  end
+  object Edit5: TEdit
+    Left = 17
+    Height = 33
+    Top = 173
+    Width = 137
+    ParentFont = False
+    TabOrder = 4
+  end
+  object Label5: TLabel
+    Left = 173
+    Height = 25
+    Top = 128
+    Width = 161
+    Caption = 'Number of variables'
+    ParentColor = False
+    ParentFont = False
+  end
+end
