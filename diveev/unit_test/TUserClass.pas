@@ -75,9 +75,9 @@ End;
 Procedure TUser.RP(t1: real; x1: TArrReal; var f1: TArrReal);
 var
   i:integer;
-  alf:real;
+  // alf:real;
 Begin
-  alf:=0;
+  // alf:=0;
   // diff of robot state and goal   
   NOP.Vs[0]:=(xf1[0]-x1[0]);
   NOP.Vs[1]:=(xf1[1]-x1[1]);
