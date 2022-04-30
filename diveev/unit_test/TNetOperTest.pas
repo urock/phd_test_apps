@@ -81,7 +81,7 @@ var
 Begin
    k:=0.5;
    // diff of robot state and goal   
-   NOP.Vs[0] := (Goal.x - state.x);
+   NOP.Vs[0] := (Goal.x - state.x);    // Vs - set of variables
    NOP.Vs[1] := (Goal.y - state.y);
    NOP.Vs[2] := (Goal.yaw - state.yaw);
    NOP.RPControl;
@@ -92,6 +92,7 @@ Begin
    end
    else
    begin
+      // NOP.z - vector of nodes
       currControl.v := NOP.z[NOP.Dnum[0]]; 
       currControl.w := NOP.z[NOP.Dnum[1]];
    end;
@@ -156,13 +157,13 @@ begin
 
    // creating NOP
    NOP:=TNetOper.Create(L1, Mout1, kp1, kr1, kw1, kv1);
-   NOP.SetO1s(o1s1);    // (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 23)
-   NOP.SetO2s(o2s1);    // (1, 2)
-   NOP.SetRnum(rnum1);  // (3, 4, 5)
-   NOP.SetPnum(pnum1);  // (0, 1, 2)
-   NOP.SetDnum(dnum1);  // (22, 23)
-   NOP.SetPsi(Psi1);
-   NOP.SetCs(q1); 
+   NOP.SetO1s(o1s1);    // set of unary operations
+   NOP.SetO2s(o2s1);    // set of binary operations
+   NOP.SetRnum(rnum);   // vector of number nodes for parameters
+   NOP.SetPnum(pnum1);  // vector of number nodes for variables
+   NOP.SetDnum(dnum1);  // vector of number nodes for outputs
+   NOP.SetPsi(Psi1);    // Network  operator matrix
+   NOP.SetCs(q1);       // set of parameters
 
    // todo fix it
    for i:=0 to nGraphc-1 do
