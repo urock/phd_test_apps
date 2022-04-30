@@ -159,7 +159,7 @@ begin
    NOP:=TNetOper.Create(L1, Mout1, kp1, kr1, kw1, kv1);
    NOP.SetO1s(o1s1);    // set of unary operations
    NOP.SetO2s(o2s1);    // set of binary operations
-   NOP.SetRnum(rnum);   // vector of number nodes for parameters
+   NOP.SetRnum(rnum1);  // vector of number nodes for parameters
    NOP.SetPnum(pnum1);  // vector of number nodes for variables
    NOP.SetDnum(dnum1);  // vector of number nodes for outputs
    NOP.SetPsi(Psi1);    // Network  operator matrix
