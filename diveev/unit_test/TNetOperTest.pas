@@ -13,8 +13,8 @@ end;
 
 // struct for robot control
 Control = Record
-   v: Real;
-   w: Real;
+   u1: Real;
+   u2: Real;
 end;
 
 var
@@ -36,18 +36,18 @@ Begin
    currState.x := initialState.x + undefinedParameters[0];
    currState.y := initialState.y + undefinedParameters[1];
    currState.yaw := initialState.yaw + undefinedParameters[2];
-   currControl.v := 0;
-   currControl.w := 0;
+   currControl.u1 := 0;
+   currControl.u2 := 0;
    currTime := 0;
 End;
 //*************************************************************
 Procedure TrimCurrentControl;
 Begin
-currControl.v := Max(currControl.v, -10);
-currControl.v := Min(currControl.v, 10);
+currControl.u1 := Max(currControl.u1, -10);
+currControl.u1 := Min(currControl.u1, 10);
 
-currControl.w := Max(currControl.w, -10);
-currControl.w := Min(currControl.w, 10);
+currControl.u2 := Max(currControl.u2, -10);
+currControl.u2 := Min(currControl.u2, 10);
 
 End;
 //*************************************************************
@@ -87,19 +87,19 @@ Begin
    NOP.RPControl;
    if NormdistBetweenStateAndGoal(state) < epsterm then
    begin
-      currControl.v := 0;
-      currControl.w := 0;
+      currControl.u1 := 0;
+      currControl.u2 := 0;
    end
    else
    begin
       // NOP.z - vector of nodes
-      currControl.v := NOP.z[NOP.Dnum[0]]; 
-      currControl.w := NOP.z[NOP.Dnum[1]];
+      currControl.u1 := NOP.z[NOP.Dnum[0]]; 
+      currControl.u2 := NOP.z[NOP.Dnum[1]];
    end;
    TrimCurrentControl;            
-   f1[0] := k * (currControl.v + currControl.w) * cos(state.yaw);
-   f1[1] := k * (currControl.v + currControl.w) * sin(state.yaw);
-   f1[2] := k * (currControl.v - currControl.w);
+   f1[0] := k * (currControl.u1 + currControl.u2) * cos(state.yaw);
+   f1[1] := k * (currControl.u1 + currControl.u2) * sin(state.yaw);
+   f1[2] := k * (currControl.u1 - currControl.u2);
 
    // ??? 
    for i := 0 to ny1-1 do
@@ -157,8 +157,10 @@ begin
 
    // creating NOP
    NOP:=TNetOper.Create(L1, Mout1, kp1, kr1, kw1, kv1);
-   NOP.SetO1s(o1s1);    // set of unary operations
-   NOP.SetO2s(o2s1);    // set of binary operations
+
+   // urock. seems that o1s1, o2s1 are not needed for nop calculation
+   //NOP.SetO1s(o1s1);    // set of unary operations
+   //NOP.SetO2s(o2s1);    // set of binary operations
    NOP.SetRnum(rnum1);  // vector of number nodes for parameters
    NOP.SetPnum(pnum1);  // vector of number nodes for variables
    NOP.SetDnum(dnum1);  // vector of number nodes for outputs
