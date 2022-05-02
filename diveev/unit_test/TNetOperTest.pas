@@ -1,6 +1,6 @@
 program TNetOperTest;
 
-uses crt, TUserClass, UnitTestHeader, TNetOperTestHeader, TNetOperClass, Math, Calc3;
+uses crt, TUserClass, UnitTestHeader, TNetOperClass, Math, Calc3;
 
 type 
 // struct for robot state 

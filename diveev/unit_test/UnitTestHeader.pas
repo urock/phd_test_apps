@@ -3,8 +3,18 @@ UNIT UnitTestHeader;
 //*************************************************************
                            INTERFACE
 //*************************************************************
-uses Classes, SysUtils, FileUtil, ComCtrls,
-Interfaces, TUserClass;
+uses Classes, SysUtils, FileUtil, ComCtrls, Interfaces;
+
+
+type
+  TArrInt=array of integer;
+  TArrArrInt=array of TArrInt;
+  TArr4Int=array [0..3]of integer;
+  TArrArr4Int=array of TArr4Int;
+  TArrArrArr4int=array of TArrArr4Int;
+  TArrReal=array of real;
+  TArrArrReal=array of TArrReal;
+  TArrString=array of string;
 
 const
 nGraphc=8; // num of graphs
@@ -95,7 +105,6 @@ PsiBasc:array [0..23,0..23] of integer=
 
 var
 
-ASNEE:TUser;
 n1:integer=3;     //dimention of system;
 m1:integer=2;     //dimention of control;
 ll1:integer=3;    //dimention of viewing;
