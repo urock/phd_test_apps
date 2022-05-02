@@ -28,6 +28,8 @@ var
    currState:RobotState;   
    currControl:Control;
    currTime:real;
+   delta_state_goal: TArrReal;
+   currentControl: TArrReal;
 
 //*************************************************************
 Procedure resetCondition;
@@ -80,11 +82,15 @@ var
    k:real;
 Begin
    k:=0.5;
-   // diff of robot state and goal   
-   NOP.Vs[0] := (Goal.x - state.x);    // Vs - set of variables
-   NOP.Vs[1] := (Goal.y - state.y);
-   NOP.Vs[2] := (Goal.yaw - state.yaw);
-   NOP.RPControl;
+   // diff of robot state and goal  
+   delta_state_goal[0] := (Goal.x - state.x);
+   delta_state_goal[1] := (Goal.y - state.y);
+   delta_state_goal[2] := (Goal.yaw - state.yaw);
+
+   // NOP.Vs[0] := (Goal.x - state.x);    // Vs - set of variables
+   // NOP.Vs[1] := (Goal.y - state.y);
+   // NOP.Vs[2] := (Goal.yaw - state.yaw);
+   NOP.RPControl(delta_state_goal, currentControl);
    if NormdistBetweenStateAndGoal(state) < epsterm then
    begin
       currControl.u1 := 0;
@@ -93,8 +99,10 @@ Begin
    else
    begin
       // NOP.z - vector of nodes
-      currControl.u1 := NOP.z[NOP.Dnum[0]]; 
-      currControl.u2 := NOP.z[NOP.Dnum[1]];
+      // currControl.u1 := NOP.z[NOP.Dnum[0]]; 
+      // currControl.u2 := NOP.z[NOP.Dnum[1]];
+      currControl.u1 := currentControl[0]; 
+      currControl.u2 := currentControl[1];      
    end;
    TrimCurrentControl;            
    f1[0] := k * (currControl.u1 + currControl.u2) * cos(state.yaw);
@@ -139,6 +147,9 @@ begin
    SetParameters();  // from UnitTest
    // ny1 = dimension = 3
    SetLength(undefinedParameters, ny1);
+   SetLength(delta_state_goal,3);
+   SetLength(currentControl,2);
+   
    
    // set initial state
    initialState.x := 0.0;

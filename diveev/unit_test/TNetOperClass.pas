@@ -48,7 +48,7 @@ type
     Procedure SetPsi(Psi1:TArrArrInt);
     Procedure GenVar(var w:TArr4Int);
     Procedure Variations(w:TArr4Int);
-    Procedure RPControl;
+    Procedure RPControl(delta_state_goal: TArrReal; var currentControl: TArrReal);
     Procedure PsitoPas;
     Procedure PsitoTex;
     Procedure PsitoPasStr;
@@ -92,29 +92,6 @@ Begin
     Dnum[i]:=dnum1[i];        
 End;
 
-// //*************************************************************
-// Procedure TNetOper.SetRnum(rnum1: TArrInt);
-
-// Begin
-//   for i:=0 to kR-1 do
-//     Rnum[i]:=rnum1[i];
-// End;
-// //*************************************************************
-// procedure TNetOper.SetPnum(pnum1: TArrInt);
-// var
-//   i:integer;
-// Begin
-//   for i:=0 to kP-1 do
-//     Pnum[i]:=pnum1[i];
-// End;
-// //*************************************************************
-// procedure TNetOper.SetDnum(dnum1: TArrInt);
-// var
-//   i:integer;
-// Begin
-//   for i:=0 to Mout-1 do
-//     Dnum[i]:=dnum1[i];
-// End;
 
 //*************************************************************
 procedure TNetOper.SetCs(cs1: TArrReal);
@@ -188,11 +165,12 @@ Begin
       Psi1[i,j]:=Psi0[i,j];
 End;
 //*************************************************************
-Procedure TNetOper.RPControl;
+Procedure TNetOper.RPControl(delta_state_goal: TArrReal; var currentControl: TArrReal);
 var
   i,j:integer;
   zz:real;
 Begin
+  SetVs(delta_state_goal);
   for i:=0 to L-1 do
     case psi[i,i] of
       1,5..8: z[i]:=0;
@@ -249,6 +227,8 @@ Begin
           8: z[j]:=Xi_8(z[j],zz);
         end;
       end;
+  currentControl[0] := z[Dnum[0]]; 
+  currentControl[1] := z[Dnum[1]];      
 End;
 //*************************************************************
 Procedure TNetOper.Variations(w: TArr4Int);
