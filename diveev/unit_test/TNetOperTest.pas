@@ -29,7 +29,7 @@ var
    currControl:Control;
    currTime:real;
    delta_state_goal: TArrReal;
-   currentControl: TArrReal;
+   current_control: TArrReal;
 
 //*************************************************************
 Procedure resetCondition;
@@ -87,10 +87,8 @@ Begin
    delta_state_goal[1] := (Goal.y - state.y);
    delta_state_goal[2] := (Goal.yaw - state.yaw);
 
-   // NOP.Vs[0] := (Goal.x - state.x);    // Vs - set of variables
-   // NOP.Vs[1] := (Goal.y - state.y);
-   // NOP.Vs[2] := (Goal.yaw - state.yaw);
-   NOP.RPControl(delta_state_goal, currentControl);
+   NOP.RPControl(delta_state_goal, current_control);
+
    if NormdistBetweenStateAndGoal(state) < epsterm then
    begin
       currControl.u1 := 0;
@@ -98,11 +96,8 @@ Begin
    end
    else
    begin
-      // NOP.z - vector of nodes
-      // currControl.u1 := NOP.z[NOP.Dnum[0]]; 
-      // currControl.u2 := NOP.z[NOP.Dnum[1]];
-      currControl.u1 := currentControl[0]; 
-      currControl.u2 := currentControl[1];      
+      currControl.u1 := current_control[0]; 
+      currControl.u2 := current_control[1];      
    end;
    TrimCurrentControl;            
    f1[0] := k * (currControl.u1 + currControl.u2) * cos(state.yaw);
@@ -148,7 +143,7 @@ begin
    // ny1 = dimension = 3
    SetLength(undefinedParameters, ny1);
    SetLength(delta_state_goal,3);
-   SetLength(currentControl,2);
+   SetLength(current_control,2);
    
    
    // set initial state
@@ -169,12 +164,7 @@ begin
    // creating NOP
    NOP:=TNetOper.Create(L1, Mout1, kp1, kr1, kw1, kv1, rnum1, pnum1, dnum1);
 
-   // urock. seems that o1s1, o2s1 are not needed for nop calculation
-   //NOP.SetO1s(o1s1);    // set of unary operations
-   //NOP.SetO2s(o2s1);    // set of binary operations
-   // NOP.SetRnum(rnum1);  // vector of number nodes for parameters
-   // NOP.SetPnum(pnum1);  // vector of number nodes for variables
-   // NOP.SetDnum(dnum1);  // vector of number nodes for outputs
+
    NOP.SetPsi(Psi1);    // Network  operator matrix
    NOP.SetCs(q1);       // set of parameters
 
