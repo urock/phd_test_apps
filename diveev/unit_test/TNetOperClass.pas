@@ -34,14 +34,16 @@ type
     z:TArrReal;//vector of nodes
     zs:TArrString;//string for mathematical expression
     Psi,Psi0:TArrArrInt;//Network  operator matrices
-    Constructor Create(Lay1,Mout1,kp1,kr1,kw1,kv1:integer);//create of NOP
+
+    Constructor Create(Lay1,Mout1,kp1,kr1,kw1,kv1:integer;
+                        rnum1, pnum1, dnum1: TArrInt);
     Procedure SetVs(vs1:TArrReal);
     Procedure SetCs(cs1:TArrReal);
     Procedure SetO1s(o1s1:TArrInt);
     Procedure SetO2s(o2s1:TArrInt);
-    Procedure SetPnum(pnum1:TArrInt);
-    Procedure SetRnum(rnum1:TArrInt);
-    Procedure SetDnum(dnum1:TArrInt);
+    // Procedure SetPnum(pnum1:TArrInt);
+    // Procedure SetRnum(rnum1:TArrInt);
+    // Procedure SetDnum(dnum1:TArrInt);
     Procedure SetPsiBas(Psi1:TArrArrInt);
     Procedure SetPsi(Psi1:TArrArrInt);
     Procedure GenVar(var w:TArr4Int);
@@ -60,7 +62,10 @@ type
 {$R+}
                       { TNetOper }
 //*************************************************************
-Constructor TNetOper.Create(Lay1, Mout1, kp1, kr1, kw1, kv1: integer);
+Constructor TNetOper.Create(Lay1, Mout1, kp1, kr1, kw1, kv1: integer;
+                            rnum1, pnum1, dnum1: TArrInt);
+var
+  i:integer;
 Begin
   L:=Lay1;
   kP:=kp1;
@@ -79,7 +84,38 @@ Begin
   Setlength(Pnum,kP);
   Setlength(Rnum,kR);
   Setlength(Dnum,Mout);
+  for i:=0 to kR-1 do
+    Rnum[i]:=rnum1[i];  
+  for i:=0 to kP-1 do
+    Pnum[i]:=pnum1[i];
+  for i:=0 to Mout-1 do
+    Dnum[i]:=dnum1[i];        
 End;
+
+// //*************************************************************
+// Procedure TNetOper.SetRnum(rnum1: TArrInt);
+
+// Begin
+//   for i:=0 to kR-1 do
+//     Rnum[i]:=rnum1[i];
+// End;
+// //*************************************************************
+// procedure TNetOper.SetPnum(pnum1: TArrInt);
+// var
+//   i:integer;
+// Begin
+//   for i:=0 to kP-1 do
+//     Pnum[i]:=pnum1[i];
+// End;
+// //*************************************************************
+// procedure TNetOper.SetDnum(dnum1: TArrInt);
+// var
+//   i:integer;
+// Begin
+//   for i:=0 to Mout-1 do
+//     Dnum[i]:=dnum1[i];
+// End;
+
 //*************************************************************
 procedure TNetOper.SetCs(cs1: TArrReal);
 var
@@ -88,14 +124,7 @@ Begin
   for i:=0 to kR-1 do
     Cs[i]:=cs1[i];
 End;
-//*************************************************************
-procedure TNetOper.SetDnum(dnum1: TArrInt);
-var
-  i:integer;
-Begin
-  for i:=0 to Mout-1 do
-    Dnum[i]:=dnum1[i];
-End;
+
 //*************************************************************
 Procedure TNetOper.SetO1s(o1s1: TArrInt);
 var
@@ -112,14 +141,7 @@ Begin
   for i:=0 to kV-1 do
     O2s[i]:=o2s1[i];
 End;
-//*************************************************************
-procedure TNetOper.SetPnum(pnum1: TArrInt);
-var
-  i:integer;
-Begin
-  for i:=0 to kP-1 do
-    Pnum[i]:=pnum1[i];
-End;
+
 //*************************************************************
 Procedure TNetOper.SetPsi(Psi1: TArrArrInt);
 var
@@ -138,14 +160,7 @@ Begin
     for j:= 0 to L-1 do
       Psi0[i,j]:=Psi1[i,j];
 End;
-//*************************************************************
-Procedure TNetOper.SetRnum(rnum1: TArrInt);
-var
-  i:integer;
-Begin
-  for i:=0 to kR-1 do
-    Rnum[i]:=rnum1[i];
-End;
+
 //*************************************************************
 Procedure TNetOper.SetVs(vs1: TArrReal);
 var

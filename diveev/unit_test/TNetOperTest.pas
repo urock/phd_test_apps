@@ -1,6 +1,6 @@
 program TNetOperTest;
 
-uses crt, TUserClass, UnitTestHeader, TNetOperClass, Math, Calc3;
+uses crt, UnitTestHeader, TNetOperClass, Math, Calc3;
 
 type 
 // struct for robot state 
@@ -156,14 +156,14 @@ begin
    currState.yaw := 0.0;
 
    // creating NOP
-   NOP:=TNetOper.Create(L1, Mout1, kp1, kr1, kw1, kv1);
+   NOP:=TNetOper.Create(L1, Mout1, kp1, kr1, kw1, kv1, rnum1, pnum1, dnum1);
 
    // urock. seems that o1s1, o2s1 are not needed for nop calculation
    //NOP.SetO1s(o1s1);    // set of unary operations
    //NOP.SetO2s(o2s1);    // set of binary operations
-   NOP.SetRnum(rnum1);  // vector of number nodes for parameters
-   NOP.SetPnum(pnum1);  // vector of number nodes for variables
-   NOP.SetDnum(dnum1);  // vector of number nodes for outputs
+   // NOP.SetRnum(rnum1);  // vector of number nodes for parameters
+   // NOP.SetPnum(pnum1);  // vector of number nodes for variables
+   // NOP.SetDnum(dnum1);  // vector of number nodes for outputs
    NOP.SetPsi(Psi1);    // Network  operator matrix
    NOP.SetCs(q1);       // set of parameters
 
