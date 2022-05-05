@@ -2,4 +2,7 @@ lib
 NOP1
 *.lps
 *.exe
+*.so
+*.o
+*.a
 backup
