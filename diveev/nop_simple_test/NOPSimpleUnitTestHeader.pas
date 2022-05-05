@@ -53,7 +53,7 @@ var
   x1: array [0..1] of real = (0.1,0.1);
   Procedure InitTest;
   Procedure RPControl;
-  Procedure Run;
+  Procedure Run(new_X1, new_X2:real);
   function func_et1(x, q: TArrReal): real;
 
 //*************************************************************
@@ -138,13 +138,14 @@ begin
 end;
 
 
-procedure Run;
+Procedure Run(new_X1, new_X2:real);
 var
   i: integer;
 begin
   InitTest;
+  x1[0] := new_X1;
+  x1[1] := new_X2;
   y1[0]:=func_et1(x1,q1_c);
-  // y1[1]:=func_et2(x1,q1_c);
 
   for i:=0 to kR-1 do
     Cs[i]:=q1_c[i];
@@ -157,8 +158,8 @@ begin
  // 9.9004983374916828E-003
  // 9.9004983374916828E-003
 
-  writeln(y1[0]);
-  writeln(z[Dnumc[0]]);
+  writeln('Analitical results = ', y1[0]);
+  writeln('NOP results = ', z[Dnumc[0]]);
 
 end;
 
