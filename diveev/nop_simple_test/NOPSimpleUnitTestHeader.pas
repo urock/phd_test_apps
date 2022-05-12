@@ -133,7 +133,6 @@ End;
 
 function func_et1(x, q: TArrReal): real;
 begin
-  // Result = 4.9406564584124654e-324
   result:=(sqr(x[0])-sqr(x[1]))*cos(q[0]*x[0]+q[1])+x[0]*x[1]*exp(-q[2]*x[0]);
 end;
 
@@ -161,6 +160,10 @@ begin
   writeln('Analitical results = ', y1[0]);
   writeln('NOP results = ', z[Dnumc[0]]);
 
+  if abs(z[Dnumc[0]] - y1[0]) < 0.001 then
+     writeln('TEST OK')
+  else
+      writeln('TEST FAILED')
 end;
 
 end.
