@@ -4,11 +4,31 @@
 
 TEST(NOP, SimpleTest)
 {
-    auto j = NetOper();
+    auto netOper = NetOper();
     EXPECT_TRUE(true);
 }
 
 TEST(NOP, ComplexTest)
 {
     EXPECT_TRUE(true);
+}
+
+TEST(NOP, metrixDimensionTest)
+{
+    auto netOper = NetOper();
+    for (auto n : {1,1,3,10,100})
+    {
+        netOper.setMatrixDimension(n);
+        EXPECT_EQ(netOper.getMatrixDimension(), n);
+    }    
+}
+
+TEST(NOP, numOfOutputsTest)
+{
+    auto netOper = NetOper();
+    for (auto n : {2,2,5,10,100})
+    {
+        netOper.setOutputsNum(n);
+        EXPECT_EQ(netOper.getOutputsNum(), n);
+    }    
 }
