@@ -17,8 +17,11 @@ TEST(NOP, ComplexTest)
 TEST(NOP, funcMapTests)
 {
     auto netOper = NetOper();
-    float result = netOper.getOperationResult(1, 10.);
-    EXPECT_EQ(result, 10);
+    EXPECT_EQ(netOper.getUnaryOperationResult(1, 10.), 10.);
+    EXPECT_EQ(netOper.getUnaryOperationResult(2, 4.), 2.);
+    EXPECT_EQ(netOper.getUnaryOperationResult(2, pow(10, 9)), pow(10, 8));
+    EXPECT_EQ(netOper.getUnaryOperationResult(3, 1.), -1.);
+    EXPECT_EQ(netOper.getUnaryOperationResult(4, 4.), 2.);
 }
 
 TEST(NOP, metrixDimensionTest)

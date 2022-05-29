@@ -17,7 +17,9 @@ public:
     size_t getMatrixDimension();
     size_t getOutputsNum();
 
-    float getOperationResult(int operationNum, float input);
+    float getUnaryOperationResult(int operationNum, float input);
+    float getBinaryOperationResult(int operationNum, float left, float right);
+
 
     void setMatrixDimension(size_t newDim);
     void setOutputsNum(size_t newNum);
@@ -44,7 +46,7 @@ private:
     std::vector<std::vector<int>> m_netOperMatrix; // Psi
 
     std::map<int, float(*)(float)> m_unaryFuncMap;
-    std::map<int, float(*)(float)> m_binaryFuncMap;
+    std::map<int, float(*)(float, float)> m_binaryFuncMap;
     // std::vector<std::vector<int>> m_netOperMatrix0 // Psi0
 
 

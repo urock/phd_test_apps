@@ -6,6 +6,74 @@
 NetOper::NetOper()
 {
     initUnaryFunctionsMap();
+    initBinaryFunctionsMap();
+}
+
+void NetOper::solveRP(std::vector<float> goalDelta, std::vector<float> currentControl)
+{
+    // SetVs(delta_state_goal);
+    // for i:=0 to L-1 do
+    // case psi[i,i] of
+    //   1,5..8: z[i]:=0;
+    //   2: z[i]:=1;
+    //   3: z[i]:=-infinity;
+    //   4: z[i]:=infinity;
+    // end;
+    for(int i=0; i < m_MatrixDimension; ++i)
+    {
+        if (m_netOperMatrix[i][i] == 2)
+            m_nodes[i] = 1;
+        else if (m_netOperMatrix[i][i] == 3)
+            m_nodes[i] = Infinity;
+        else if (m_netOperMatrix[i][i] == 4)
+            m_nodes[i] = (-1) * Infinity;
+        else
+            m_nodes[i] = 0;  
+    }
+
+    // for i:=0 to kP-1 do
+    //     z[Pnum[i]]:=Vs[i];
+    for(size_t i=0; i < m_nodesForVar.size(); ++i)
+        m_nodes[m_nodesForVar[i]] = goalDelta[i];
+
+    // for i:=0 to kR-1 do
+    //     z[Rnum[i]]:=Cs[i];
+    for (size_t i=0; i < m_nodesForParams.size(); ++i)
+        m_nodes[m_nodesForParams[i]] = m_parameters[i];
+
+    // for i:=0 to L-2 do
+    //     for j:=i+1 to L-1 do
+    //         if Psi[i,j]<>0 then
+    //         begin
+    //         case Psi[i,j] of
+    float tmpVal; // zz
+    for(size_t i=0; i < m_MatrixDimension - 1; ++i)
+    {
+        for(size_t j=0; j < m_MatrixDimension; ++j)
+        {
+            if (m_netOperMatrix[i][j] == 0)
+                continue;
+            tmpVal = getUnaryOperationResult(m_netOperMatrix[i][j], m_nodes[i]);
+
+            m_nodes[j] = getBinaryOperationResult(m_netOperMatrix[j][j], m_nodes[j], tmpVal);
+
+        }
+    }
+
+    for(size_t i = 0; i < m_nodesForOutput.size(); ++i)
+        currentControl[i] = m_nodes[m_nodesForOutput[i]];
+
+
+}
+
+float NetOper::getUnaryOperationResult(int operationNum, float input)
+{
+    return m_unaryFuncMap[operationNum](input);
+}
+
+float NetOper::getBinaryOperationResult(int operationNum, float left, float right)
+{
+    return m_binaryFuncMap[operationNum](left, right);
 }
 
 void NetOper::initUnaryFunctionsMap()
@@ -41,9 +109,16 @@ void NetOper::initUnaryFunctionsMap()
     m_unaryFuncMap[28] = ro_28;
 }
 
-float NetOper::getOperationResult(int operationNum, float input)
+void NetOper::initBinaryFunctionsMap()
 {
-    return m_unaryFuncMap[operationNum](input);
+    m_binaryFuncMap[1] = xi_1;
+    m_binaryFuncMap[2] = xi_2;
+    m_binaryFuncMap[3] = xi_3;
+    m_binaryFuncMap[4] = xi_4;
+    m_binaryFuncMap[5] = xi_5;
+    m_binaryFuncMap[6] = xi_6;
+    m_binaryFuncMap[7] = xi_7;
+    m_binaryFuncMap[8] = xi_8;
 }
 
 
