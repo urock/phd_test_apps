@@ -1,10 +1,12 @@
 #pragma once
 
+#include "baseFunctions.hpp"
 #include <iostream>
 #include <map>
 #include <set>
 #include <string>
 #include <vector>
+
 
 // class network operator
 class NetOper
@@ -15,8 +17,12 @@ public:
     size_t getMatrixDimension();
     size_t getOutputsNum();
 
+    float getOperationResult(int operationNum, float input);
+
     void setMatrixDimension(size_t newDim);
     void setOutputsNum(size_t newNum);
+
+    void solveRP(std::vector<float> goalDelta, std::vector<float> currentControl);
 
 private:
     size_t m_MatrixDimension;              // L
@@ -33,6 +39,7 @@ private:
 
     std::vector<std::vector<int>> m_netOperMatrix; // Psi
 
+    std::map<int, float(*)(float)> m_unaryFuncMap;
     // std::vector<std::vector<int>> m_netOperMatrix0 // Psi0
 
 };

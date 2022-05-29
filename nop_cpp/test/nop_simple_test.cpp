@@ -13,6 +13,14 @@ TEST(NOP, ComplexTest)
     EXPECT_TRUE(true);
 }
 
+
+TEST(NOP, funcMapTests)
+{
+    auto netOper = NetOper();
+    float result = netOper.getOperationResult(0, 10.);
+    EXPECT_EQ(result, 10);
+}
+
 TEST(NOP, metrixDimensionTest)
 {
     auto netOper = NetOper();
