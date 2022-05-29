@@ -22,12 +22,12 @@ include_directories(
 
 set(Headers
     include/nop_class.hpp
-
+    include/baseFunctions.hpp
 )
+
 set(Sources
     lib/nop_class.cpp
-#     app/nop_simple_test.cpp
-
+    lib/baseFunctions.cpp
 )
 
 add_library(${This} STATIC ${Sources} ${Headers})

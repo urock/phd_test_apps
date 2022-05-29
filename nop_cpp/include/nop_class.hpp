@@ -25,6 +25,10 @@ public:
     void solveRP(std::vector<float> goalDelta, std::vector<float> currentControl);
 
 private:
+    void initUnaryFunctionsMap();
+    void initBinaryFunctionsMap();
+
+private:
     size_t m_MatrixDimension;              // L
     size_t m_numOutputs;                   // Mout
     std::vector<float> m_variables;        // Vs
@@ -40,6 +44,9 @@ private:
     std::vector<std::vector<int>> m_netOperMatrix; // Psi
 
     std::map<int, float(*)(float)> m_unaryFuncMap;
+    std::map<int, float(*)(float)> m_binaryFuncMap;
     // std::vector<std::vector<int>> m_netOperMatrix0 // Psi0
+
+
 
 };

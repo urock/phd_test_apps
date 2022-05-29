@@ -17,7 +17,7 @@ TEST(NOP, ComplexTest)
 TEST(NOP, funcMapTests)
 {
     auto netOper = NetOper();
-    float result = netOper.getOperationResult(0, 10.);
+    float result = netOper.getOperationResult(1, 10.);
     EXPECT_EQ(result, 10);
 }
 
