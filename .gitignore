@@ -6,3 +6,4 @@ NOP1
 *.o
 *.a
 backup
+build

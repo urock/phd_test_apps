@@ -1,0 +1,3 @@
+[submodule "nop_cpp/include/googletest"]
+	path = nop_cpp/include/googletest
+	url = https://github.com/google/googletest.git

@@ -1,15 +1,37 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(nop_cpp)
 
-add_compile_options(-g -Wall -static -O3)
+set(This nop_cpp)
 
-# include_directories(
-#         driver
-#         api
-# )
+project(${This} C CXX)
 
-# SET(CMAKE_EXE_LINKER_FLAGS "-static")
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -o3")
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# add_library(pcie_api STATIC api/locate.c api/power.c api/driver-api.c)
+enable_testing()
 
-add_executable(nop_simple_test app/nop_simple_test.cpp)
+add_subdirectory(
+    include/googletest
+)
+
+include_directories(
+    include
+    lib
+)
+
+set(Headers
+    include/nop_class.hpp
+
+)
+set(Sources
+    lib/nop_class.cpp
+#     app/nop_simple_test.cpp
+
+)
+
+add_library(${This} STATIC ${Sources} ${Headers})
+
+add_subdirectory(
+    test
+)
