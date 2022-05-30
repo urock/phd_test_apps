@@ -9,53 +9,36 @@ NetOper::NetOper()
     initBinaryFunctionsMap();
 }
 
-void NetOper::solveRP(std::vector<float> goalDelta, std::vector<float> currentControl)
+void NetOper::solveRP(const std::vector<float>& goalDelta, std::vector<float>& currentControl)
 {
-    // SetVs(delta_state_goal);
-    // for i:=0 to L-1 do
-    // case psi[i,i] of
-    //   1,5..8: z[i]:=0;
-    //   2: z[i]:=1;
-    //   3: z[i]:=-infinity;
-    //   4: z[i]:=infinity;
-    // end;
-    for(int i=0; i < m_MatrixDimension; ++i)
+    for(size_t i=0; i < m_matrixDimension; ++i)
     {
-        if (m_netOperMatrix[i][i] == 2)
+        if (m_matrix[i][i] == 2)
             m_nodes[i] = 1;
-        else if (m_netOperMatrix[i][i] == 3)
+        else if (m_matrix[i][i] == 3)
             m_nodes[i] = Infinity;
-        else if (m_netOperMatrix[i][i] == 4)
+        else if (m_matrix[i][i] == 4)
             m_nodes[i] = (-1) * Infinity;
         else
             m_nodes[i] = 0;  
     }
 
-    // for i:=0 to kP-1 do
-    //     z[Pnum[i]]:=Vs[i];
-    for(size_t i=0; i < m_nodesForVar.size(); ++i)
-        m_nodes[m_nodesForVar[i]] = goalDelta[i];
+    for(size_t i=0; i < m_nodesForVars.size(); ++i)
+        m_nodes[m_nodesForVars[i]] = goalDelta[i];
 
-    // for i:=0 to kR-1 do
-    //     z[Rnum[i]]:=Cs[i];
     for (size_t i=0; i < m_nodesForParams.size(); ++i)
         m_nodes[m_nodesForParams[i]] = m_parameters[i];
 
-    // for i:=0 to L-2 do
-    //     for j:=i+1 to L-1 do
-    //         if Psi[i,j]<>0 then
-    //         begin
-    //         case Psi[i,j] of
     float tmpVal; // zz
-    for(size_t i=0; i < m_MatrixDimension - 1; ++i)
+    for(size_t i=0; i < m_matrixDimension - 1; ++i)
     {
-        for(size_t j=0; j < m_MatrixDimension; ++j)
+        for(size_t j=0; j < m_matrixDimension; ++j)
         {
-            if (m_netOperMatrix[i][j] == 0)
+            if (m_matrix[i][j] == 0)
                 continue;
-            tmpVal = getUnaryOperationResult(m_netOperMatrix[i][j], m_nodes[i]);
+            tmpVal = getUnaryOperationResult(m_matrix[i][j], m_nodes[i]);
 
-            m_nodes[j] = getBinaryOperationResult(m_netOperMatrix[j][j], m_nodes[j], tmpVal);
+            m_nodes[j] = getBinaryOperationResult(m_matrix[j][j], m_nodes[j], tmpVal);
 
         }
     }
@@ -124,13 +107,13 @@ void NetOper::initBinaryFunctionsMap()
 
 size_t NetOper::getMatrixDimension()
 {
-    return m_MatrixDimension;
+    return m_matrixDimension;
 }
 
 void NetOper::setMatrixDimension(size_t newDim)
 {
-    if (newDim != m_MatrixDimension)
-        m_MatrixDimension = newDim;
+    if (newDim != m_matrixDimension)
+        m_matrixDimension = newDim;
 }
 
 size_t NetOper::getOutputsNum()
@@ -143,3 +126,60 @@ void NetOper::setOutputsNum(size_t newNum)
     if (newNum != m_numOutputs)
         m_numOutputs = newNum;
 }
+
+const std::vector<int>& NetOper::getNodesForVars()
+{
+    return m_nodesForVars;
+}
+
+void NetOper::setNodesForVars(const std::vector<int>& nodes)
+{
+    m_nodesForVars = nodes;
+}
+
+const std::vector<int>& NetOper::getNodesForParameters()
+{
+    return m_nodesForParams;
+}
+
+void NetOper::setNodesForParams(const std::vector<int>& nodes)
+{
+    m_nodesForParams = nodes;
+}
+
+const std::vector<int>& NetOper::getNodesForOutput()
+{
+    return m_nodesForOutput;
+}
+
+void NetOper::setNodesForOutput(const std::vector<int>& nodes)
+{
+    m_nodesForOutput = nodes;
+}
+
+const std::vector<std::vector<int>>& NetOper::getMatrix()
+{
+    return m_matrix;
+}
+
+const std::vector<float>& NetOper::getParameters()
+{
+    return m_parameters;
+}
+
+void NetOper::setParameters(const std::vector<float>& newParams)
+{
+    m_parameters = newParams;
+}
+
+void NetOper::setMatrix(const std::vector<std::vector<int>>& newMatrix)
+{
+    for(size_t i = 0; i < m_matrixDimension; ++i)
+    {
+        for(size_t j = 0; j < m_matrixDimension; ++j)
+        {
+            m_matrix[i][j] = newMatrix[i][j];
+        }
+    }
+}
+
