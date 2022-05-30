@@ -20,8 +20,8 @@ public:
     float getUnaryOperationResult(int operationNum, float input);
     float getBinaryOperationResult(int operationNum, float left, float right);
     
-    void setMatrixDimension(size_t newDim);
-    size_t getMatrixDimension();
+/*    void setMatrixDimension(size_t newDim);
+    size_t getMatrixDimension();*/
     
     void setOutputsNum(size_t newNum);
     size_t getOutputsNum();
@@ -48,7 +48,7 @@ private:
     void initBinaryFunctionsMap();
 
 private:
-    size_t m_matrixDimension;              // L
+    // size_t m_matrixDimension;              // L
     size_t m_numOutputs;                   // Mout
     std::vector<float> m_variables;        // Vs // probably useless
     std::vector<float> m_parameters;       // Cs

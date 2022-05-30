@@ -11,7 +11,9 @@ NetOper::NetOper()
 
 void NetOper::solveRP(const std::vector<float>& goalDelta, std::vector<float>& currentControl)
 {
-    for(size_t i=0; i < m_matrixDimension; ++i)
+    //for(size_t i=0; i < m_matrixDimension; ++i)
+    m_nodes.resize(m_matrix.size());
+    for(size_t i=0; i < m_matrix.size(); ++i)
     {
         if (m_matrix[i][i] == 2)
             m_nodes[i] = 1;
@@ -30,9 +32,9 @@ void NetOper::solveRP(const std::vector<float>& goalDelta, std::vector<float>& c
         m_nodes[m_nodesForParams[i]] = m_parameters[i];
 
     float tmpVal; // zz
-    for(size_t i=0; i < m_matrixDimension - 1; ++i)
+    for(size_t i=0; i < m_matrix.size() - 1; ++i)
     {
-        for(size_t j=0; j < m_matrixDimension; ++j)
+        for(size_t j=0; j < m_matrix.size(); ++j)
         {
             if (m_matrix[i][j] == 0)
                 continue;
@@ -105,16 +107,21 @@ void NetOper::initBinaryFunctionsMap()
 }
 
 
-size_t NetOper::getMatrixDimension()
-{
-    return m_matrixDimension;
-}
+// size_t NetOper::getMatrixDimension()
+// {
+//     return m_matrixDimension;
+// }
 
-void NetOper::setMatrixDimension(size_t newDim)
-{
-    if (newDim != m_matrixDimension)
-        m_matrixDimension = newDim;
-}
+// void NetOper::setMatrixDimension(size_t newDim)
+// {
+//     if (newDim != m_matrixDimension)
+//         m_matrixDimension = newDim;
+
+//     m_matrix.resize(newDim);
+//     for (auto row : m_matrix)
+//         row.resize(newDim);
+
+// }
 
 size_t NetOper::getOutputsNum()
 {
@@ -174,12 +181,8 @@ void NetOper::setParameters(const std::vector<float>& newParams)
 
 void NetOper::setMatrix(const std::vector<std::vector<int>>& newMatrix)
 {
-    for(size_t i = 0; i < m_matrixDimension; ++i)
-    {
-        for(size_t j = 0; j < m_matrixDimension; ++j)
-        {
-            m_matrix[i][j] = newMatrix[i][j];
-        }
-    }
+    m_matrix = newMatrix;
+    // m_matrix.size()
+    // TODO CHANGE MATRIX DIM!
 }
 
