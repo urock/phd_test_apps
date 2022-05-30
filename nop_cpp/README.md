@@ -12,7 +12,11 @@ make
 ```
 cd build/test
 ./nop_tests 
+# or
+./nop_tests --gtest_filter="NOP.*"
 ```
+
+
 
 
 

@@ -137,7 +137,7 @@ void NetOper::setNodesForVars(const std::vector<int>& nodes)
     m_nodesForVars = nodes;
 }
 
-const std::vector<int>& NetOper::getNodesForParameters()
+const std::vector<int>& NetOper::getNodesForParams()
 {
     return m_nodesForParams;
 }

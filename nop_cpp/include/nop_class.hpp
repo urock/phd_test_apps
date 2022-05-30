@@ -31,7 +31,7 @@ public:
     const std::vector<int>& getNodesForVars();
 
     void setNodesForParams(const std::vector<int>& nodes);
-    const std::vector<int>& getNodesForParameters();
+    const std::vector<int>& getNodesForParams();
 
     void setNodesForOutput(const std::vector<int>& nodes);
     const std::vector<int>& getNodesForOutput();
