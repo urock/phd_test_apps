@@ -154,7 +154,7 @@ float ro_23(float inp)
 	if (abs(inp) > 1./Eps)
 		return (-1) * ro_10(inp) / Eps;
 	else
-		return inp - inp * pow(inp, 3);
+		return inp - pow(inp, 3);
 }
 
 float ro_24(float inp)
@@ -162,7 +162,12 @@ float ro_24(float inp)
 	if (inp > Infinity)
 		return 1;
 	else
-		return 1. / (1. + exp(-inp));
+	{
+		if (exp(-inp) > Infinity)
+			return 0;
+		else
+			return 1. / (1. + exp(-inp));
+	}
 }
 
 float ro_25(float inp)
@@ -243,5 +248,5 @@ float xi_7(float l, float r)
 
 float xi_8(float l, float r)
 {
-	return ro_10(l + r) * xi_2(abs(l), abs(2));
+	return ro_10(l + r) * xi_2(abs(l), abs(r));
 }

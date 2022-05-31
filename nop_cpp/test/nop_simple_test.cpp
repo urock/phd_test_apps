@@ -60,14 +60,15 @@ TEST(NOP, SimpleTest)
 
     auto res = desiredFunction(initialState, parameters);
 
-    netOper.solveRP(initialState, parameters);
+
+    std::vector<float> NOPOutput(2);
+    netOper.solveRP(initialState, NOPOutput);
 
 
     std::cout << "desiredFunction RESULT: " << res << std::endl;
     
-    std::cout<<"RP RESULT: "<< parameters[0] <<" "<< parameters[1]<< std::endl;
+    std::cout<<"RP RESULT: "<< NOPOutput[0] <<" "<< NOPOutput[1]<< std::endl;
 
-//     EXPECT_TRUE(true);
 }
 
 
