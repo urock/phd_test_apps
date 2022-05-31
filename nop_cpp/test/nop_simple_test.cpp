@@ -1,6 +1,6 @@
 #include "nop_class.hpp"
 #include <gtest/gtest.h>
-
+#include <cmath>
 
 TEST(NOP, Test)
 {
@@ -10,6 +10,22 @@ TEST(NOP, Test)
 
 TEST(NOP, SimpleTest)
 {   
+    auto desiredFunction = [](std::vector<float> initialState,
+                               std::vector<float> control)
+    {
+        float x = initialState[0];
+        float y = initialState[0];
+
+        float v = control[0];
+        float w = control[1];
+        float z = control[2];
+
+        // std::cout<< "x: " << x << " y: " << y << std::endl;
+
+        // std::cout<< "v: " << std::to_string(v) << " w: " << w << " z: " << z << std::endl;
+
+        return (pow(x, 2) - pow(y, 2)) * cos(v * x + w) + x*y*exp(-z * x);
+    };
 
     const std::vector<std::vector<int>> Psi = 
        {{0,0,0,0,  0,1,1,1,  0,2,0,0, 0,0},
@@ -30,21 +46,26 @@ TEST(NOP, SimpleTest)
        {0,0,0,0,  0,0,0,0,  0,0,0,0, 2,1},
        {0,0,0,0,  0,0,0,0,  0,0,0,0, 0,1}};
 
+    std::vector<float> parameters = {0.1, 0.1, 0.1};
     auto netOper = NetOper();
-    // netOper.setMatrixDimension(14);          // set L
     netOper.setOutputsNum(2);                // set Mout
     netOper.setNodesForVars({0, 1});         // Pnum
     netOper.setNodesForParams({2, 3, 4});    // Rnum
     netOper.setNodesForOutput({13, 13});     // Dnum
-    netOper.setParameters({0.1, 0.1});       // set Cs
+    netOper.setParameters(parameters);       // set Cs
 
     netOper.setMatrix(Psi);
 
     std::vector<float> initialState = {0.1, 0.1};
-    std::vector<float> control = {0.1, 0.1};
-    netOper.solveRP(initialState, control);
 
-     std::cout<<"RP RESULT: "<<control[0]<<" "<<control[1]<< std::endl;
+    auto res = desiredFunction(initialState, parameters);
+
+    netOper.solveRP(initialState, parameters);
+
+
+    std::cout << "desiredFunction RESULT: " << res << std::endl;
+    
+    std::cout<<"RP RESULT: "<< parameters[0] <<" "<< parameters[1]<< std::endl;
 
 //     EXPECT_TRUE(true);
 }
@@ -54,7 +75,7 @@ TEST(NOP, funcMapTests)
 {
     auto netOper = NetOper();
     EXPECT_EQ(netOper.getUnaryOperationResult(1, 10.), 10.);
-    EXPECT_EQ(netOper.getUnaryOperationResult(2, 4.), 2.);
+    EXPECT_EQ(netOper.getUnaryOperationResult(2, 4.), 16.);
     EXPECT_EQ(netOper.getUnaryOperationResult(2, pow(10, 9)), pow(10, 8));
     EXPECT_EQ(netOper.getUnaryOperationResult(3, 1.), -1.);
     EXPECT_EQ(netOper.getUnaryOperationResult(4, 4.), 2.);

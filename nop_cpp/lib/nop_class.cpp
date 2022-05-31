@@ -11,7 +11,6 @@ NetOper::NetOper()
 
 void NetOper::solveRP(const std::vector<float>& goalDelta, std::vector<float>& currentControl)
 {
-    //for(size_t i=0; i < m_matrixDimension; ++i)
     m_nodes.resize(m_matrix.size());
     for(size_t i=0; i < m_matrix.size(); ++i)
     {
