@@ -74,12 +74,20 @@ TEST(NOP, SimpleTest)
 
 TEST(NOP, funcMapTests)
 {
+    
     auto netOper = NetOper();
-    EXPECT_EQ(netOper.getUnaryOperationResult(1, 10.), 10.);
-    EXPECT_EQ(netOper.getUnaryOperationResult(2, 4.), 16.);
-    EXPECT_EQ(netOper.getUnaryOperationResult(2, pow(10, 9)), pow(10, 8));
-    EXPECT_EQ(netOper.getUnaryOperationResult(3, 1.), -1.);
-    EXPECT_EQ(netOper.getUnaryOperationResult(4, 4.), 2.);
+    auto a = 24.23;
+    auto big_inf = pow(10,9);
+    auto b = 7892.02;
+    EXPECT_EQ(netOper.getUnaryOperationResult(1, a), ro_1(a));
+    EXPECT_EQ(netOper.getUnaryOperationResult(2, a), ro_2(a));
+    EXPECT_EQ(netOper.getUnaryOperationResult(2, big_inf), ro_2(big_inf));
+    EXPECT_EQ(netOper.getUnaryOperationResult(3, a), ro_3(a));
+    EXPECT_EQ(netOper.getUnaryOperationResult(4, a), ro_4(a));
+
+    EXPECT_EQ(netOper.getBinaryOperationResult(1, a, b), xi_1(a, b));
+    EXPECT_EQ(netOper.getBinaryOperationResult(2, a, b), xi_2(a, b));
+    
 }
 
 // // TODO FIX MATRIX DIM ISSUE!
