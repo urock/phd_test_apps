@@ -10,21 +10,10 @@ TEST(NOP, Test)
 
 TEST(NOP, SimpleTest)
 {   
-    auto desiredFunction = [](std::vector<float> initialState,
-                               std::vector<float> control)
+    auto desiredFunction = [](std::vector<float> x,
+                               std::vector<float> q)
     {
-        float x = initialState[0];
-        float y = initialState[0];
-
-        float v = control[0];
-        float w = control[1];
-        float z = control[2];
-
-        // std::cout<< "x: " << x << " y: " << y << std::endl;
-
-        // std::cout<< "v: " << std::to_string(v) << " w: " << w << " z: " << z << std::endl;
-
-        return (pow(x, 2) - pow(y, 2)) * cos(v * x + w) + x*y*exp(-z * x);
+        return (pow(x[0], 2) - pow(x[1], 2)) * cos(q[0] * x[0] + q[1]) + x[0]*x[1]*exp(-q[2] * x[0]);
     };
 
     const std::vector<std::vector<int>> Psi = 
@@ -56,7 +45,7 @@ TEST(NOP, SimpleTest)
 
     netOper.setMatrix(Psi);
 
-    std::vector<float> initialState = {0.2, 0.1};
+    std::vector<float> initialState = {0.1, 0.1};
 
     auto expectedResult = desiredFunction(initialState, parameters);
 
