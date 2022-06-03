@@ -56,18 +56,21 @@ TEST(NOP, SimpleTest)
 
     netOper.setMatrix(Psi);
 
-    std::vector<float> initialState = {0.1, 0.1};
+    std::vector<float> initialState = {0.2, 0.1};
 
-    auto res = desiredFunction(initialState, parameters);
+    auto expectedResult = desiredFunction(initialState, parameters);
 
 
     std::vector<float> NOPOutput(2);
     netOper.solveRP(initialState, NOPOutput);
 
 
-    std::cout << "desiredFunction RESULT: " << res << std::endl;
+    std::cout << "desiredFunction RESULT: " << expectedResult << std::endl;
     
     std::cout<<"RP RESULT: "<< NOPOutput[0] <<" "<< NOPOutput[1]<< std::endl;
+
+    EXPECT_EQ(NOPOutput[0], expectedResult);
+    
 
 }
 
