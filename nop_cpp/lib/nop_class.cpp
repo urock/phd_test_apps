@@ -17,9 +17,9 @@ void NetOper::solveRP(const std::vector<float>& goalDelta, std::vector<float>& c
         if (m_matrix[i][i] == 2)
             m_nodes[i] = 1;
         else if (m_matrix[i][i] == 3)
-            m_nodes[i] = Infinity;
-        else if (m_matrix[i][i] == 4)
             m_nodes[i] = (-1) * Infinity;
+        else if (m_matrix[i][i] == 4)
+            m_nodes[i] = Infinity;
         else
             m_nodes[i] = 0;  
     }
@@ -30,16 +30,15 @@ void NetOper::solveRP(const std::vector<float>& goalDelta, std::vector<float>& c
     for (size_t i=0; i < m_nodesForParams.size(); ++i)
         m_nodes[m_nodesForParams[i]] = m_parameters[i];
 
-    float tmpVal; // zz
     for(size_t i=0; i < m_matrix.size() - 1; ++i)
     {
-        for(size_t j=0; j < m_matrix.size(); ++j)
+        for(size_t j=i+1; j < m_matrix.size(); ++j)
         {
             if (m_matrix[i][j] == 0)
                 continue;
-            tmpVal = getUnaryOperationResult(m_matrix[i][j], m_nodes[i]);
+            auto zz = getUnaryOperationResult(m_matrix[i][j], m_nodes[i]);
 
-            m_nodes[j] = getBinaryOperationResult(m_matrix[j][j], m_nodes[j], tmpVal);
+            m_nodes[j] = getBinaryOperationResult(m_matrix[j][j], m_nodes[j], zz);
 
         }
     }

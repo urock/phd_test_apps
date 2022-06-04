@@ -58,8 +58,7 @@ TEST(NOP, SimpleTest)
     
     std::cout<<"RP RESULT: "<< NOPOutput[0] <<" "<< NOPOutput[1]<< std::endl;
 
-    EXPECT_EQ(NOPOutput[0], expectedResult);
-    
+    EXPECT_TRUE(abs(NOPOutput[0] - expectedResult) < 0.001);
 
 }
 
