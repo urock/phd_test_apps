@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.3)
 set(This nop_tests)
 
 set(Sources
-    nop_simple_test.cpp
+    nop_class_test.cpp
 
 )
 

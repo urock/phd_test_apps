@@ -15,13 +15,11 @@ public:
     NetOper();
 
     // RPCntrol
-    void solveRP(const std::vector<float>& goalDelta, std::vector<float>& currentControl);
+    void calcResult(const std::vector<float>& x_in, std::vector<float>& y_out);
 
     float getUnaryOperationResult(int operationNum, float input);
     float getBinaryOperationResult(int operationNum, float left, float right);
     
-/*    void setMatrixDimension(size_t newDim);
-    size_t getMatrixDimension();*/
     
     void setOutputsNum(size_t newNum);
     size_t getOutputsNum();
@@ -50,14 +48,14 @@ private:
 private:
     // size_t m_matrixDimension;              // L
     size_t m_numOutputs;                   // Mout
-    std::vector<float> m_variables;        // Vs // probably useless
+    // std::vector<float> m_variables;        // Vs // probably useless
     std::vector<float> m_parameters;       // Cs
     std::vector<int> m_unaryOperations;    // O1s
     std::vector<int> m_binaryOperations;   // O2s
     std::vector<int> m_nodesForVars;       // Pnum
     std::vector<int> m_nodesForParams;     // Rnum
     std::vector<int> m_nodesForOutput;     // Dnum
-    std::vector<float> m_nodes;            // z
+    std::vector<float> z;                  // z
     std::vector<std::string> m_nodesExpr;  // zs
 
     std::vector<std::vector<int>> m_matrix; // Psi

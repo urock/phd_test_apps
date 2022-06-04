@@ -2,65 +2,6 @@
 #include <gtest/gtest.h>
 #include <cmath>
 
-TEST(NOP, Test)
-{
-    auto netOper = NetOper();
-    EXPECT_TRUE(true);
-}
-
-TEST(NOP, SimpleTest)
-{   
-    auto desiredFunction = [](std::vector<float> x,
-                               std::vector<float> q)
-    {
-        return (pow(x[0], 2) - pow(x[1], 2)) * cos(q[0] * x[0] + q[1]) + x[0]*x[1]*exp(-q[2] * x[0]);
-    };
-
-    const std::vector<std::vector<int>> Psi = 
-       {{0,0,0,0,  0,1,1,1,  0,2,0,0, 0,0},
-       {0,0,0,0,  0,0,1,0,  2,0,0,0, 0,0},
-       {0,0,0,0,  0,1,0,0,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 0,0},
-
-       {0,0,0,0,  0,0,0,3,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,2,0,0,  0,0,1,0, 0,0},
-       {0,0,0,0,  0,0,2,0,  0,0,0,1, 0,0},
-       {0,0,0,0,  0,0,0,2,  0,0,0,6, 0,0},
-
-       {0,0,0,0,  0,0,0,0,  1,3,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,1,0,0, 1,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 11,0},
-       {0,0,0,0,  0,0,0,0,  0,0,0,2, 0,1},
-
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 2,1},
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 0,1}};
-
-    std::vector<float> parameters = {0.1, 0.1, 0.1};
-    auto netOper = NetOper();
-    netOper.setOutputsNum(2);                // set Mout
-    netOper.setNodesForVars({0, 1});         // Pnum
-    netOper.setNodesForParams({2, 3, 4});    // Rnum
-    netOper.setNodesForOutput({13, 13});     // Dnum
-    netOper.setParameters(parameters);       // set Cs
-
-    netOper.setMatrix(Psi);
-
-    std::vector<float> initialState = {0.1, 0.1};
-
-    auto expectedResult = desiredFunction(initialState, parameters);
-
-
-    std::vector<float> NOPOutput(2);
-    netOper.solveRP(initialState, NOPOutput);
-
-
-    std::cout << "desiredFunction RESULT: " << expectedResult << std::endl;
-    
-    std::cout<<"RP RESULT: "<< NOPOutput[0] <<" "<< NOPOutput[1]<< std::endl;
-
-    EXPECT_TRUE(abs(NOPOutput[0] - expectedResult) < 0.001);
-
-}
 
 
 TEST(NOP, funcMapTests)
@@ -99,7 +40,7 @@ TEST(NOP, funcMapTests)
 //     }    
 // }
 
-TEST(NOP, numOfOutputsTest)
+TEST(NOP, setGetTest)
 {
     auto netOper = NetOper();
     for (auto n : {2,2,5,10,100})
@@ -107,39 +48,24 @@ TEST(NOP, numOfOutputsTest)
         netOper.setOutputsNum(n);
         EXPECT_EQ(netOper.getOutputsNum(), n);
     }    
-}
 
-TEST(NOP, nodesForVarsTest)
-{
-    auto netOper = NetOper();
     std::vector<int> nodesForVars = {0, 1, 2, 3};
     netOper.setNodesForVars(nodesForVars);
-    EXPECT_TRUE(nodesForVars == netOper.getNodesForVars());
-}
+    EXPECT_TRUE(nodesForVars == netOper.getNodesForVars());    
 
-TEST(NOP, nodesForParamsTest)
-{
-    auto netOper = NetOper();
     std::vector<int> nodesForParams = {2, 3, 4, 5};
     netOper.setNodesForParams(nodesForParams);
-    EXPECT_TRUE(nodesForParams == netOper.getNodesForParams());
-}
+    EXPECT_TRUE(nodesForParams == netOper.getNodesForParams());    
 
-TEST(NOP, nodesForParamsOutputTest)
-{
-    auto netOper = NetOper();
     std::vector<int> nodesForOutput = {13, 13};
     netOper.setNodesForOutput(nodesForOutput);
-    EXPECT_TRUE(nodesForOutput == netOper.getNodesForOutput());
-}
+    EXPECT_TRUE(nodesForOutput == netOper.getNodesForOutput());    
 
-TEST(NOP, ParametersTest)
-{
-    auto netOper = NetOper();
     std::vector<float> parameters = {0.1, 0.1};
     netOper.setParameters(parameters);
-    EXPECT_TRUE(parameters == netOper.getParameters());
+    EXPECT_TRUE(parameters == netOper.getParameters());    
 }
+
 
 TEST(NOP, setMatrixTest)
 {
@@ -166,4 +92,59 @@ TEST(NOP, setMatrixTest)
     netOper.setMatrix(Psi);
 
     EXPECT_TRUE(Psi == netOper.getMatrix());
+}
+
+
+TEST(NOP, calcResultTest)
+{   
+    auto desiredFunction = [](std::vector<float> x,
+                               std::vector<float> q)
+    {
+        return (pow(x[0], 2) - pow(x[1], 2)) * cos(q[0] * x[0] + q[1]) + x[0]*x[1]*exp(-q[2] * x[0]);
+    };
+
+    const std::vector<std::vector<int>> Psi = 
+       {{0,0,0,0,  0,1,1,1,  0,2,0,0, 0,0},
+       {0,0,0,0,  0,0,1,0,  2,0,0,0, 0,0},
+       {0,0,0,0,  0,1,0,0,  0,0,0,0, 0,0},
+       {0,0,0,0,  0,0,0,0,  0,0,1,0, 0,0},
+
+       {0,0,0,0,  0,0,0,3,  0,0,0,0, 0,0},
+       {0,0,0,0,  0,2,0,0,  0,0,1,0, 0,0},
+       {0,0,0,0,  0,0,2,0,  0,0,0,1, 0,0},
+       {0,0,0,0,  0,0,0,2,  0,0,0,6, 0,0},
+
+       {0,0,0,0,  0,0,0,0,  1,3,0,0, 0,0},
+       {0,0,0,0,  0,0,0,0,  0,1,0,0, 1,0},
+       {0,0,0,0,  0,0,0,0,  0,0,1,0, 11,0},
+       {0,0,0,0,  0,0,0,0,  0,0,0,2, 0,1},
+
+       {0,0,0,0,  0,0,0,0,  0,0,0,0, 2,1},
+       {0,0,0,0,  0,0,0,0,  0,0,0,0, 0,1}};
+
+    std::vector<float> parameters = {0.1, 0.1, 0.1};
+    auto netOper = NetOper();
+    netOper.setOutputsNum(2);                // set Mout
+    netOper.setNodesForVars({0, 1});         // Pnum
+    netOper.setNodesForParams({2, 3, 4});    // Rnum
+    netOper.setNodesForOutput({13, 13});     // Dnum
+    netOper.setParameters(parameters);       // set Cs
+
+    netOper.setMatrix(Psi);
+
+    std::vector<float> x_in = {0.1, 0.1};
+
+    auto expectedResult = desiredFunction(x_in, parameters);
+
+
+    std::vector<float> y_out(2);
+    netOper.calcResult(x_in, y_out);
+
+
+    // std::cout << "desiredFunction RESULT: " << expectedResult << std::endl;
+    
+    // std::cout<<"RP RESULT: "<< y_out[0] <<" "<< y_out[1]<< std::endl;
+
+    EXPECT_TRUE(abs(y_out[0] - expectedResult) < 0.001);
+
 }
