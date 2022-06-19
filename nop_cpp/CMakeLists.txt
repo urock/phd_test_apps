@@ -21,17 +21,27 @@ include_directories(
 )
 
 set(Headers
-    include/nop_class.hpp
     include/baseFunctions.hpp
+    include/nop_class.hpp
+    include/nop_controller.h
 )
 
 set(Sources
-    lib/nop_class.cpp
     lib/baseFunctions.cpp
+    lib/nop_class.cpp
+    lib/nop_controller.cpp
 )
 
 add_library(${This} STATIC ${Sources} ${Headers})
 
+# Create tests
 add_subdirectory(
     test
+)
+
+# Create more complex test (TNetOperTest) 
+add_executable(test_app app/test_app.cpp)
+
+target_link_libraries(test_app PUBLIC
+    nop_cpp
 )
