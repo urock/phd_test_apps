@@ -148,3 +148,4 @@ TEST(NOP, calcResultTest)
     EXPECT_TRUE(abs(y_out[0] - expectedResult) < 0.001);
 
 }
+

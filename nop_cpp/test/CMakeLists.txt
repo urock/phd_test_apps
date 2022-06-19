@@ -4,6 +4,7 @@ set(This nop_tests)
 
 set(Sources
     nop_class_test.cpp
+    nop_controller_test.cpp
 )
 
 add_executable(${This} ${Sources})
