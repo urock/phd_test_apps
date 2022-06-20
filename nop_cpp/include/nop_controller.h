@@ -32,7 +32,7 @@ public:
 	/// returns curr goal state
 	const State& goal();
 	/// returns nnetwork operator
-	const NetOper& netOper();
+	NetOper& netOper();
 
 private:
 

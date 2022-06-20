@@ -5,7 +5,7 @@
 Controller::Controller(State goalState, NetOper netOper):m_goalState(goalState)
 	,m_netOper(netOper)
 {
-	std::cout<<"Init Controller" << std::endl;
+	// std::cout<<"Init Controller" << std::endl;
 }
 
 std::vector<float> Controller::calcControl(const State& currState)
@@ -73,7 +73,7 @@ const State& Controller::goal()
 	return m_goalState;
 }
 
-const NetOper& Controller::netOper()
+NetOper& Controller::netOper()
 {
 	return m_netOper;
 }
