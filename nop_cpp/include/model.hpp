@@ -1,10 +1,14 @@
 #pragma once
+#include <iostream>
 #include <vector>
 
 class Model {
 
 public:
-  using Control = std::vector<float>;
+  struct Control {
+    float left;
+    float right;
+  };
 
   struct State {
     float x;

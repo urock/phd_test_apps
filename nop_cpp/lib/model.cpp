@@ -18,10 +18,10 @@ void Model::setState(const State &state) { m_state = state; }
 
 const Model::State Model::calcState(const Control &control, const float dt) {
   constexpr float k = 0.5f;
-  auto ds = State{k * (control[0] + control[1]) * cosf(m_state.yaw),
-                  k * (control[0] + control[1]) * sinf(m_state.yaw),
-                  k * (control[0] - control[1])};
-  return m_state + ds * dt;
+  auto Vs = State{k * (control.left + control.right) * cosf(m_state.yaw),
+                  k * (control.left + control.right) * sinf(m_state.yaw),
+                  k * (control.left - control.right)};
+  return m_state + Vs * dt;
 }
 
 void Model::applyControl(const Control &control, const float dt) {
