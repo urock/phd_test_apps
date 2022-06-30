@@ -1,8 +1,7 @@
-#include "nop_controller.h"
-#include "nop_class.hpp"
-#include <gtest/gtest.h>
 #include <cmath>
+#include <gtest/gtest.h>
 
+#include "controller.hpp"
 
 
 TEST(Controller, ConstructorTests)
@@ -46,16 +45,10 @@ TEST(Controller, SimpleTest)
     controller.netOper().setParameters(parameters);       // set Cs
     controller.netOper().setMatrix(Psi);
 
-    State currState = {0, 0, 0};
+    Model::State currState = {0, 0, 0};
 
-    EXPECT_EQ(controller.distToGoal(currState), 1.);
 
-    auto control = controller.calcControl(currState);
+    Model::Control u = controller.calcControl(currState);
 
-    std::cout << "CONTROL: ";
-    for (auto i : control)
-    {
-        std::cout<<i << " ";
-    }
-    std::cout << std::endl;
+    std::cout << "CONTROL: " << u.left << " " << u.right << "\n";
 }

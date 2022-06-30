@@ -1,7 +1,7 @@
-#include "nop_class.hpp"
-#include <gtest/gtest.h>
 #include <cmath>
+#include <gtest/gtest.h>
 
+#include "nop.hpp"
 
 
 TEST(NOP, funcMapTests)

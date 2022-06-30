@@ -2,12 +2,6 @@
 #include <cmath>
 #include <gtest/gtest.h>
 
-TEST(Model, ConstructorTests) {
-  Model first = Model();
-  Model::State state{12.2, -2.4, -0.3};
-  Model second = Model(state);
-}
-
 TEST(Model, reset) {
   Model model({-10, 0, 0});
   Model::State state{1, 0, 0};

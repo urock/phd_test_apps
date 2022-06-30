@@ -17,33 +17,27 @@ add_subdirectory(
 
 include_directories(
     include
-    lib
+    lib/include
 )
 
-set(Headers
-    include/baseFunctions.hpp
-    include/nop_class.hpp
-    include/model.hpp
-    include/nop_controller.h
-)
-
-set(Sources
+set(LibSources
     lib/baseFunctions.cpp
-    lib/nop_class.cpp
+    lib/nop.cpp
     lib/model.cpp
-    lib/nop_controller.cpp
+    lib/controller.cpp
+    lib/runner.cpp
 )
 
-add_library(${This} STATIC ${Sources} ${Headers})
+add_library(${This} STATIC ${LibSources})
 
 # Create tests
 add_subdirectory(
     test
 )
 
-# Create more complex test (TNetOperTest)
-add_executable(test_app app/test_app.cpp)
+# # Create more complex test (TNetOperTest)
+# add_executable(test_app app/test_app.cpp)
 
-target_link_libraries(test_app PUBLIC
-    nop_cpp
-)
+# target_link_libraries(test_app PUBLIC
+#     nop_cpp
+# )

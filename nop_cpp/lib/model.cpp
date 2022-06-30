@@ -1,14 +1,6 @@
 #include "model.hpp"
 #include <cmath>
 
-const Model::State Model::State::operator+(const State &state) {
-  return State{this->x + state.x, this->y + state.y, this->yaw + state.yaw};
-}
-
-const Model::State Model::State::operator*(float val) {
-  return State{this->x * val, this->y * val, this->yaw * val};
-}
-
 Model::Model() {}
 Model::Model(const State &state) { setState(state); }
 
@@ -32,4 +24,4 @@ const Model::State Model::getNext(const Control &control, const float dt) {
   return calcState(control, dt);
 }
 
-const Model::State &Model::getState() { return m_state; };
+const Model::State &Model::getState() { return m_state; }
