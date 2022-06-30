@@ -14,6 +14,7 @@ class Runner {
         Model::State mCurrentState;
         Model::State mGoal;
         float dt;
+        float mCurrentTime; 
 
         Model mModel;
         Controller mController;  

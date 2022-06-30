@@ -13,12 +13,12 @@ Model::Control Controller::calcControl(const Model::State& currState)
 	Model::State d = mGoal - currState; 
 
 
-	std::vector<float> intermResult(2, 0);
+	std::vector<float> u(2, 0);
 
-	m_netOper.calcResult({d.x, d.y, d.yaw}, intermResult);
+	m_netOper.calcResult({d.x, d.y, d.yaw}, u);
 
 	
-	return Model::Control{intermResult[0], intermResult[1]};
+	return Model::Control{u[0], u[1]};
 }
 
 // bullshit
