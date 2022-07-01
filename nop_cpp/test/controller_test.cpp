@@ -22,7 +22,7 @@ TEST(Controller, SimpleTest)
 
     std::vector<float> parameters = {0.1, 0.1, 0.1};
 
-    controller.netOper().setOutputsNum(2);             // set Mout
+    // controller.netOper().setOutputsNum(2);             // set Mout
     controller.netOper().setNodesForVars({0, 1});         // Pnum
     controller.netOper().setNodesForParams({2, 3, 4});    // Rnum
     controller.netOper().setNodesForOutput({13, 13});     // Dnum

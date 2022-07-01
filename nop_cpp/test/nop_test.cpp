@@ -27,11 +27,11 @@ TEST(NOP, funcMapTests)
 TEST(NOP, setGetTest)
 {
     auto netOper = NetOper();
-    for (auto n : {2,2,5,10,100})
-    {
-        netOper.setOutputsNum(n);
-        EXPECT_EQ(netOper.getOutputsNum(), n);
-    }    
+    // for (auto n : {2,2,5,10,100})
+    // {
+    //     netOper.setOutputsNum(n);
+    //     EXPECT_EQ(netOper.getOutputsNum(), n);
+    // }    
 
     std::vector<int> nodesForVars = {0, 1, 2, 3};
     netOper.setNodesForVars(nodesForVars);
@@ -74,7 +74,7 @@ TEST(NOP, calcResultTest)
 
     std::vector<float> parameters = {0.1, 0.1, 0.1};
     auto netOper = NetOper();
-    netOper.setOutputsNum(2);                // set Mout
+    // netOper.setOutputsNum(2);                // set Mout
     netOper.setNodesForVars({0, 1});         // Pnum
     netOper.setNodesForParams({2, 3, 4});    // Rnum
     netOper.setNodesForOutput({13, 13});     // Dnum

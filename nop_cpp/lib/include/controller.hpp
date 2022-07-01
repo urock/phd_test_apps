@@ -14,7 +14,7 @@
 class Controller {
 
 public:
-  Controller(Model::State &goalState, NetOper &netOper);
+  Controller(const Model::State &goalState, NetOper &netOper);
 
   /// RP from pascal version
   Model::Control calcControl(const Model::State &currState);

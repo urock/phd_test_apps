@@ -20,11 +20,13 @@ void Runner::init(const Model::State &state_) {
 void Runner::Euler2() {
 
     auto u1 = mController.calcControl(mCurrentState);
+    // u1.print();
 
     auto v1 = mModel.calcVelocity(u1);
     auto s1 = mModel.calcState(v1);
 
     auto u2 = mController.calcControl(s1);
+    // u2.print();
 
     auto v2 = mModel.calcVelocity(u2);
 

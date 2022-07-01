@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 class Model {
 
@@ -8,6 +9,10 @@ public:
   struct Control {
     float left;
     float right;
+
+    void print() {
+      std::cout << left << " " << right <<  "\n";
+    }    
   };
 
   struct State {
@@ -23,6 +28,20 @@ public:
     State operator*(float val) {
       return State{this->x * val, this->y * val, this->yaw * val};
     }
+
+    float dist(const State &state) {
+      float dx = fabs(this->x - state.x);
+      float dy = fabs(this->y - state.y);
+      float dyaw = fabs(this->yaw - state.yaw);
+
+      // comparison of meters and radians looks like crap
+      return std::max(std::max(dx, dy), dyaw);
+    }
+
+    void print() {
+      std::cout << x << " " << y << " " << yaw << "\n";
+    }
+
   };
 
 
