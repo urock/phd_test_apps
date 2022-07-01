@@ -62,7 +62,7 @@ TEST(NOP, setMatrixTest)
 }
 
 
-TEST(NOP, calcResultTest)
+TEST(NOP, simpleTestWithFunction)
 {   
     auto desiredFunction = [](std::vector<float> x,
                                std::vector<float> q)
@@ -99,3 +99,17 @@ TEST(NOP, calcResultTest)
 
 }
 
+
+TEST(NOP, trainedOperatorTest)
+{
+    /*
+TODO:
+    1. Запустить паскалевский код TNetOperTest.pas, достать оттуда числа, 
+    что подается на вход NetOper, что на выход для нескольких точек
+
+    2. В этом тесте взять NopPsiN (nop.cpp), подать на него входные числа из п1
+    3. Сравнить выход с числами из п1 
+
+    */
+    
+}
