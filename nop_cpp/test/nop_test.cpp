@@ -46,8 +46,8 @@ TEST(NOP, setGetTest)
     EXPECT_TRUE(nodesForOutput == netOper.getNodesForOutput());    
 
     std::vector<float> parameters = {0.1, 0.1};
-    netOper.setParameters(parameters);
-    EXPECT_TRUE(parameters == netOper.getParameters());    
+    netOper.setCs(parameters);
+    EXPECT_TRUE(parameters == netOper.getCs());    
 }
 
 
@@ -56,9 +56,9 @@ TEST(NOP, setMatrixTest)
 {
     auto netOper = NetOper();
     
-    netOper.setMatrix(NopPsiN);
+    netOper.setPsi(NopPsiN);
 
-    EXPECT_TRUE(NopPsiN == netOper.getMatrix());
+    EXPECT_TRUE(NopPsiN == netOper.getPsi());
 }
 
 
@@ -78,9 +78,9 @@ TEST(NOP, calcResultTest)
     netOper.setNodesForVars({0, 1});         // Pnum
     netOper.setNodesForParams({2, 3, 4});    // Rnum
     netOper.setNodesForOutput({13, 13});     // Dnum
-    netOper.setParameters(parameters);       // set Cs
+    netOper.setCs(parameters);              // set Cs
 
-    netOper.setMatrix(Psi);
+    netOper.setPsi(Psi);
 
     std::vector<float> x_in = {0.1, 0.2};
 

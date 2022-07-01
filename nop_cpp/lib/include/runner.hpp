@@ -11,13 +11,14 @@ class Runner {
         Model::State makeStep(); 
 
     private:
+        Model &mModel;
+        Controller &mController;  
+        
         Model::State mCurrentState;
         Model::State mGoal;
+        
         float dt;
         float mCurrentTime; 
-
-        Model mModel;
-        Controller mController;  
 
         void Euler2(void);
 

@@ -4,6 +4,7 @@
 
 TEST(Runner, FullTest)
 {
+    NetOper netOp = NetOper();
     
 
 }

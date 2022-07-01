@@ -107,22 +107,22 @@ void NetOper::setNodesForOutput(const std::vector<int>& nodes)
     m_nodesForOutput = nodes;
 }
 
-const std::vector<std::vector<int>>& NetOper::getMatrix()
+const std::vector<std::vector<int>>& NetOper::getPsi()
 {
     return m_matrix;
 }
 
-const std::vector<float>& NetOper::getParameters()
+const std::vector<float>& NetOper::getCs()
 {
     return m_parameters;
 }
 
-void NetOper::setParameters(const std::vector<float>& newParams)
+void NetOper::setCs(const std::vector<float>& newParams)
 {
     m_parameters = newParams;
 }
 
-void NetOper::setMatrix(const std::vector<std::vector<int>>& newMatrix)
+void NetOper::setPsi(const std::vector<std::vector<int>>& newMatrix)
 {
     m_matrix = newMatrix;
     z.resize(m_matrix.size());

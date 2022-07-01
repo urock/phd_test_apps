@@ -32,11 +32,11 @@ public:
     void setNodesForOutput(const std::vector<int>& nodes);
     const std::vector<int>& getNodesForOutput();
 
-    void setParameters(const std::vector<float>& newParams);
-    const std::vector<float>& getParameters();
+    void setCs(const std::vector<float>& newParams);
+    const std::vector<float>& getCs();
 
-    void setMatrix(const std::vector<std::vector<int>>& newMatrix);
-    const std::vector<std::vector<int>>& getMatrix();
+    void setPsi(const std::vector<std::vector<int>>& newMatrix);
+    const std::vector<std::vector<int>>& getPsi();
 
     
 private:

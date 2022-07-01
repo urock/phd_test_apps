@@ -26,8 +26,8 @@ TEST(Controller, SimpleTest)
     controller.netOper().setNodesForVars({0, 1});         // Pnum
     controller.netOper().setNodesForParams({2, 3, 4});    // Rnum
     controller.netOper().setNodesForOutput({13, 13});     // Dnum
-    controller.netOper().setParameters(parameters);       // set Cs
-    controller.netOper().setMatrix(Psi);
+    controller.netOper().setCs(parameters);       // set Cs
+    controller.netOper().setPsi(Psi);
 
     Model::State currState = {0, 0, 0};
 
