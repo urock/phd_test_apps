@@ -39,6 +39,6 @@ public:
 private:
   float k = 0.5f;
   
-  State m_state;
+  State mCurrentState;
   float dt; 
 };

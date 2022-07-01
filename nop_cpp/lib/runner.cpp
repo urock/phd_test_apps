@@ -17,13 +17,6 @@ void Runner::init(const Model::State &state_) {
     mCurrentState = state_;
 }
 
-Model::State Runner::makeStep() {
-
-    Euler2();
-
-    return mCurrentState; 
-}
-
 void Runner::Euler2() {
 
     auto u1 = mController.calcControl(mCurrentState);
@@ -41,5 +34,14 @@ void Runner::Euler2() {
 
     mCurrentTime += dt; 
 }
+
+Model::State Runner::makeStep() {
+
+    Euler2();
+
+    return mCurrentState; 
+}
+
+
 
 

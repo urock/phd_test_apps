@@ -7,35 +7,19 @@
 TEST(Controller, ConstructorTests)
 {
     
-    Controller first = Controller({1., 1., 0.});
     NetOper newNetOper = NetOper();
-    Controller second = Controller({1., 1., 0.}, newNetOper);
+    Model::State goal = {1., 1., 0.};
+    Controller second = Controller(goal, newNetOper);
 
 }
 
 TEST(Controller, SimpleTest)
 {
-    
-    Controller controller = Controller({1., 0., 0.});
+    NetOper newNetOper = NetOper();
+    Model::State goal = {0.1, 0.2, 0.};
+    Controller controller = Controller(goal, newNetOper);
 
-    const std::vector<std::vector<int>> Psi = 
-       {{0,0,0,0,  0,1,1,1,  0,2,0,0, 0,0},
-       {0,0,0,0,  0,0,1,0,  2,0,0,0, 0,0},
-       {0,0,0,0,  0,1,0,0,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 0,0},
 
-       {0,0,0,0,  0,0,0,3,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,2,0,0,  0,0,1,0, 0,0},
-       {0,0,0,0,  0,0,2,0,  0,0,0,1, 0,0},
-       {0,0,0,0,  0,0,0,2,  0,0,0,6, 0,0},
-
-       {0,0,0,0,  0,0,0,0,  1,3,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,1,0,0, 1,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 11,0},
-       {0,0,0,0,  0,0,0,0,  0,0,0,2, 0,1},
-
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 2,1},
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 0,1}};
     std::vector<float> parameters = {0.1, 0.1, 0.1};
 
     controller.netOper().setOutputsNum(2);             // set Mout
@@ -51,4 +35,19 @@ TEST(Controller, SimpleTest)
     Model::Control u = controller.calcControl(currState);
 
     std::cout << "CONTROL: " << u.left << " " << u.right << "\n";
+
+    auto desiredFunction = [](std::vector<float> x,
+                               std::vector<float> q)
+    {
+        return (pow(x[0], 2) - pow(x[1], 2)) * cos(q[0] * x[0] + q[1]) + x[0]*x[1]*exp(-q[2] * x[0]);
+    };
+
+    std::vector<float> x_in = {0.1, 0.2};
+    Model::State dstate = goal - currState;
+    x_in[0] = dstate.x;
+    x_in[1] = dstate.y;
+
+    auto expectedResult = desiredFunction(x_in, parameters);    
+
+    EXPECT_TRUE(abs(u.left - expectedResult) < 0.001);
 }

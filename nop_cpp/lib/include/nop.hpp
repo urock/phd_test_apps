@@ -64,3 +64,8 @@ private:
 
 
 };
+
+extern const std::vector<std::vector<int>> NopPsiN;
+extern std::vector<float> qc;
+
+extern const std::vector<std::vector<int>> Psi;

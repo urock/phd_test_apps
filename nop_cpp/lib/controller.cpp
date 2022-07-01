@@ -3,7 +3,7 @@
 
 #include "controller.hpp"
 
-Controller::Controller(Model::State goal_, NetOper netOper):mGoal(goal_)
+Controller::Controller(Model::State &goal_, NetOper &netOper):mGoal(goal_)
 	,m_netOper(netOper)
 {
 }

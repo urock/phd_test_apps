@@ -22,23 +22,7 @@ TEST(NOP, funcMapTests)
     
 }
 
-// // TODO FIX MATRIX DIM ISSUE!
-// TEST(NOP, metrixDimensionTest)
-// {
-    
-//     // auto compareDimensions = [](size_t dim, 
-//     //     const std::vector<std::vector<int>>& matrix)
-//     // {
 
-//     // };
-
-//     auto netOper = NetOper();
-//     for (auto n : {1,1,3,10,100})
-//     {
-//         netOper.setMatrixDimension(n);
-//         EXPECT_EQ(netOper.getMatrixDimension(), n);
-//     }    
-// }
 
 TEST(NOP, setGetTest)
 {
@@ -67,31 +51,14 @@ TEST(NOP, setGetTest)
 }
 
 
+
 TEST(NOP, setMatrixTest)
 {
     auto netOper = NetOper();
-    const std::vector<std::vector<int>> Psi = 
-       {{0,0,0,0,  0,1,1,1,  0,2,0,0, 0,0},
-       {0,0,0,0,  0,0,1,0,  2,0,0,0, 0,0},
-       {0,0,0,0,  0,1,0,0,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 0,0},
-
-       {0,0,0,0,  0,0,0,3,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,2,0,0,  0,0,1,0, 0,0},
-       {0,0,0,0,  0,0,2,0,  0,0,0,1, 0,0},
-       {0,0,0,0,  0,0,0,2,  0,0,0,6, 0,0},
-
-       {0,0,0,0,  0,0,0,0,  1,3,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,1,0,0, 1,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 11,0},
-       {0,0,0,0,  0,0,0,0,  0,0,0,2, 0,1},
-
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 2,1},
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 0,1}};
     
-    netOper.setMatrix(Psi);
+    netOper.setMatrix(NopPsiN);
 
-    EXPECT_TRUE(Psi == netOper.getMatrix());
+    EXPECT_TRUE(NopPsiN == netOper.getMatrix());
 }
 
 
@@ -103,24 +70,7 @@ TEST(NOP, calcResultTest)
         return (pow(x[0], 2) - pow(x[1], 2)) * cos(q[0] * x[0] + q[1]) + x[0]*x[1]*exp(-q[2] * x[0]);
     };
 
-    const std::vector<std::vector<int>> Psi = 
-       {{0,0,0,0,  0,1,1,1,  0,2,0,0, 0,0},
-       {0,0,0,0,  0,0,1,0,  2,0,0,0, 0,0},
-       {0,0,0,0,  0,1,0,0,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 0,0},
 
-       {0,0,0,0,  0,0,0,3,  0,0,0,0, 0,0},
-       {0,0,0,0,  0,2,0,0,  0,0,1,0, 0,0},
-       {0,0,0,0,  0,0,2,0,  0,0,0,1, 0,0},
-       {0,0,0,0,  0,0,0,2,  0,0,0,6, 0,0},
-
-       {0,0,0,0,  0,0,0,0,  1,3,0,0, 0,0},
-       {0,0,0,0,  0,0,0,0,  0,1,0,0, 1,0},
-       {0,0,0,0,  0,0,0,0,  0,0,1,0, 11,0},
-       {0,0,0,0,  0,0,0,0,  0,0,0,2, 0,1},
-
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 2,1},
-       {0,0,0,0,  0,0,0,0,  0,0,0,0, 0,1}};
 
     std::vector<float> parameters = {0.1, 0.1, 0.1};
     auto netOper = NetOper();
@@ -132,7 +82,7 @@ TEST(NOP, calcResultTest)
 
     netOper.setMatrix(Psi);
 
-    std::vector<float> x_in = {0.1, 0.1};
+    std::vector<float> x_in = {0.1, 0.2};
 
     auto expectedResult = desiredFunction(x_in, parameters);
 
@@ -141,9 +91,9 @@ TEST(NOP, calcResultTest)
     netOper.calcResult(x_in, y_out);
 
 
-    // std::cout << "desiredFunction RESULT: " << expectedResult << std::endl;
+    std::cout << "desiredFunction RESULT: " << expectedResult << std::endl;
     
-    // std::cout<<"RP RESULT: "<< y_out[0] <<" "<< y_out[1]<< std::endl;
+    std::cout<<"RP RESULT: "<< y_out[0] <<" "<< y_out[1] << std::endl;
 
     EXPECT_TRUE(abs(y_out[0] - expectedResult) < 0.001);
 

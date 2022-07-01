@@ -6,6 +6,7 @@ set(Sources
     nop_test.cpp
     controller_test.cpp
     model_test.cpp
+    runner_test.cpp
 )
 
 add_executable(${This} ${Sources})
