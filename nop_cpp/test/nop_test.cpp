@@ -111,5 +111,20 @@ TODO:
     3. Сравнить выход с числами из п1 
 
     */
+
+    auto netOper = NetOper();
+    netOper.setNodesForVars({0, 1, 2});      // Pnum
+    netOper.setNodesForParams({3, 4, 5});    // Rnum
+    netOper.setNodesForOutput({22, 23});     // Dnum
+    netOper.setCs(qc);              // set Cs
+
+    netOper.setPsi(NopPsiN);
+
+    std::vector<float> x_in = {-2.5, 2.5, 1.31};
+    std::vector<float> y_out(2);
+
+    netOper.calcResult(x_in, y_out);
+
+    std::cout<<"RP RESULT: "<< y_out[0] <<" "<< y_out[1] << std::endl;
     
 }

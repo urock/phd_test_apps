@@ -13,7 +13,7 @@ TEST(Runner, FullTest)
     netOp.setCs(qc);                       // set Cs
     netOp.setPsi(NopPsiN);
 
-    float dt = 0.1;
+    float dt = 0.01;
     Model::State currState = {0.0, 0.0, 0.0}; 
     Model model(currState, dt);
     
