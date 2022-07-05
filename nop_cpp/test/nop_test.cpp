@@ -6,7 +6,7 @@
 
 TEST(NOP, funcMapTests)
 {
-    
+
     auto netOper = NetOper();
     auto a = 24.23;
     auto big_inf = pow(10,9);
@@ -19,7 +19,7 @@ TEST(NOP, funcMapTests)
 
     EXPECT_EQ(netOper.getBinaryOperationResult(1, a, b), xi_1(a, b));
     EXPECT_EQ(netOper.getBinaryOperationResult(2, a, b), xi_2(a, b));
-    
+
 }
 
 
@@ -31,23 +31,23 @@ TEST(NOP, setGetTest)
     // {
     //     netOper.setOutputsNum(n);
     //     EXPECT_EQ(netOper.getOutputsNum(), n);
-    // }    
+    // }
 
     std::vector<int> nodesForVars = {0, 1, 2, 3};
     netOper.setNodesForVars(nodesForVars);
-    EXPECT_TRUE(nodesForVars == netOper.getNodesForVars());    
+    EXPECT_TRUE(nodesForVars == netOper.getNodesForVars());
 
     std::vector<int> nodesForParams = {2, 3, 4, 5};
     netOper.setNodesForParams(nodesForParams);
-    EXPECT_TRUE(nodesForParams == netOper.getNodesForParams());    
+    EXPECT_TRUE(nodesForParams == netOper.getNodesForParams());
 
     std::vector<int> nodesForOutput = {13, 13};
     netOper.setNodesForOutput(nodesForOutput);
-    EXPECT_TRUE(nodesForOutput == netOper.getNodesForOutput());    
+    EXPECT_TRUE(nodesForOutput == netOper.getNodesForOutput());
 
     std::vector<float> parameters = {0.1, 0.1};
     netOper.setCs(parameters);
-    EXPECT_TRUE(parameters == netOper.getCs());    
+    EXPECT_TRUE(parameters == netOper.getCs());
 }
 
 
@@ -55,7 +55,7 @@ TEST(NOP, setGetTest)
 TEST(NOP, setMatrixTest)
 {
     auto netOper = NetOper();
-    
+
     netOper.setPsi(NopPsiN);
 
     EXPECT_TRUE(NopPsiN == netOper.getPsi());
@@ -63,7 +63,7 @@ TEST(NOP, setMatrixTest)
 
 
 TEST(NOP, simpleTestWithFunction)
-{   
+{
     auto desiredFunction = [](std::vector<float> x,
                                std::vector<float> q)
     {
@@ -92,7 +92,7 @@ TEST(NOP, simpleTestWithFunction)
 
 
     std::cout << "desiredFunction RESULT: " << expectedResult << std::endl;
-    
+
     std::cout<<"RP RESULT: "<< y_out[0] <<" "<< y_out[1] << std::endl;
 
     EXPECT_TRUE(abs(y_out[0] - expectedResult) < 0.001);
@@ -102,29 +102,35 @@ TEST(NOP, simpleTestWithFunction)
 
 TEST(NOP, trainedOperatorTest)
 {
-    /*
-TODO:
-    1. Запустить паскалевский код TNetOperTest.pas, достать оттуда числа, 
-    что подается на вход NetOper, что на выход для нескольких точек
-
-    2. В этом тесте взять NopPsiN (nop.cpp), подать на него входные числа из п1
-    3. Сравнить выход с числами из п1 
-
-    */
 
     auto netOper = NetOper();
-    netOper.setNodesForVars({0, 1, 2});      // Pnum
-    netOper.setNodesForParams({3, 4, 5});    // Rnum
-    netOper.setNodesForOutput({22, 23});     // Dnum
-    netOper.setCs(qc);              // set Cs
+    netOper.setNodesForVars({0, 1, 2});   // Pnum
+    netOper.setNodesForParams({3, 4, 5}); // Rnum
+    netOper.setNodesForOutput({22, 23});  // Dnum
+    netOper.setCs(qc);                    // set Cs
 
     netOper.setPsi(NopPsiN);
+    using SliceT = std::vector<float>;
 
-    std::vector<float> x_in = {-2.5, 2.5, 1.31};
-    std::vector<float> y_out(2);
+    std::vector<SliceT> slice_pack = {
+      { 2.5000000000000000E+000,	2.5000000000000000E+000,	1.3100000000000001E+000,	7.6197997817352853E+003,	-9.4771230671817757E+003 },
+      { 2.5000000000000000E+000,	2.5000000000000000E+000,	-1.3100000000000001E+000,	1.4423954467471624E+001,	-3.9757176807666457E+000 },
+      { 2.5000000000000000E+000,	-2.5000000000000000E+000,	-1.3100000000000001E+000,	-5.5207311836960698E+003,	5.8007645332198299E+003 },
+      { 4.6561580083458731E-003,	4.0351029521603278E-002,	8.3948216438293491E-002,	1.3335461264421879E+001,	8.4973200088496483E+000 },
+      { -9.1758697199960415E-001,	-4.4754665005156380E-001,	-5.1089064121246375E-001,	-3.4732514696068890E+001,	-6.2624360542277708E+000 },
+      { 5.6599015741103036E-002,	4.1273824183417351E-002,	-2.5226671345531987E-001,	-2.0985952049623924E-001,	2.6154650032382927E+000 },
+    };
 
-    netOper.calcResult(x_in, y_out);
+    for (auto s : slice_pack) {
+      auto x_in = SliceT{s[0], s[1], s[2]};
+      auto y_out_gold = SliceT{s[3], s[4]};
+      auto y_out = SliceT{0, 0};
 
-    std::cout<<"RP RESULT: "<< y_out[0] <<" "<< y_out[1] << std::endl;
-    
+      netOper.calcResult(x_in, y_out);
+
+      // std::cout << "RP RESULT: " << y_out[0] << " " << y_out[1] << std::endl;
+
+      EXPECT_EQ(y_out[0], y_out_gold[0]);
+      EXPECT_EQ(y_out[1], y_out_gold[1]);
+    }
 }
