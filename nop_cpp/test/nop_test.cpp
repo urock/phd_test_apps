@@ -128,9 +128,6 @@ TEST(NOP, trainedOperatorTest)
 
       netOper.calcResult(x_in, y_out);
 
-      // std::cout << "RP RESULT: " << y_out[0] << " " << y_out[1] << std::endl;
-
-      EXPECT_EQ(y_out[0], y_out_gold[0]);
-      EXPECT_EQ(y_out[1], y_out_gold[1]);
+      EXPECT_EQ(y_out, y_out_gold);
     }
 }
