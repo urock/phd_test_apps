@@ -1,25 +1,24 @@
-#include "model.hpp"
+#pragma once
+
 #include "controller.hpp"
+#include "model.hpp"
 
 class Runner {
 
-    public:
-        Runner(Model &, Controller &, float);
-        void setGoal(const Model::State &);
-        void init(const Model::State &);
+public:
+  Runner(Model &, Controller &, float);
+  void init(const Model::State &);
+  void setGoal(const Model::State &);
 
-        Model::State makeStep(); 
+  Model::State makeStep();
+  const Model::State &getState();
 
-    private:
-        Model &mModel;
-        Controller &mController;  
-        
-        Model::State mCurrentState;
-        Model::State mGoal;
-        
-        float dt;
-        float mCurrentTime; 
+  void Euler2(void);
 
-        void Euler2(void);
-
+private:
+  Controller mController;
+  Model mModel;
+  Model::State mGoal;
+  float dt;
+  float mCurrentTime;
 };
