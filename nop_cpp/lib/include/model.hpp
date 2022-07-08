@@ -47,10 +47,10 @@ public:
         float dy = fabs(this->y - state.y);
         float dyaw = fabs(this->yaw - state.yaw);
 
-        // comparison of meters and radians looks like crap
-        // return std::max(std::max(dx, dy), dyaw);
-        return std::max(dx, dy);
-      }
+      // comparison of meters and radians looks like crap
+      // return std::max(std::max(dx, dy), dyaw);
+      return std::max(dx, dy);
+    }
 
     void print() {
         std::cout << x << " " << y << " " << yaw << "\n";
