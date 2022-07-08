@@ -41,7 +41,6 @@ void NetOper::initUnaryFunctionsMap()
     m_unaryFuncMap[17] = ro_17;
     m_unaryFuncMap[18] = ro_18;
     m_unaryFuncMap[19] = ro_19;
-    m_unaryFuncMap[19] = ro_19;
     m_unaryFuncMap[20] = ro_20;
     m_unaryFuncMap[21] = ro_21;
     m_unaryFuncMap[22] = ro_22;
@@ -139,7 +138,7 @@ void NetOper::calcResult(const std::vector<float>& x_in, std::vector<float>& y_o
         else if (m_matrix[i][i] == 4)
             z[i] = Infinity;
         else
-            z[i] = 0;  
+            z[i] = 0;
     }
 
     for(size_t i=0; i < m_nodesForVars.size(); ++i)
@@ -167,7 +166,7 @@ void NetOper::calcResult(const std::vector<float>& x_in, std::vector<float>& y_o
 }
 
 // NopPsiN - Naive NetOper trained without constraits
-const std::vector<std::vector<int>> NopPsiN = 
+const std::vector<std::vector<int>> NopPsiN =
   {{0,0,0,0,  0,0,1,10,  0,0,12,1,  0,0,0,0,  0,0,0,0,   0,0,0,10},
    {0,0,0,0,  0,0,0, 1,  0,0,0,0,   0,0,0,0,  0,0,0,12,  0,0,0,0},
    {0,0,0,0,  0,0,0, 0,  1,0,0,0,   0,0,2,9,  0,0,0,0,   10,0,0,0},
@@ -199,10 +198,10 @@ const std::vector<std::vector<int>> NopPsiN =
    {0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1}};
 
 // from q_461.txt
-std::vector<float> qc = {12.86841, 3.82666, 6.94312}; 
+std::vector<float> qc = {12.86841, 3.82666, 6.94312};
 
 // Base NetOper matrix to represent simple desiredFucntion from nop_test and controller_test
-const std::vector<std::vector<int>> Psi = 
+const std::vector<std::vector<int>> Psi =
     {{0,0,0,0,  0,1,1,1,  0,2,0,0, 0,0},
     {0,0,0,0,  0,0,1,0,  2,0,0,0, 0,0},
     {0,0,0,0,  0,1,0,0,  0,0,0,0, 0,0},
