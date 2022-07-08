@@ -4,6 +4,23 @@
 #include "nop.hpp"
 
 
+template <class T>
+std::vector<T> operator-(const std::vector<T> &a, const std::vector<T> &b) {
+  std::vector<T> rt(a.size());
+  for (size_t i = 0; i < a.size(); i++)
+    rt[i] = a[i] - b[i];
+  return rt;
+}
+
+template <class T>
+std::ostream &operator<<(std::ostream &os, const std::vector<T> &data) {
+  os << '(';
+  for (auto x : data)
+    os << x << ' ';
+  os << ") ";
+  return os;
+}
+
 TEST(NOP, funcMapTests)
 {
 
@@ -87,7 +104,18 @@ TEST(NOP, simpleTestWithFunction)
 
 }
 
-TEST(NOP, unarPsi) {
+constexpr float test_inputs[]{
+    0,
+    0.123,
+    1,
+    6.666,
+    364654846.2342,
+    10E+8,
+    -9.4771230671817757E+003,
+    4.6561580083458731E-003
+};
+
+TEST(NOPminPsi, unarPsi) {
   using SliceT = std::vector<float>;
 
   NetOper netOper;
@@ -95,15 +123,18 @@ TEST(NOP, unarPsi) {
   netOper.setNodesForOutput({1});
 
   for (int i = 1; i <= 28; i++) {
-    netOper.setPsi({{1, i}, {0, 1}});
 
-    std::vector<SliceT> slice_pack = {
-        {0, netOper.getUnaryOperationResult(i, 0)},
-        {1, netOper.getUnaryOperationResult(i, 1)},
-        {-1, netOper.getUnaryOperationResult(i, -1)},
-        {pow(10, 9), netOper.getUnaryOperationResult(i, pow(10, 9))},
-        {pow(10, -9), netOper.getUnaryOperationResult(i, pow(10, -9))},
-    };
+    netOper.setPsi({
+      {1, i},
+      {0, 1}
+    });
+
+    std::vector<SliceT> slice_pack;
+
+    for (float x : test_inputs) {
+      slice_pack.push_back({x, netOper.getUnaryOperationResult(i, x)});
+      slice_pack.push_back({-x, netOper.getUnaryOperationResult(i, -x)});
+    }
 
     std::vector<SliceT> y_out_pack;
     std::vector<SliceT> y_out_gold_pack;
@@ -113,6 +144,7 @@ TEST(NOP, unarPsi) {
       auto y_out_gold = SliceT{s[1]};
       auto y_out = SliceT{0};
       netOper.calcResult(x_in, y_out);
+      // std::cout << y_out_gold - y_out;
       y_out_pack.push_back(y_out);
       y_out_gold_pack.push_back(y_out_gold);
     }
@@ -121,7 +153,7 @@ TEST(NOP, unarPsi) {
   }
 }
 
-TEST(NOP, paramPsi) {
+TEST(NOPminPsi, paramPsi) {
   using SliceT = std::vector<float>;
 
   NetOper netOper;
@@ -129,15 +161,18 @@ TEST(NOP, paramPsi) {
   netOper.setNodesForOutput({1});
 
   for (int i = 1; i <= 28; i++) {
-    netOper.setPsi({{1, i}, {0, 1}});
 
-    std::vector<SliceT> slice_pack = {
-        {0, netOper.getUnaryOperationResult(i, 0)},
-        {1, netOper.getUnaryOperationResult(i, 1)},
-        {-1, netOper.getUnaryOperationResult(i, -1)},
-        {pow(10, 9), netOper.getUnaryOperationResult(i, pow(10, 9))},
-        {pow(10, -9), netOper.getUnaryOperationResult(i, pow(10, -9))},
-    };
+    netOper.setPsi({
+      {1, i},
+      {0, 1}
+    });
+
+    std::vector<SliceT> slice_pack;
+
+    for (float x : test_inputs) {
+      slice_pack.push_back({x, netOper.getUnaryOperationResult(i, x)});
+      slice_pack.push_back({-x, netOper.getUnaryOperationResult(i, -x)});
+    }
 
     std::vector<SliceT> y_out_pack;
     std::vector<SliceT> y_out_gold_pack;
@@ -148,6 +183,7 @@ TEST(NOP, paramPsi) {
       auto y_out = SliceT{0};
       netOper.setCs(x_in);
       netOper.calcResult({0}, y_out);
+      // std::cout << y_out_gold - y_out;
       y_out_pack.push_back(y_out);
       y_out_gold_pack.push_back(y_out_gold);
     }
@@ -156,7 +192,7 @@ TEST(NOP, paramPsi) {
   }
 }
 
-TEST(NOP, multPsi) {
+TEST(NOPminPsi, multPsi) {
   using SliceT = std::vector<float>;
 
   NetOper netOper;
@@ -164,15 +200,20 @@ TEST(NOP, multPsi) {
   netOper.setNodesForOutput({2, 3});
 
   for (int i = 1; i <= 28; i++) {
-    netOper.setPsi({{1, 0, i, 0}, {0, 1, 0, i}, {0, 0, 1, 0}, {0, 0, 0, 1}});
 
-    std::vector<SliceT> slice_pack = {
-        {0, netOper.getUnaryOperationResult(i, 0)},
-        {1, netOper.getUnaryOperationResult(i, 1)},
-        {-1, netOper.getUnaryOperationResult(i, -1)},
-        {pow(10, 9), netOper.getUnaryOperationResult(i, pow(10, 9))},
-        {pow(10, -9), netOper.getUnaryOperationResult(i, pow(10, -9))},
-    };
+    netOper.setPsi({
+      {1, 0, i, 0},
+      {0, 1, 0, i},
+      {0, 0, 1, 0},
+      {0, 0, 0, 1}
+       });
+
+    std::vector<SliceT> slice_pack;
+
+    for (float x : test_inputs) {
+      slice_pack.push_back({x, netOper.getUnaryOperationResult(i, x)});
+      slice_pack.push_back({-x, netOper.getUnaryOperationResult(i, -x)});
+    }
 
     std::vector<SliceT> y_out_pack;
     std::vector<SliceT> y_out_gold_pack;
@@ -182,6 +223,7 @@ TEST(NOP, multPsi) {
       auto y_out_gold = SliceT{s[1], s[1]};
       auto y_out = SliceT{0, 0};
       netOper.calcResult(x_in, y_out);
+      // std::cout << y_out_gold - y_out;
       y_out_pack.push_back(y_out);
       y_out_gold_pack.push_back(y_out_gold);
     }
@@ -190,7 +232,7 @@ TEST(NOP, multPsi) {
   }
 }
 
-TEST(NOP, binarPsi) {
+TEST(NOPminPsi, binarPsi) {
   using SliceT = std::vector<float>;
 
   NetOper netOper;
@@ -204,13 +246,13 @@ TEST(NOP, binarPsi) {
       {0, 0, 1}
     });
 
-    std::vector<SliceT> slice_pack = {
-        {0, netOper.getBinaryOperationResult(i, 0,0)},
-        {1, netOper.getBinaryOperationResult(i, 1,1)},
-        {-1, netOper.getBinaryOperationResult(i, -1,-1)},
-        {pow(10, 9), netOper.getBinaryOperationResult(i, pow(10, 9),pow(10, 9))},
-        {pow(10, -9), netOper.getBinaryOperationResult(i, pow(10, -9),pow(10, -9))},
-    };
+    std::vector<SliceT> slice_pack;
+
+    for (float x : test_inputs) {
+      slice_pack.push_back({x, netOper.getBinaryOperationResult(i, x,x)});
+      slice_pack.push_back({-x, netOper.getBinaryOperationResult(i, -x,-x)});
+    }
+
 
     std::vector<SliceT> y_out_pack;
     std::vector<SliceT> y_out_gold_pack;
@@ -220,6 +262,7 @@ TEST(NOP, binarPsi) {
       auto y_out_gold = SliceT{s[1]};
       auto y_out = SliceT{0};
       netOper.calcResult(x_in, y_out);
+      // std::cout << y_out_gold - y_out;
       y_out_pack.push_back(y_out);
       y_out_gold_pack.push_back(y_out_gold);
     }
