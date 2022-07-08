@@ -303,12 +303,14 @@ TEST(NOP, trainedOperatorTest)
       y_out_pack.push_back(y_out);
       y_out_gold_pack.push_back(y_out_gold);
       
-      printf("Inputs: %.3f %.3f %.3f\n", s[0], s[1], s[2]);
-      printf("y_out     : %.3f %.3f\n", y_out[0], y_out[1]);
-      printf("y_out_gold: %.3f %.3f\n", s[3], s[4]);
+      // printf("Inputs: %.3f %.3f %.3f\n", s[0], s[1], s[2]);
+      // printf("y_out     : %.3f %.3f\n", y_out[0], y_out[1]);
+      // printf("y_out_gold: %.3f %.3f\n", s[3], s[4]);
 
 
     }
 
-    // EXPECT_EQ(y_out_pack, y_out_gold_pack);
+    for (int ii = 0; ii < y_out_pack.size(); ++ii) {
+      EXPECT_TRUE(fabs(y_out_pack[ii][0] - y_out_gold_pack[ii][0]) < 0.001); 
+    }
 }
