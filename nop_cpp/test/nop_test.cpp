@@ -312,5 +312,6 @@ TEST(NOP, trainedOperatorTest)
 
     for (int ii = 0; ii < y_out_pack.size(); ++ii) {
       EXPECT_TRUE(fabs(y_out_pack[ii][0] - y_out_gold_pack[ii][0]) < 0.001); 
+      EXPECT_TRUE(fabs(y_out_pack[ii][1] - y_out_gold_pack[ii][1]) < 0.01); 
     }
 }
