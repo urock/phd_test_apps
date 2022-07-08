@@ -35,7 +35,8 @@ public:
       float dyaw = fabs(this->yaw - state.yaw);
 
       // comparison of meters and radians looks like crap
-      return std::max(std::max(dx, dy), dyaw);
+      // return std::max(std::max(dx, dy), dyaw);
+      return std::max(dx, dy);
     }
 
     void print() {
