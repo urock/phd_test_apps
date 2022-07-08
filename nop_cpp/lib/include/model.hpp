@@ -48,12 +48,9 @@ public:
 
       // comparison of meters and radians looks like crap
       // return std::max(std::max(dx, dy), dyaw);
-      return std::max(dx, dy);
+        return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
     }
 
-    void print() {
-        std::cout << x << " " << y << " " << yaw << "\n";
-      }
   };
 
   Model(const State &, float);
