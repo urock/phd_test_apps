@@ -41,14 +41,19 @@ public:
     bool operator==(const State &state) const {
       return (this->x == state.x)&& (this->y == state.y)&& (this->yaw == state.yaw);
     }
-    float dist(const State &state) {
-     float dx = fabs(this->x - state.x);
-     float dy = fabs(this->y - state.y);
-     float dyaw = fabs(this->yaw - state.yaw);
 
-     // comparison of meters and radians looks like crap
-     return std::max(std::max(dx, dy), dyaw);
-   }
+    float dist(const State &state) {
+        float dx = fabs(this->x - state.x);
+        float dy = fabs(this->y - state.y);
+        float dyaw = fabs(this->yaw - state.yaw);
+
+        // comparison of meters and radians looks like crap
+        // return std::max(std::max(dx, dy), dyaw);
+        return std::max(dx, dy);
+      }
+
+    void print() {
+        std::cout << x << " " << y << " " << yaw << "\n";
   };
 
   Model(const State &, float);
