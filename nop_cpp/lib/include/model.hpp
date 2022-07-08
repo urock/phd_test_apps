@@ -1,4 +1,3 @@
-
 #pragma once
 #include <iostream>
 #include <vector>
@@ -54,6 +53,7 @@ public:
 
     void print() {
         std::cout << x << " " << y << " " << yaw << "\n";
+      }
   };
 
   Model(const State &, float);

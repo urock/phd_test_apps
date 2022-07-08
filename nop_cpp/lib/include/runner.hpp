@@ -1,7 +1,6 @@
 #pragma once
 
 #include "controller.hpp"
-#include "model.hpp"
 
 class Runner {
 
