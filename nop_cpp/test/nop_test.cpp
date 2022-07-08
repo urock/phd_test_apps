@@ -72,7 +72,7 @@ TEST(NOP, simpleTestWithFunction)
     auto desiredFunction = [](std::vector<float> x,
                                std::vector<float> q)
     {
-        return (pow(x[0], 2) - pow(x[1], 2)) * cos(q[0] * x[0] + q[1]) + x[0]*x[1]*exp(-q[2] * x[0]);
+        return (pow(x[0], 2) - pow(x[1], 2)) * cosf(q[0] * x[0] + q[1]) + x[0]*x[1]*exp(-q[2] * x[0]);
     };
 
 
@@ -87,7 +87,7 @@ TEST(NOP, simpleTestWithFunction)
 
     netOper.setPsi(Psi);
 
-    std::vector<float> x_in = {2.1, 1.2};
+    std::vector<float> x_in = {-9.4771230671817757E+001, 4.6561580083458731E-02};
 
     auto expectedResult = desiredFunction(x_in, parameters);
 
@@ -98,10 +98,11 @@ TEST(NOP, simpleTestWithFunction)
 
     std::cout << "desiredFunction RESULT: " << expectedResult << std::endl;
 
-    std::cout<<"RP RESULT: "<< y_out[0] <<" "<< y_out[1] << std::endl;
+    std::cout << "RP RESULT: " << y_out << std::endl;
+    auto diff = y_out[0] - expectedResult;
+    std::cout << "DIFF: " << diff << std::endl;
 
-    EXPECT_TRUE(abs(y_out[0] - expectedResult) < 0.001);
-
+    EXPECT_TRUE(abs(diff) < 0.001);
 }
 
 constexpr float test_inputs[]{
@@ -125,7 +126,7 @@ TEST(NOPminPsi, unarPsi) {
   for (int i = 1; i <= 28; i++) {
 
     netOper.setPsi({
-      {1, i},
+      {0, i},
       {0, 1}
     });
 
@@ -163,7 +164,7 @@ TEST(NOPminPsi, paramPsi) {
   for (int i = 1; i <= 28; i++) {
 
     netOper.setPsi({
-      {1, i},
+      {0, i},
       {0, 1}
     });
 
@@ -202,8 +203,8 @@ TEST(NOPminPsi, multPsi) {
   for (int i = 1; i <= 28; i++) {
 
     netOper.setPsi({
-      {1, 0, i, 0},
-      {0, 1, 0, i},
+      {0, 0, i, 0},
+      {0, 0, 0, i},
       {0, 0, 1, 0},
       {0, 0, 0, 1}
        });

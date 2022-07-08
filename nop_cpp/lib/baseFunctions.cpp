@@ -10,7 +10,7 @@ float ro_2(float inp)
 	if (abs(inp) > sqrt(Infinity))
 		return Infinity;
 	else
-		return pow(inp, 2);  
+		return pow(inp, 2);
 }
 
 float ro_3(float inp)
@@ -73,17 +73,17 @@ float ro_10(float inp)
 
 float ro_11(float inp)
 {
-	return cos(inp);
+	return cosf(inp);
 }
 
 float ro_12(float inp)
 {
-	return sin(inp);
+	return sinf(inp);
 }
 
 float ro_13(float inp)
 {
-	return atan(inp);
+	return atanf(inp);
 }
 
 float ro_14(float inp)
@@ -182,7 +182,7 @@ float ro_26(float inp)
 {
 	if (abs(inp) < pow(10, -2))
 		return 0.;
-	else 
+	else
 		return ro_10(inp);
 }
 
