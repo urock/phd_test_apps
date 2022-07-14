@@ -3,6 +3,17 @@
 #include <vector>
 #include <cmath>
 
+constexpr float pi = 3.1415927;
+
+constexpr float radr(float angle) {
+  if (angle >= pi)
+    return radr(angle - 2 * pi);
+  else if (angle < -pi)
+    return radr(angle + 2 * pi);
+  else
+    return angle;
+}
+
 class Model {
 
 public:
@@ -28,23 +39,23 @@ public:
     float yaw;
 
     State operator+(const State &state) const {
-      return State{this->x + state.x, this->y + state.y, this->yaw + state.yaw};
+      return State{this->x + state.x, this->y + state.y, radr(this->yaw + state.yaw)};
     }
     State operator-(const State &state) const {
-      return State{this->x - state.x, this->y - state.y, this->yaw - state.yaw};
+      return State{this->x - state.x, this->y - state.y, radr(this->yaw - state.yaw)};
     }
     State operator*(float val) const {
-      return State{this->x * val, this->y * val, this->yaw * val};
+      return State{this->x * val, this->y * val, radr(this->yaw * val)};
     }
 
     bool operator==(const State &state) const {
-      return (this->x == state.x)&& (this->y == state.y)&& (this->yaw == state.yaw);
+      return (this->x == state.x)&& (this->y == state.y)&& (radr(this->yaw) == radr(state.yaw));
     }
 
     float dist(const State &state) {
         float dx = fabs(this->x - state.x);
         float dy = fabs(this->y - state.y);
-        float dyaw = fabs(this->yaw - state.yaw);
+        float dyaw = fabs(radr(this->yaw) - radr(state.yaw));
 
       // comparison of meters and radians looks like crap
       // return std::max(std::max(dx, dy), dyaw);
@@ -53,7 +64,7 @@ public:
 
   };
 
-  Model(const State &, float);
+  Model(State &, float);
 
   void setState(const State &);
   void setState(const Control &);
@@ -67,6 +78,6 @@ public:
 private:
   float k = 0.5f;
 
-  State mCurrentState;
+  State &mCurrentState;
   float dt;
 };

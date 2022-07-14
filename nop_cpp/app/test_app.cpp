@@ -1,4 +1,4 @@
-#include "nop_class.hpp"
+#include "runner.hpp"
 #include <cmath>
 #include <iostream>
 
@@ -8,5 +8,3 @@ int main()
     std::cout << "Hello simple app" << std::endl;
     return 0;
 }
-
-

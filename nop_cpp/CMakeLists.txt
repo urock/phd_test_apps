@@ -35,9 +35,9 @@ add_subdirectory(
     test
 )
 
-# # Create more complex test (TNetOperTest)
-# add_executable(test_app app/test_app.cpp)
+# Create more complex test (TNetOperTest)
+add_executable(test_app app/test_app.cpp)
 
-# target_link_libraries(test_app PUBLIC
-#     nop_cpp
-# )
+target_link_libraries(test_app PUBLIC
+    nop_cpp
+)

@@ -14,7 +14,7 @@
 class Controller {
 
 public:
-  Controller(const Model::State &goalState, NetOper &netOper);
+  Controller(Model::State &goalState, NetOper &netOper);
 
   /// RP from pascal version
   Model::Control calcControl(const Model::State &currState);
@@ -28,7 +28,6 @@ public:
   NetOper &netOper();
 
 private:
-  Model::State mGoal;
-  NetOper m_netOper;
-  const float Eps = 0.1; // [m]
+  Model::State &mGoal;
+  NetOper &m_netOper;
 };

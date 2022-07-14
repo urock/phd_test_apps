@@ -3,7 +3,7 @@
 
 Model::State operator*(float val, const Model::State st) { return st * val; }
 
-Model::Model(const Model::State &state_, float dt_)
+Model::Model(Model::State &state_, float dt_)
     : mCurrentState(state_), dt(dt_) {}
 
 void Model::setState(const State &state_) { mCurrentState = state_; }

@@ -8,7 +8,9 @@ std::ostream &operator<<(std::ostream &os, const Model::State &state) {
 }
 
 TEST(Model, setget) {
-  Model model({0, 0, 0}, 1);
+  Model::State initstate{0, 0, 0};
+
+  Model model(initstate, 1);
   Model::State state{1, 1, 0};
   Model::State state2{2, 1, 0};
   model.setState(state);
@@ -18,8 +20,10 @@ TEST(Model, setget) {
 }
 
 TEST(Model, calcState) {
-  EXPECT_EQ(Model({1, 0, 0}, 1).calcState(Model::Control{1, 1}).x, 2);
-  EXPECT_EQ(Model({1, 0, 0}, 1).calcState(Model::State{-1, 0, 0}).x, 0);
+  Model::State initstate{1, 0, 0};
+
+  EXPECT_EQ(Model(initstate, 1).calcState(Model::Control{1, 1}).x, 2);
+  EXPECT_EQ(Model(initstate, 1).calcState(Model::State{-1, 0, 0}).x, 0);
 }
 
 TEST(State, dist) {

@@ -23,7 +23,6 @@ TEST(Runner, FullTest) {
   Controller controller(goal, netOp);
 
   Runner runner(model, controller, dt);
-  runner.setGoal(goal);
 
   // create initial states vector
   std::vector<Model::State> init_states;
@@ -47,7 +46,7 @@ TEST(Runner, FullTest) {
   runner_tests_file.open("runner_tests.csv");
 
   for (int i = 0; i <= nGraphc - 1; ++i) {
-    runner.init(init_states[i]);
+    currState = init_states[i];
 
     float currTime = 0;
     auto plot = [&] {

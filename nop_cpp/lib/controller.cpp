@@ -3,14 +3,14 @@
 
 #include "controller.hpp"
 
-Controller::Controller(const Model::State &goal_, NetOper &netOper):mGoal(goal_)
+Controller::Controller(Model::State &goal_, NetOper &netOper):mGoal(goal_)
 	,m_netOper(netOper)
 {
 }
 
 Model::Control Controller::calcControl(const Model::State& currState)
-{	
-	Model::State d = mGoal - currState; 
+{
+	Model::State d = mGoal - currState;
 
 
 	std::vector<float> u(2, 0);
