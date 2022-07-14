@@ -9,7 +9,6 @@
 #include "model.hpp"
 #include "nop.hpp"
 
-
 // class network operator
 class Controller {
 

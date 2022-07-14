@@ -1,16 +1,12 @@
 #pragma once
+#include <cmath>
 #include <iostream>
 #include <vector>
-#include <cmath>
 
 constexpr float pi = 3.1415927;
 
-constexpr float nfmod(float a, float b){
-    return a - std::floor(a/b)*b;
-}
-constexpr float radr(float angle){
-    return nfmod(angle+pi,2*pi)-pi;
-}
+constexpr float nfmod(float a, float b) { return a - std::floor(a / b) * b; }
+constexpr float radr(float angle) { return nfmod(angle + pi, 2 * pi) - pi; }
 
 class Model {
 
@@ -28,7 +24,6 @@ public:
     Control operator*(float val) const {
       return Control{this->left * val, this->right * val};
     }
-
   };
 
   struct State {
@@ -37,29 +32,29 @@ public:
     float yaw;
 
     State operator+(const State &state) const {
-      return State{this->x + state.x, this->y + state.y, radr(this->yaw + state.yaw)};
+      return State{this->x + state.x, this->y + state.y,
+                   radr(this->yaw + state.yaw)};
     }
     State operator-(const State &state) const {
-      return State{this->x - state.x, this->y - state.y, radr(this->yaw - state.yaw)};
+      return State{this->x - state.x, this->y - state.y,
+                   radr(this->yaw - state.yaw)};
     }
     State operator*(float val) const {
       return State{this->x * val, this->y * val, radr(this->yaw * val)};
     }
 
     bool operator==(const State &state) const {
-      return (this->x == state.x)&& (this->y == state.y)&& (radr(this->yaw) == radr(state.yaw));
+      return (this->x == state.x) && (this->y == state.y) &&
+             (radr(this->yaw) == radr(state.yaw));
     }
 
     float dist(const State &state) {
-        float dx = fabs(this->x - state.x);
-        float dy = fabs(this->y - state.y);
-        float dyaw = fabs(radr(this->yaw) - radr(state.yaw));
+      float dx = fabs(this->x - state.x);
+      float dy = fabs(this->y - state.y);
+      float dyaw = fabs(radr(this->yaw - state.yaw));
 
-      // comparison of meters and radians looks like crap
-      // return std::max(std::max(dx, dy), dyaw);
-        return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
+      return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
     }
-
   };
 
   Model(State &, float);

@@ -1,8 +1,7 @@
 #include "runner.hpp"
 
-Runner::Runner(Model &model_, Controller &controller_, float& dt_)
+Runner::Runner(Model &model_, Controller &controller_, float &dt_)
     : mController(controller_), mModel(model_), dt(dt_) {}
-
 
 void Runner::Euler2() {
   auto u1 = mController.calcControl(mModel.getState());

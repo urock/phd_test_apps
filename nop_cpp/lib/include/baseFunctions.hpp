@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 constexpr float Eps = pow(10, -8);
 constexpr size_t PokMax = 8; // what is it ????
