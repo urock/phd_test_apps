@@ -42,32 +42,20 @@ TEST(Runner, FullTest) {
   float epsterm = 0.1;
   float sumt = 0.0, sumdelt = 0.0;
 
-  std::ofstream runner_tests_file;
-  runner_tests_file.open("runner_tests.csv");
-
   for (int i = 0; i <= nGraphc - 1; ++i) {
     currState = init_states[i];
 
     float currTime = 0;
-    auto plot = [&] {
-      runner_tests_file << currTime << ", " << currState.x << ", "
-                        << currState.y << ", " << currState.yaw << '\n';
-    };
 
     currState = init_states[i];
     while (currTime < timeLimit) {
 
-      plot();
-
-      auto pastState = currState;
       currState = runner.makeStep();
       currTime += dt;
 
-      // if (currState.dist(goal) < epsterm || currState==pastState)
       if (currState.dist(goal) < epsterm)
         break;
     }
-    plot();
 
     sumt += currTime;
     sumdelt += currState.dist(goal);
@@ -77,8 +65,6 @@ TEST(Runner, FullTest) {
 
   float sumdelt_golden = 0.870068;
   float sumt_golden = 6.3;
-
-  runner_tests_file.close();
 
   EXPECT_TRUE(abs(sumt - sumt_golden) < 0.01);
   EXPECT_TRUE(abs(sumdelt - sumdelt_golden) < 0.01);

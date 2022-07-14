@@ -5,13 +5,11 @@
 
 constexpr float pi = 3.1415927;
 
-constexpr float radr(float angle) {
-  if (angle >= pi)
-    return radr(angle - 2 * pi);
-  else if (angle < -pi)
-    return radr(angle + 2 * pi);
-  else
-    return angle;
+constexpr float nfmod(float a, float b){
+    return a - std::floor(a/b)*b;
+}
+constexpr float radr(float angle){
+    return nfmod(angle+pi,2*pi)-pi;
 }
 
 class Model {
