@@ -18,7 +18,7 @@ int main() {
   Model model(currState, dt);
 
   Model::State goal = {0.0, 0.0, 0.0};
-  Controller controller(goal, netOp);
+  Controller controller(netOp);
 
   Runner runner(model, controller, dt);
 
@@ -57,11 +57,9 @@ int main() {
 
       plot();
 
-      auto pastState = currState;
       currState = runner.makeStep();
       currTime += dt;
 
-      // if (currState.dist(goal) < epsterm || currState==pastState)
       if (currState.dist(goal) < epsterm)
         break;
     }
@@ -72,9 +70,6 @@ int main() {
   }
 
   std::cout << sumt << " " << sumdelt << "\n";
-
-  float sumdelt_golden = 0.870068;
-  float sumt_golden = 6.3;
 
   runner_tests_file.close();
 

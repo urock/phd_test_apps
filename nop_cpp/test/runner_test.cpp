@@ -20,7 +20,7 @@ TEST(Runner, FullTest) {
   Model model(currState, dt);
 
   Model::State goal = {0.0, 0.0, 0.0};
-  Controller controller(goal, netOp);
+  Controller controller(netOp);
 
   Runner runner(model, controller, dt);
 

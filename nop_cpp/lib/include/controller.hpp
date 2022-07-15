@@ -13,20 +13,12 @@
 class Controller {
 
 public:
-  Controller(Model::State &goalState, NetOper &netOper);
+  Controller(NetOper &netOper);
 
   /// RP from pascal version
   Model::Control calcControl(const Model::State &currState);
 
-  // /// NormdistBetweenStateAndGoal
-  // float distToGoal(const Model::State &currState);
-  /// set new goal state
-  void setGoal(Model::State newGoal);
-
-  /// returns nnetwork operator
-  NetOper &netOper();
 
 private:
-  Model::State &mGoal;
   NetOper &m_netOper;
 };

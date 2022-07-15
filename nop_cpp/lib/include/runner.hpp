@@ -10,7 +10,6 @@ public:
   void setGoal(Model::State &);
 
   Model::State makeStep();
-  const Model::State &getState();
 
   void Euler2(void);
 

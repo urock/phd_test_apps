@@ -5,28 +5,27 @@
 
 TEST(Controller, ConstructorTests) {
 
-  NetOper newNetOper = NetOper();
-  Model::State goal = {1., 1., 0.};
-  Controller second = Controller(goal, newNetOper);
+  NetOper newNetOper;
+  Controller second = Controller(newNetOper);
 }
 
 TEST(Controller, SimpleTest) {
   NetOper newNetOper = NetOper();
-  Model::State goal = {0.1, 0.2, 0.};
-  Controller controller = Controller(goal, newNetOper);
+  Model::State goal = {-0.1, -0.2, 0.};
+  Controller controller = Controller(newNetOper);
 
   std::vector<float> parameters = {0.1, 0.1, 0.1};
 
-  // controller.netOper().setOutputsNum(2);             // set Mout
-  controller.netOper().setNodesForVars({0, 1});      // Pnum
-  controller.netOper().setNodesForParams({2, 3, 4}); // Rnum
-  controller.netOper().setNodesForOutput({13, 13});  // Dnum
-  controller.netOper().setCs(parameters);            // set Cs
-  controller.netOper().setPsi(Psi);
+  // newNetOper.setOutputsNum(2);             // set Mout
+  newNetOper.setNodesForVars({0, 1});      // Pnum
+  newNetOper.setNodesForParams({2, 3, 4}); // Rnum
+  newNetOper.setNodesForOutput({13, 13});  // Dnum
+  newNetOper.setCs(parameters);            // set Cs
+  newNetOper.setPsi(Psi);
 
   Model::State currState = {0, 0, 0};
 
-  Model::Control u = controller.calcControl(currState);
+  Model::Control u = controller.calcControl(goal);
 
   std::cout << "CONTROL: " << u.left << " " << u.right << "\n";
 
@@ -36,7 +35,7 @@ TEST(Controller, SimpleTest) {
   };
 
   std::vector<float> x_in = {0.1, 0.2};
-  Model::State dstate = goal - currState;
+  Model::State dstate =  currState - goal;
   x_in[0] = dstate.x;
   x_in[1] = dstate.y;
 

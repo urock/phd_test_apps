@@ -65,17 +65,6 @@ void NetOper::initBinaryFunctionsMap()
 }
 
 
-
-// size_t NetOper::getOutputsNum()
-// {
-//     return m_numOutputs;
-// }
-
-// void NetOper::setOutputsNum(size_t newNum)
-// {
-//     m_numOutputs = newNum;
-// }
-
 const std::vector<int>& NetOper::getNodesForVars()
 {
     return m_nodesForVars;
