@@ -14,15 +14,19 @@ public:
   struct Control {
     float left;
     float right;
+    float yaw;
 
-    Control operator+(const Control &ctrl) const {
-      return Control{this->left + ctrl.left, this->right + ctrl.right};
+    Control operator+(const Control &ctrl) const 
+    {
+      return Control{this->left + ctrl.left, this->right + ctrl.right, this->yaw - ctrl.yaw};
     }
-    Control operator-(const Control &ctrl) const {
-      return Control{this->left - ctrl.left, this->right - ctrl.right};
+    Control operator-(const Control &ctrl) const 
+    {
+      return Control{this->left - ctrl.left, this->right - ctrl.right, this->yaw - ctrl.yaw};
     }
-    Control operator*(float val) const {
-      return Control{this->left * val, this->right * val};
+    Control operator*(float val) const 
+    {
+      return Control{this->left * val, this->right * val, this->yaw * val};
     }
   };
 
@@ -53,8 +57,8 @@ public:
       float dy = fabs(this->y - state.y);
       float dyaw = fabs(this->yaw - state.yaw);
 
-      return std::max(dyaw, std::max(dx, dy));
-      //return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
+      // return std::max(dyaw, std::max(dx, dy));
+      return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
 
 
 
