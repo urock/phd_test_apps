@@ -11,16 +11,22 @@ void Model::setState(const Control &u) {
   mCurrentState = mCurrentState + calcDeltaState(u);
 }
 
-const Model::State &Model::getState() { return mCurrentState; }
+const Model::State &Model::getState() 
+{ 
+  return mCurrentState; 
+}
 
-Model::State Model::calcDeltaState(const Control &u) {
+Model::State Model::calcDeltaState(const Control &u) 
+{
   return dt * k *
          State{(u.left + u.right) * cosf(mCurrentState.yaw),
                (u.left + u.right) * sinf(mCurrentState.yaw),
                (u.left - u.right)};
 }
 
-Model::State Model::calcState(const State &Vs) { return mCurrentState + Vs; }
+Model::State Model::calcState(const State &Vs) { 
+  return mCurrentState + Vs; 
+}
 
 Model::State Model::calcState(const Control &u) {
   return calcState(calcDeltaState(u));

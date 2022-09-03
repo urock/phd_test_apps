@@ -4,7 +4,8 @@
 
 Controller::Controller(NetOper &netOper) : m_netOper(netOper) {}
 
-Model::Control Controller::calcControl(const Model::State &currState) {
+Model::Control Controller::calcControl(const Model::State &currState) 
+{
   Model::State d = Model::State{} - currState;
 
   std::vector<float> u(2, 0);

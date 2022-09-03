@@ -51,9 +51,13 @@ public:
     float dist(const State &state) {
       float dx = fabs(this->x - state.x);
       float dy = fabs(this->y - state.y);
-      float dyaw = fabs(radr(this->yaw - state.yaw));
+      float dyaw = fabs(this->yaw - state.yaw);
 
-      return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
+      return std::max(dyaw, std::max(dx, dy));
+      //return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
+
+
+
     }
   };
 

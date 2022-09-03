@@ -6,8 +6,8 @@ class Runner {
 
 public:
   Runner(Model &, Controller &, float&);
-  void init(const Model::State &);
-  void setGoal(Model::State &);
+  // void init(const Model::State &);
+  // void setGoal(Model::State &);
 
   Model::State makeStep();
 

@@ -17,12 +17,12 @@ TEST(Runner, FullTest) {
   float dt = 0.01;
 
   Model::State currState = {0.0, 0.0, 0.0};
-  Model model(currState, dt);
+  // Model model(currState, dt);
 
   Model::State goal = {0.0, 0.0, 0.0};
-  Controller controller(netOp);
+  // Controller controller(netOp);
 
-  Runner runner(model, controller, dt);
+  // Runner runner(model, controller, dt);
 
   // create initial states vector
   std::vector<Model::State> init_states;
@@ -38,16 +38,21 @@ TEST(Runner, FullTest) {
                                        i & 1 ? qymaxc[2] : qyminc[2]});
   }
 
+
+
   float timeLimit = 1.5; // terminal time;
   float epsterm = 0.1;
   float sumt = 0.0, sumdelt = 0.0;
 
   for (int i = 0; i <= nGraphc - 1; ++i) {
     currState = init_states[i];
+    
+    Model model(currState, dt);
+    Controller controller(netOp);
+    Runner runner(model, controller, dt);
+
 
     float currTime = 0;
-
-    currState = init_states[i];
     while (currTime < timeLimit) {
 
       currState = runner.makeStep();
@@ -63,8 +68,8 @@ TEST(Runner, FullTest) {
 
   std::cout << sumt << " " << sumdelt << "\n";
 
-  float sumdelt_golden = 0.870068;
   float sumt_golden = 6.3;
+  float sumdelt_golden = 0.870068;
 
   EXPECT_TRUE(abs(sumt - sumt_golden) < 0.01);
   EXPECT_TRUE(abs(sumdelt - sumdelt_golden) < 0.01);
