@@ -35,7 +35,7 @@ public:
       float dy = fabs(this->y - state.y);
       float dyaw = fabs(this->yaw - state.yaw);
 
-      return std::max(std::max(dx, dy), dyaw);
+      return std::sqrt(dx * dx + dy * dy + dyaw * dyaw);
     }
 
     void print() {
