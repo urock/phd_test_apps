@@ -1,5 +1,5 @@
 #include "runner.hpp"
-#include <cmath>
+
 #include <gtest/gtest.h>
 
 TEST(Runner, FullTest)
@@ -15,13 +15,13 @@ TEST(Runner, FullTest)
 
     float dt = 0.01;
     Model::State currState = {0.0, 0.0, 0.0}; 
-    Model model(currState, dt);
+    // Model model(currState, dt);
     
     Model::State goal = {0.0, 0.0, 0.0};
-    Controller controller(goal, netOp);
+    //Controller controller(goal, netOp);
 
-    Runner runner(model, controller, dt); 
-    runner.setGoal(goal);
+    //Runner runner(model, controller); 
+    //runner.setGoal(goal);
 
 
     // create initial states vector
@@ -43,14 +43,21 @@ TEST(Runner, FullTest)
 
     float timeLimit = 1.5;           //terminal time;
     float epsterm = 0.1;
-    float sumt = 0.0, sumdelt = 0.0;
+    float sumt = 0.0;
+    float sumdelt = 0.0;
 
     for (int i = 0; i <= nGraphc - 1; ++i) {
-        runner.init(init_states[i]);
+        currState = init_states[i];
+        Model model(currState, dt);
+        Controller controller(goal, netOp);
+        Runner runner(model, controller);
+        runner.setGoal(goal);
+
+        // runner.init(init_states[i]);
         float currTime = 0;
         while (currTime < timeLimit) {
             currState = runner.makeStep();
-            currState.print();
+            // currState.print();
             currTime += dt;
             if (currState.dist(goal) < epsterm)
                 break; 
@@ -68,6 +75,3 @@ TEST(Runner, FullTest)
     EXPECT_TRUE(abs(sumdelt - sumdelt_golden) < 0.001);
 
 }
-
-
-

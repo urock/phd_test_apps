@@ -1,7 +1,7 @@
-#include <cmath>
+#include "nop.hpp"
+
 #include <gtest/gtest.h>
 
-#include "nop.hpp"
 
 
 template <class T>
