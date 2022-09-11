@@ -4,7 +4,7 @@
 class Runner {
 
     public:
-        Runner(Model &, Controller &, float);
+        Runner(Model& model_, Controller & controller_);
         void setGoal(const Model::State &);
         void init(const Model::State &);
 
@@ -14,11 +14,9 @@ class Runner {
         Model &mModel;
         Controller &mController;  
         
-        Model::State mCurrentState;
-        Model::State mGoal;
+        // Model::State mGoal;
         
-        float dt;
-        float mCurrentTime; 
+        // float dt;
 
         void Euler2(void);
 
