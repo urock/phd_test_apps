@@ -13,10 +13,6 @@ class Runner {
     private:
         Model &mModel;
         Controller &mController;  
-        
-        // Model::State mGoal;
-        
-        // float dt;
 
         void Euler2(void);
 

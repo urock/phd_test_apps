@@ -21,7 +21,7 @@ void Runner::Euler2() {
 
     Model::State initialState = mModel.getState();
 
-    Model::Control u1 = mController.calcControl(mModel.getState());
+    Model::Control u1 = mController.calcControl(initialState);
     Model::State v1 = mModel.calcVelocity(u1); // fa
     Model::State s1 = mModel.calcState(v1); // moved state
 

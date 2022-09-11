@@ -38,7 +38,6 @@ TEST(Runner, FullTest)
                             i & 2? qymaxc[1] : qyminc[1], 
                             i & 1? qymaxc[2] : qyminc[2] }
             );
-        // std::cout << init_states[i].x << " " << init_states[i].y << " " << init_states[i].yaw << "\n";
     }
 
     float timeLimit = 1.5;          
@@ -61,9 +60,6 @@ TEST(Runner, FullTest)
     }
 
     std::cout << sumt << " " << sumdelt <<  "\n";
-
-    //float sumdelt_golden = 0.870068;  // from Diveed
-    // float sumt_golden = 6.3;         // from Diveed 
 
     float sumt_golden = 6.32;
     float sumdelt_golden = 0.87811;
