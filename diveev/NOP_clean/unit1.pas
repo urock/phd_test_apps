@@ -462,9 +462,10 @@ End;
 //*********************************************************
 Procedure TUser.Func(var Fu: TArrReal);
 var
-  sumpen,dr,promah:real;
+  sumpen,dr,promah,additionalCost:real;
   i:integer;
 Begin
+  additionalCost:=0;
   Initial;
   goalrun:=goalrun+1;
   sumpen:=0;
@@ -473,12 +474,42 @@ Begin
   repeat
     Viewer;
     Euler2;
+    writeln('X: ',x[0]);
+    writeln('Y: ',x[1]);
+
+    if((x[0] < 0.6) and (x[0] > -0.6)) then
+    begin
+
+      if((x[1] < 0.6) and (x[1] > 0.15)) then
+      begin
+      additionalCost := 100000;
+      end;
+
+      if((x[1] > -0.6) and (x[1] < -0.15)) then
+      begin
+      additionalCost := 100000;
+      end;
+
+    end;
+
   until (t>tf1)or (Normdist(x,xf1)<epsterm);
+
+  if((Normdist(x,xf1)<epsterm)) then
+    begin
+    additionalCost := additionalCost + 200000;
+    end;
+
   promah:=0;
   for i := 0 to high(xf1) do
     promah:=promah+sqr(x[i]-xf1[i]);
   promah:=sqrt(promah);
-  fu[0]:=t+Shtraf1*promah;
+
+
+  // for i := 0 to high(xf1) do
+  //   begin
+  // end;
+
+  fu[0]:=t+Shtraf1*promah + additionalCost;
   fu[1]:=promah;
 End;
 //*********************************************************
