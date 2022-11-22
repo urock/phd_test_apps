@@ -69,6 +69,9 @@ const
   //(14.72876, 2.02710, 4.02222);
   qyminc:array [0..2]of real =(-2.5,-2.5,-5*pi/12);
   qymaxc:array [0..2]of real =(2.5,2.5,5*pi/12);
+
+  // TODO проверить что начальные точки не попадают
+
   stepsqyc:array[0..2]of real=(1.25,2.5,5*pi/12);
   Pnumc:array [0..2] of integer=(0,1,2);
   Rnumc:array [0..2] of integer=(3,4,5);
@@ -462,10 +465,10 @@ End;
 //*********************************************************
 Procedure TUser.Func(var Fu: TArrReal);
 var
-  sumpen,dr,promah,additionalCost:real;
+  sumpen,dr,promah,obstacleCost:real;
   i:integer;
 Begin
-  additionalCost:=0;
+  obstacleCost:=0;
   Initial;
   goalrun:=goalrun+1;
   sumpen:=0;
@@ -482,26 +485,21 @@ Begin
 
       if((x[1] < 0.6) and (x[1] > 0.15)) then
       begin
-      additionalCost := 100000;
+      obstacleCost := 10;
       end;
 
       if((x[1] > -0.6) and (x[1] < -0.15)) then
       begin
-      additionalCost := 100000;
+      obstacleCost := 10;
       end;
 
     end;
 
   until (t>tf1)or (Normdist(x,xf1)<epsterm);
 
-  if((Normdist(x,xf1)<epsterm)) then
-    begin
-    additionalCost := additionalCost + 200000;
-    end;
-
   promah:=0;
   for i := 0 to high(xf1) do
-    promah:=promah+sqr(x[i]-xf1[i]);
+    promah:=promah+sqr(x[i]-xf1[i]);  
   promah:=sqrt(promah);
 
 
@@ -509,8 +507,8 @@ Begin
   //   begin
   // end;
 
-  fu[0]:=t+Shtraf1*promah + additionalCost;
-  fu[1]:=promah;
+  fu[0]:=t+Shtraf1*promah ; // тут длина траектории  
+  fu[1]:=promah + obstacleCost; // тут препятствие 
 End;
 //*********************************************************
 Procedure TUser.Initial;
