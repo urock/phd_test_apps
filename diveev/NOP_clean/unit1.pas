@@ -7,8 +7,11 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, Menus,
   ComCtrls, StdCtrls, Unit2, Unit3, Unit4, Unit6, Unit7,
   Unit8, Unit9, Unit10, Unit11, Unit12, Unit13, Unit14, Unit15,
-  UnitAdaptObject, Calc3;
+  UnitAdaptObject, Calc3, unitObstacle;
 type
+
+  ArrObstacles=array of Obstacle; //
+
   { TForm1 }
   TForm1 = class(TForm)
     Label1: TLabel;
@@ -114,9 +117,13 @@ const
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,1,1,0),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,1,1),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1));
+
+
+  NumOfObstacles:integer=3;
 var
   Form1: TForm1;
   ASNEE:TUser;
+  Obstacles:ArrObstacles;
   n1:integer=3;//dimention of system;
   m1:integer=2;//dimention of control;
   ll1:integer=3;//dimention of viewing;
@@ -490,6 +497,7 @@ Begin
 
       if((x[1] > -0.6) and (x[1] < -0.15)) then
       begin
+          writeln(': ');
       obstacleCost := 10;
       end;
 
