@@ -47,24 +47,23 @@ type
 
                       { TNetOper }
 //*************************************************************
-Constructor TNetOper.Create(Lay1, Mout1, kp1, kr1, kw1, kv1: integer);
+Constructor TNetOper.Create(x_top, y_top, x_low, y_low:real)
 Begin
-  L:=Lay1;
-  kP:=kp1;
-  kR:=kr1;
-  kW:=kw1;
-  kV:=kv1;
-  Mout:=Mout1;
-  Setlength(Psi,L,L);
-  Setlength(Psi0,L,L);
-  Setlength(z,L);
-  Setlength(zs,L);
-  Setlength(Vs,kP);
-  Setlength(Cs,kR);
-  Setlength(O1s,kW);
-  Setlength(O2s,kV);
-  Setlength(Pnum,kP);
-  Setlength(Rnum,kR);
-  Setlength(Dnum,Mout);
+	x_top_left:=x_top;
+	y_top_left:=y_top;
+	x_lower_right:=x_low;
+	y_lower_right:=y_low;
+End;
+
+// Функция проверяет попадает ли точки внутрь препятсвия
+//*************************************************************
+procedure TNetOper.CheckCollision(x, y:real);
+var
+  i:integer;
+Begin
+	if ((x>=x_top_left) and (y<=y_top_left) and (x<=x_lower_right) and (y<=y_lower_right) then
+		return true;
+
+	return false;
 End;
 //*************************************************************

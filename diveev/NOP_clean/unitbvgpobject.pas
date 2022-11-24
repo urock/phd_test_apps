@@ -432,20 +432,22 @@ End;
 constructor TGABVGP.Create(hh1, pp1, rr1, nfu1, lchr1, p1, c1, d1, Epo1,
   kel1: integer; alfa1, pmut1: real; Lay1, Mout1, kp1, kr1, kw1, kv1: integer);
 Begin
-  HH:=hh1;
-  PP:=pp1;
-  RR:=rr1;
-  nfu:=nfu1;
-  lchr:=lchr1;
-  p:=p1;
-  c:=c1;
-  d:=d1;
-  Epo:=Epo1;
-  kel:=kel1;
-  alfa:=alfa1;
-  pmut:=pmut1;
+  HH:=hh1;      //number of chromosomes in an initial population
+  PP:=pp1;      // number of generations
+  RR:=rr1;      // number of couples in one generation
+  nfu:=nfu1;    // number of functionals
+  lchr:=lchr1;  //number of variations in one chromosome
+  p:=p1;        //number of serching parameters
+  c:=c1;        //number of bits for integer part
+  d:=d1;        //number of bits for fractional part
+  Epo:=Epo1;    // number of ganerations between exchange of basic NOM
+  kel:=kel1;    // number of elitaring chromosomes
+  alfa:=alfa1;  // parameter for crossover
+  pmut:=pmut1;  // probability of mutation
   BVGP:=TBVGP.Create(Lay1,Mout1,kp1,kr1,kw1,kv1);
-  Setlength(PopChrStr,HH,lchr);
+  // PopChrStr:TArrArrArr2Int;//array for structural parts of chromosomes
+  // PopChrPar:TArrArrInt;//array for perametrical parts of chromosomes
+  Setlength(PopChrStr,HH,lchr); 
   Setlength(PopChrPar,HH,p*(c+d));
   Setlength(Fuh,HH,nfu);
   SetLength(FuhNorm,HH,nfu);
