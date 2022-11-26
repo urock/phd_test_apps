@@ -49,10 +49,9 @@ Function Obstacle.CheckCollision(x, y:real): boolean;
 var
   i:integer;
 Begin
+        result:=False;
 	if ((x>=x_top_left) and (x<=x_lower_right) and (y<=y_top_left) and (y>=y_lower_right)) then
 		result:=True;
-
-	result:=False;
 End;
 //*************************************************************
 
