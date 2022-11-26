@@ -27,12 +27,19 @@ type
 
 		Constructor Create(x_top, y_top, x_low, y_low:real);
 		Function CheckCollision(x, y:real): boolean;
+
+
 	end;
+	// ArrObstacles=array of Obstacle; //
+
+var
+	
+	NumOfObstacles:integer=3; 
+	Obstacles:array of Obstacle;         
 
 //*************************************************************
                         IMPLEMENTATION
 //*************************************************************
-
                       { Obstacle }
 //*************************************************************
 Constructor Obstacle.Create(x_top, y_top, x_low, y_low:real);

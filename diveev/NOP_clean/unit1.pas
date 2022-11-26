@@ -9,9 +9,6 @@ uses
   Unit8, Unit9, Unit10, Unit11, Unit12, Unit13, Unit14, Unit15,
   UnitAdaptObject, Calc3, unitObstacle;
 type
-
-  ArrObstacles=array of Obstacle; //
-
   { TForm1 }
   TForm1 = class(TForm)
     Label1: TLabel;
@@ -179,11 +176,6 @@ var
   f0,f1:real;
   goalrun:integer=0;
 
-  // Setup phase constrains
-  // Setlength(xmm[iGraph,i],kolpoint_mult[iGraph]);
-  Obstacles:ArrObstacles;         
-  NumOfObstacles:integer=3;     
-
   Function Normdist(x1,xf1:TArrReal):real;
   Function Power2(l:integer):real;
   Procedure UpProgressBar;
@@ -226,7 +218,7 @@ End;
 //*************************************************************
 Procedure TForm1.MenuItem6Click(Sender: TObject);
 var
-  k,i,iGraph:integer;
+  i,iGraph:integer;
   tp,sumdelt,sumt:real;
 Begin
   Application.CreateForm(TForm13,Form13);
@@ -340,7 +332,8 @@ Begin
   end;
   //SetLength(qyGraph,nGraphc,2);
 
-  Setlength(Obstacles,3);
+  // Set phase constrains
+  Setlength(Obstacles, NumOfObstacles);
   // x_top_left, y_top_left, x_botton_right, y_bottom_right
   Obstacles[0] := Obstacle.Create(-0.45, 0.6, 0.6, 0.15);
   Obstacles[1] := Obstacle.Create(-0.45, -0.15, 0.6, -0.6);
@@ -493,19 +486,16 @@ Begin
   repeat
     Viewer;
     Euler2;
-    // writeln('X: ',x[0]);
-    // writeln('Y: ',x[1]);
 
     for j := 0 to NumOfObstacles-1 do
+    begin
+      if (Obstacles[j].CheckCollision(x[0], x[1])) then
       begin
-        if (Obstacles[j].CheckCollision(x[0], x[1])) then
-          begin 
-            obstacleCost:=20;
-            break;        
-          end
-      end
-
-
+        obstacleCost:=20;
+        break;        
+      end;
+    end;
+    
   until (t>tf1)or (Normdist(x,xf1)<epsterm);
 
   promah:=0;

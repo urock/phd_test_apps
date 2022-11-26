@@ -3,7 +3,7 @@
 //*************************************************************
                            INTERFACE
 //*************************************************************
-Uses Classes, Calc3,SysUtils;
+Uses Classes,Calc3,SysUtils,unitObstacle;
 type
   TArrInt=array of integer;
   TArrArrInt=array of TArrInt;
@@ -1346,16 +1346,32 @@ End;
 Procedure TModel.Integr;
 var
   i,j:integer;
-  flag:boolean;
+  flag, bad_position:boolean;
 Begin
   for i:=0 to ny-1 do
     ix[i]:=0;
   for i:=0 to nfu-1 do
     su[i]:=0;
   repeat
+    bad_position:=False;
+
     for i:=0 to ny-1 do
       qy[i]:=qymin[i]+stepsqy[i]*ix[i];
+    
+    for j := 0 to NumOfObstacles-1 do
+    begin
+      if (Obstacles[j].CheckCollision(qy[0], qy[1])) then
+        bad_position:=True;     
+    end;
+
+    // skip starting position inside obstacles
+    if (bad_position) then
+    begin
+      continue;
+    end;
+
     Func(su1);
+    
     for i:=0 to nfu-1 do
       su[i]:=su[i]+su1[i];
     LexPM(ix,flag);
