@@ -57,7 +57,6 @@ type
     Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal); override;
     Procedure Initial;override;
     Procedure Viewer;override;
-//    Function Terminal:real;override;
   end;
 const
   x0c:array [0..2] of real=(0,0,0);
@@ -119,11 +118,9 @@ const
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1));
 
 
-  NumOfObstacles:integer=3;
 var
   Form1: TForm1;
   ASNEE:TUser;
-  Obstacles:ArrObstacles;
   n1:integer=3;//dimention of system;
   m1:integer=2;//dimention of control;
   ll1:integer=3;//dimention of viewing;
@@ -181,10 +178,15 @@ var
   kolpoint:integer;
   f0,f1:real;
   goalrun:integer=0;
+
+  // Setup phase constrains
+  // Setlength(xmm[iGraph,i],kolpoint_mult[iGraph]);
+  Obstacles:ArrObstacles;         
+  NumOfObstacles:integer=3;     
+
   Function Normdist(x1,xf1:TArrReal):real;
   Function Power2(l:integer):real;
   Procedure UpProgressBar;
-//Function TermStop:boolean;
 //*************************************************************
                         IMPLEMENTATION
 //*************************************************************
@@ -337,6 +339,13 @@ Begin
     qy1[i]:=qymin1[i];
   end;
   //SetLength(qyGraph,nGraphc,2);
+
+  Setlength(Obstacles,3);
+  // x_top_left, y_top_left, x_botton_right, y_bottom_right
+  Obstacles[0] := Obstacle.Create(-0.45, 0.6, 0.6, 0.15);
+  Obstacles[1] := Obstacle.Create(-0.45, -0.15, 0.6, -0.6);
+  Obstacles[2] := Obstacle.Create(0.6, 0.6, 0.9, -0.6);; 
+
 End;
 //*********************************************************
 Procedure TForm1.MenuItem10Click(Sender: TObject);
@@ -473,7 +482,7 @@ End;
 Procedure TUser.Func(var Fu: TArrReal);
 var
   sumpen,dr,promah,obstacleCost:real;
-  i:integer;
+  i, j:integer;
 Begin
   obstacleCost:=0;
   Initial;
@@ -484,24 +493,18 @@ Begin
   repeat
     Viewer;
     Euler2;
-    writeln('X: ',x[0]);
-    writeln('Y: ',x[1]);
+    // writeln('X: ',x[0]);
+    // writeln('Y: ',x[1]);
 
-    if((x[0] < 0.6) and (x[0] > -0.6)) then
-    begin
-
-      if((x[1] < 0.6) and (x[1] > 0.15)) then
+    for j := 0 to NumOfObstacles-1 do
       begin
-      obstacleCost := 10;
-      end;
+        if (Obstacles[j].CheckCollision(x[0], x[1])) then
+          begin 
+            obstacleCost:=20;
+            break;        
+          end
+      end
 
-      if((x[1] > -0.6) and (x[1] < -0.15)) then
-      begin
-          writeln(': ');
-      obstacleCost := 10;
-      end;
-
-    end;
 
   until (t>tf1)or (Normdist(x,xf1)<epsterm);
 
@@ -509,11 +512,6 @@ Begin
   for i := 0 to high(xf1) do
     promah:=promah+sqr(x[i]-xf1[i]);  
   promah:=sqrt(promah);
-
-
-  // for i := 0 to high(xf1) do
-  //   begin
-  // end;
 
   fu[0]:=t+Shtraf1*promah ; // тут длина траектории  
   fu[1]:=promah + obstacleCost; // тут препятствие 
