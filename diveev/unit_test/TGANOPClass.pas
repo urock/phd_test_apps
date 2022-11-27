@@ -150,6 +150,7 @@ var
   i,j,k,pt,rt,k1,k2,lmax,imax,ks1,ks2,lhmin:integer;
   ksi,su,su1,Fumax,Fumin:real;
 Begin
+  Randomize;
   //generating population
   NOP.SetPsiBas(NOP.Psi);
   VectortoGrey(PopChrPar[0]);
@@ -524,6 +525,7 @@ var
   i,j,pt,rt,k1,k2,lmax,imax,ks2,lhmin:integer;
   ksi:real;
 Begin
+  Randomize;
   //генерация популяции
   NOP.SetPsiBas(NOP.Psi);
   VectortoGrey(PopChrPar[0]);

@@ -7,7 +7,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, Menus,
   ComCtrls, StdCtrls, Unit2, Unit3, Unit4, Unit6, Unit7,
   Unit8, Unit9, Unit10, Unit11, Unit12, Unit13, Unit14, Unit15,
-  UnitAdaptObject, Calc3;
+  UnitAdaptObject, Calc3, unitObstacle;
 type
   { TForm1 }
   TForm1 = class(TForm)
@@ -54,7 +54,6 @@ type
     Procedure RP(t1:real;x1:TArrReal;var f1:TArrReal); override;
     Procedure Initial;override;
     Procedure Viewer;override;
-//    Function Terminal:real;override;
   end;
 const
   x0c:array [0..2] of real=(0,0,0);
@@ -69,6 +68,9 @@ const
   //(14.72876, 2.02710, 4.02222);
   qyminc:array [0..2]of real =(-2.5,-2.5,-5*pi/12);
   qymaxc:array [0..2]of real =(2.5,2.5,5*pi/12);
+
+  // TODO проверить что начальные точки не попадают
+
   stepsqyc:array[0..2]of real=(1.25,2.5,5*pi/12);
   Pnumc:array [0..2] of integer=(0,1,2);
   Rnumc:array [0..2] of integer=(3,4,5);
@@ -111,6 +113,8 @@ const
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,1,1,0),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,1,1),
    (0,0,0,0,  0,0,0,0,  0,0,0,0,   0,0,0,0,  0,0,0,0,   0,0,0,1));
+
+
 var
   Form1: TForm1;
   ASNEE:TUser;
@@ -171,10 +175,10 @@ var
   kolpoint:integer;
   f0,f1:real;
   goalrun:integer=0;
+
   Function Normdist(x1,xf1:TArrReal):real;
   Function Power2(l:integer):real;
   Procedure UpProgressBar;
-//Function TermStop:boolean;
 //*************************************************************
                         IMPLEMENTATION
 //*************************************************************
@@ -214,7 +218,7 @@ End;
 //*************************************************************
 Procedure TForm1.MenuItem6Click(Sender: TObject);
 var
-  k,i,iGraph:integer;
+  i,iGraph:integer;
   tp,sumdelt,sumt:real;
 Begin
   Application.CreateForm(TForm13,Form13);
@@ -327,6 +331,14 @@ Begin
     qy1[i]:=qymin1[i];
   end;
   //SetLength(qyGraph,nGraphc,2);
+
+  // Set phase constrains
+  Setlength(Obstacles, NumOfObstacles);
+  // x_top_left, y_top_left, x_botton_right, y_bottom_right
+  Obstacles[0] := Obstacle.Create(-0.45, 0.6, 0.6, 0.15);
+  Obstacles[1] := Obstacle.Create(-0.45, -0.15, 0.6, -0.6);
+  Obstacles[2] := Obstacle.Create(0.6, 0.6, 0.9, -0.6);; 
+
 End;
 //*********************************************************
 Procedure TForm1.MenuItem10Click(Sender: TObject);
@@ -462,9 +474,10 @@ End;
 //*********************************************************
 Procedure TUser.Func(var Fu: TArrReal);
 var
-  sumpen,dr,promah:real;
-  i:integer;
+  sumpen,dr,promah,obstacleCost:real;
+  i, j:integer;
 Begin
+  obstacleCost:=0;
   Initial;
   goalrun:=goalrun+1;
   sumpen:=0;
@@ -473,13 +486,25 @@ Begin
   repeat
     Viewer;
     Euler2;
+
+    for j := 0 to NumOfObstacles-1 do
+    begin
+      if (Obstacles[j].CheckCollision(x[0], x[1])) then
+      begin
+        obstacleCost:=20;
+        break;        
+      end;
+    end;
+    
   until (t>tf1)or (Normdist(x,xf1)<epsterm);
+
   promah:=0;
   for i := 0 to high(xf1) do
-    promah:=promah+sqr(x[i]-xf1[i]);
+    promah:=promah+sqr(x[i]-xf1[i]);  
   promah:=sqrt(promah);
-  fu[0]:=t+Shtraf1*promah;
-  fu[1]:=promah;
+
+  fu[0]:=t+Shtraf1*promah ; // тут длина траектории  
+  fu[1]:=promah + obstacleCost; // тут препятствие 
 End;
 //*********************************************************
 Procedure TUser.Initial;

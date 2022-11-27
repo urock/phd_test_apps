@@ -34,7 +34,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="19">
+    <Units Count="20">
       <Unit0>
         <Filename Value="NOP1.pas"/>
         <IsPartOfProject Value="True"/>
@@ -172,6 +172,10 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit15"/>
       </Unit18>
+      <Unit19>
+        <Filename Value="unitObstacle.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit19>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
